@@ -6,6 +6,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Search, FileText, Settings, Play, Check, AlertCircle, ChevronRight, BookOpen } from 'lucide-react';
 import * as fuzz from 'fuzzball';
+import { EMBEDDED_SOURCES } from './embeddedSources';
 
 interface SourceFile {
   name: string;
@@ -14,9 +15,9 @@ interface SourceFile {
 
 export default function App() {
   const [commentary, setCommentary] = useState('');
-  const [sources, setSources] = useState<string[]>([]);
-  const [selectedSource, setSelectedSource] = useState<string>('');
-  const [sourceContent, setSourceContent] = useState<string>('');
+  const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
+  const [selectedSource, setSelectedSource] = useState<string>(Object.keys(EMBEDDED_SOURCES)[0] || '');
+  const [sourceContent, setSourceContent] = useState<string>(EMBEDDED_SOURCES[Object.keys(EMBEDDED_SOURCES)[0]] || '');
   const [localSource, setLocalSource] = useState<string>('');
   const [mode, setMode] = useState<'regex' | 'fuzzy'>('regex');
   const [processedText, setProcessedText] = useState<string>('');
@@ -28,18 +29,25 @@ export default function App() {
     fetch('/api/sources')
       .then(res => res.json())
       .then(data => {
-        setSources(data);
-        if (data.length > 0) setSelectedSource(data[0]);
+        if (data && data.length > 0) {
+          // Merge server sources with embedded ones, avoiding duplicates
+          setSources(prev => Array.from(new Set([...prev, ...data])));
+        }
       })
-      .catch(err => console.error('Error fetching sources:', err));
+      .catch(err => console.log('Running in standalone mode or server unavailable'));
   }, []);
 
   useEffect(() => {
     if (selectedSource && !localSource) {
-      fetch(`/api/sources/${selectedSource}`)
-        .then(res => res.text())
-        .then(data => setSourceContent(data))
-        .catch(err => console.error('Error fetching source content:', err));
+      // Check if it's an embedded source first
+      if (EMBEDDED_SOURCES[selectedSource]) {
+        setSourceContent(EMBEDDED_SOURCES[selectedSource]);
+      } else {
+        fetch(`/api/sources/${selectedSource}`)
+          .then(res => res.text())
+          .then(data => setSourceContent(data))
+          .catch(err => console.error('Error fetching source content:', err));
+      }
     }
   }, [selectedSource, localSource]);
 

@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
+    "prebuild": "node scripts/generate-sources.js",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",
