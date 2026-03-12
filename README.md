@@ -1,20 +1,12 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+מערכת חכמה לזיהוי והדגשת "דיבור המתחיל" בטקסטים פרשניים. הפרויקט משלב לוגיקה סטטית (Regex) עם לוגיקה דינמית המבוססת על השוואה לקובצי מקור חיצוניים (Fuzzy Matching).
 
-# Run and deploy your AI Studio app
+ תכונות עיקריות
+ שני שיטות להדגשת הדיבור המתחיל
 
-This contains everything you need to run your app locally.
+1. זיהוי מבוסס תווים: שימוש בביטויים רגולריים (Regex) לזיהוי סיומות נפוצות (.:-).
 
-View your app in AI Studio: https://ai.studio/apps/4ac5cb42-98ed-40f4-bd64-e93802482780
+2. השוואה לקובץ מקור: השוואה חכמה לקובצי TXT של ספר המקור כדי למצוא התאמה מדויקת גם ללא סימני פיסוק.
 
-## Run Locally
+מנגנון Fuzzy Match: התגברות על שינויי כתיב, ראשי תיבות והבדלי נוסח קלים בין המקור לביאור.
 
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+ממשק Web: תצוגה נקייה ב-HTML עם הדגשות ויזואליות.
