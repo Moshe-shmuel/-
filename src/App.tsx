@@ -203,27 +203,87 @@ const App: React.FC = () => {
       return;
     }
     pushToHistory();
-    const normalizedSource = normalize(activeSourceContent);
-    const sourceWords = normalizedSource.split(' ');
+
+    // 1. Pre-process source into sections based on headers
+    const sourceSections: { header: string, words: string[] }[] = [];
+    const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
+    
+    // Initial section (before any header)
+    let firstMatch = headerRegex.exec(activeSourceContent);
+    headerRegex.lastIndex = 0; 
+    
+    const initialContent = firstMatch 
+      ? activeSourceContent.substring(0, firstMatch.index)
+      : activeSourceContent;
+    
+    sourceSections.push({ 
+      header: "_initial_", 
+      words: normalize(initialContent.replace(/<[^>]*>/g, '')).split(' ') 
+    });
+
+    let match;
+    while ((match = headerRegex.exec(activeSourceContent)) !== null) {
+      const headerText = normalize(match[1].replace(/<[^>]*>/g, ''));
+      const start = headerRegex.lastIndex;
+      
+      // Peek for next header to define section end
+      const currentPos = headerRegex.lastIndex;
+      const nextMatch = headerRegex.exec(activeSourceContent);
+      const end = nextMatch ? nextMatch.index : activeSourceContent.length;
+      headerRegex.lastIndex = currentPos; // Reset regex state after peeking
+      
+      const sectionContent = activeSourceContent.substring(start, end);
+      sourceSections.push({
+        header: headerText,
+        words: normalize(sectionContent.replace(/<[^>]*>/g, '')).split(' ')
+      });
+    }
 
     const nextFiles = loadedFiles.map(f => {
       const paragraphs = f.content.split('\n');
+      let currentSourceWords = sourceSections[0].words;
+      
       const newContent = paragraphs.map(p => {
-        if (!p.trim()) return '';
-        const words = p.trim().split(/\s+/);
+        const trimmed = p.trim();
+        if (!trimmed) return '';
+
+        // Check if this paragraph is a header in the commentary
+        const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
+        if (headerMatch) {
+          const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+          // Find matching header in source (ignoring H-level)
+          const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
+          if (matchingSection) {
+            currentSourceWords = matchingSection.words;
+          }
+          return p; 
+        }
+
+        // Standard paragraph processing - strip tags for matching
+        const cleanP = trimmed.replace(/<[^>]*>/g, '');
+        const words = cleanP.split(/\s+/);
         const testLength = Math.min(words.length, 15);
         let bestMatchEndIndex = 0;
+        
         for (let i = 1; i <= testLength; i++) {
           const prefix = normalize(words.slice(0, i).join(' '));
           let maxPrefixScore = 0;
-          for (let j = 0; j <= sourceWords.length - i; j++) {
-            const window = sourceWords.slice(j, j + i).join(' ');
+          
+          // Search ONLY in the current source section
+          for (let j = 0; j <= currentSourceWords.length - i; j++) {
+            const window = currentSourceWords.slice(j, j + i).join(' ');
             const score = fuzz.ratio(prefix, window);
             if (score > maxPrefixScore) maxPrefixScore = score;
+            if (maxPrefixScore === 100) break; 
           }
-          if (maxPrefixScore > 85) bestMatchEndIndex = i;
-          else if (i > 3 && maxPrefixScore < 70) break;
+          
+          if (maxPrefixScore > 85) {
+            bestMatchEndIndex = i;
+          } else if (i > 3 && maxPrefixScore < 70) {
+            break;
+          }
         }
+        
         if (bestMatchEndIndex > 0) {
           const dhmWords = words.slice(0, bestMatchEndIndex).join(' ');
           const dhmEndPos = p.indexOf(dhmWords) + dhmWords.length;
@@ -237,8 +297,9 @@ const App: React.FC = () => {
       }).join('\n');
       return { ...f, content: newContent };
     });
+
     setLoadedFiles(nextFiles);
-    addLog("הדגשה באמצעות השוואה הושלמה", 'success');
+    addLog("הדגשה חכמה (מותאמת כותרות) הושלמה", 'success');
     setIsModalOpen(false);
   };
 
