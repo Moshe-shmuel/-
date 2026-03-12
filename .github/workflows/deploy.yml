@@ -5,13 +5,14 @@ on:
     branches: ["**"]
   workflow_dispatch:
 
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+# הגדרת מקביליות כדי למנוע התנגשויות בפריסה
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  # --- תהליך הבנייה (רץ על כל ענף) ---
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -35,17 +36,43 @@ jobs:
           cp dist/index.html output/commentary-processor.html
           cp -r dist/* output/
 
-      # שלב זה ירוץ תמיד - ויוצר ZIP אחד בלבד להורדה
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: commentary-processor-bundle
           path: output/
 
-      # --- מכאן והלאה: שלבים שירוצו רק בענף ראשי ---
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  # --- תהליך הפריסה והשחרור (רץ רק בענף הראשי) ---
+  deploy:
+    # מתנה את הריצה בהצלחה של תהליך ה-build
+    needs: build
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    
+    # הרשאות ממוקדות רק לתהליך הזה
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      
+    # חיבור ללוח הבקרה של הסביבות ב-GitHub
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: commentary-processor-bundle
+          path: output/
 
       - name: Create Release
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: softprops/action-gh-release@v2
         with:
           files: output/commentary-processor.html
@@ -60,16 +87,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Pages
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: actions/configure-pages@v4
 
-      - name: Upload Pages Artifact
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist/
-
       - name: Deploy to GitHub Pages
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         id: deployment
         uses: actions/deploy-pages@v4
