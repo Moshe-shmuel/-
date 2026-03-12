@@ -244,6 +244,8 @@ const App: React.FC = () => {
       });
     }
 
+    const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+
     const nextFiles = loadedFiles.map(f => {
       const paragraphs = f.content.split('\n');
       let currentSourceWords = sourceSections[0].words;
@@ -256,7 +258,6 @@ const App: React.FC = () => {
         const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
         if (headerMatch) {
           const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
-          // Find matching header in source (ignoring H-level)
           const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
           if (matchingSection) {
             currentSourceWords = matchingSection.words;
@@ -264,17 +265,20 @@ const App: React.FC = () => {
           return p; 
         }
 
-        // Standard paragraph processing - strip tags for matching
         const cleanP = trimmed.replace(/<[^>]*>/g, '');
         const words = cleanP.split(/\s+/);
         const testLength = Math.min(words.length, 15);
         let bestMatchEndIndex = 0;
+        let prevMaxScore = 100;
         
         for (let i = 1; i <= testLength; i++) {
+          // 1. Stop Word Check: If current word is a known commentary starter, stop here
+          const currentWordClean = words[i-1].replace(/[.,:;?!"\-()]/g, '');
+          if (STOP_WORDS.includes(currentWordClean)) break;
+
           const prefix = normalize(words.slice(0, i).join(' '));
           let maxPrefixScore = 0;
           
-          // Search ONLY in the current source section
           for (let j = 0; j <= currentSourceWords.length - i; j++) {
             const window = currentSourceWords.slice(j, j + i).join(' ');
             const score = fuzz.ratio(prefix, window);
@@ -282,8 +286,15 @@ const App: React.FC = () => {
             if (maxPrefixScore === 100) break; 
           }
           
-          if (maxPrefixScore > 85) {
+          // 2. Dynamic Threshold: Increase strictness as phrase gets longer
+          const threshold = 85 + (i > 5 ? 2 : 0);
+          
+          if (maxPrefixScore >= threshold) {
+            // 3. Score Regression Check: If score drops significantly, we've likely hit the commentary
+            if (i > 1 && maxPrefixScore < prevMaxScore - 7) break;
+            
             bestMatchEndIndex = i;
+            prevMaxScore = maxPrefixScore;
           } else if (i > 3 && maxPrefixScore < 70) {
             break;
           }
