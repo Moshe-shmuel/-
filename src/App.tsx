@@ -63,6 +63,7 @@ const App: React.FC = () => {
   const [logs, setLogs] = useState<LogEntry[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [previewIdx, setPreviewIdx] = useState(0);
+  const [terminatorChar, setTerminatorChar] = useState('.:-');
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
@@ -178,11 +179,15 @@ const App: React.FC = () => {
 
   const processWithRegex = () => {
     pushToHistory();
+    // Escape special regex characters
+    const escapedChars = terminatorChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`^([^${escapedChars}]*[${escapedChars}])`);
+
     const nextFiles = loadedFiles.map(f => {
       const paragraphs = f.content.split('\n');
       const newContent = paragraphs.map(p => {
         if (!p.trim()) return '';
-        const match = p.match(/^([^.:-]*[.:-])/);
+        const match = p.match(regex);
         if (match) {
           const dhm = match[1];
           const rest = p.substring(dhm.length);
@@ -532,7 +537,19 @@ const App: React.FC = () => {
             icon={Highlighter}
           >
             <div className="space-y-6">
-              <p className="text-slate-600">פעולה זו תסרוק את כל הקבצים הטעונים ותדגיש (תגית b) את תחילת הפסקה עד לתו הסיום הראשון (נקודה, נקודתיים או מקף).</p>
+              <p className="text-slate-600">פעולה זו תסרוק את כל הקבצים הטעונים ותדגיש (תגית b) את תחילת הפסקה עד לתו הסיום הראשון שתבחר.</p>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-bold text-slate-700 block">תווי סיום להדגשה (למשל: . או : או .:-)</label>
+                <input 
+                  type="text" 
+                  value={terminatorChar} 
+                  onChange={(e) => setTerminatorChar(e.target.value)}
+                  placeholder="הזן תווי סיום..."
+                  className="w-full p-3 border border-slate-200 rounded-xl outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+                />
+              </div>
+
               <button 
                 onClick={processWithRegex} 
                 className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg"
