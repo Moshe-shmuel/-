@@ -30,12 +30,14 @@ jobs:
         run: npm run build
 
       - name: Prepare Artifacts
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         run: |
           mkdir -p output
           cp dist/index.html output/commentary-processor.html
           cp -r dist/* output/
 
       - name: Upload Artifact
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         uses: actions/upload-artifact@v4
         with:
           name: commentary-processor-bundle
