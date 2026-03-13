@@ -7,6 +7,7 @@ import React, { useState, useCallback, useRef, useEffect } from 'react';
 import JSZip from 'jszip';
 import { isEqual } from 'lodash';
 import * as fuzz from 'fuzzball';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   Wrench, Search, Globe, Scissors, Scale, Eye, 
   Upload, Folder, Trash2, Download, FileText, 
@@ -57,6 +58,7 @@ const Modal = ({ isOpen, onClose, title, icon: Icon, children }: { isOpen: boole
 
 const App: React.FC = () => {
   const [loadedFiles, setLoadedFiles] = useState<ProcessedFile[]>([]);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [history, setHistory] = useState<ProcessedFile[][]>([]);
   const [activeTab, setActiveTab] = useState<TabId>('preview');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -175,31 +177,53 @@ const App: React.FC = () => {
     handleContentChange(newContent);
   };
 
-  const normalize = (text: string) => text.replace(/[.,:;?!\-()]/g, ' ').replace(/\s+/g, ' ').trim();
+  const normalize = (text: string) => {
+    if (!text) return '';
+    return text
+      .replace(/[.,:;?!\-()]/g, ' ') // Remove punctuation
+      .split(/\s+/)
+      .map(word => {
+        let w = word;
+        // 1. Handle prefixes: Remove ו, ב, ל, ד from the start of the word (if word length > 1)
+        if (w.length > 1 && /^[ובלד]/.test(w)) {
+          w = w.substring(1);
+        }
+        // 2. Handle full/defective spelling: Remove 'ו' and 'י' for comparison purposes
+        w = w.replace(/[וי]/g, '');
+        return w;
+      })
+      .join(' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  };
 
   const processWithRegex = () => {
-    pushToHistory();
-    // Escape special regex characters
-    const escapedChars = terminatorChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const regex = new RegExp(`^([^${escapedChars}]*[${escapedChars}])`);
+    setIsProcessing(true);
+    setTimeout(() => {
+      pushToHistory();
+      // Escape special regex characters
+      const escapedChars = terminatorChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`^([^${escapedChars}]*[${escapedChars}])`);
 
-    const nextFiles = loadedFiles.map(f => {
-      const paragraphs = f.content.split('\n');
-      const newContent = paragraphs.map(p => {
-        if (!p.trim()) return '';
-        const match = p.match(regex);
-        if (match) {
-          const dhm = match[1];
-          const rest = p.substring(dhm.length);
-          return `<b>${dhm}</b>${rest}`;
-        }
-        return p;
-      }).join('\n');
-      return { ...f, content: newContent };
-    });
-    setLoadedFiles(nextFiles);
-    addLog("הדגשה באמצעות תוי סיום הושלמה", 'success');
-    setIsModalOpen(false);
+      const nextFiles = loadedFiles.map(f => {
+        const paragraphs = f.content.split('\n');
+        const newContent = paragraphs.map(p => {
+          if (!p.trim()) return '';
+          const match = p.match(regex);
+          if (match) {
+            const dhm = match[1];
+            const rest = p.substring(dhm.length);
+            return `<b>${dhm}</b>${rest}`;
+          }
+          return p;
+        }).join('\n');
+        return { ...f, content: newContent };
+      });
+      setLoadedFiles(nextFiles);
+      addLog("הדגשה באמצעות תוי סיום הושלמה", 'success');
+      setIsModalOpen(false);
+      setIsProcessing(false);
+    }, 100);
   };
 
   const processWithFuzzy = () => {
@@ -207,116 +231,151 @@ const App: React.FC = () => {
       addLog("יש לבחור מקור להשוואה", 'error');
       return;
     }
-    pushToHistory();
+    setIsProcessing(true);
+    
+    setTimeout(() => {
+      pushToHistory();
 
-    // 1. Pre-process source into sections based on headers
-    const sourceSections: { header: string, words: string[] }[] = [];
-    const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
-    
-    // Initial section (before any header)
-    let firstMatch = headerRegex.exec(activeSourceContent);
-    headerRegex.lastIndex = 0; 
-    
-    const initialContent = firstMatch 
-      ? activeSourceContent.substring(0, firstMatch.index)
-      : activeSourceContent;
-    
-    sourceSections.push({ 
-      header: "_initial_", 
-      words: normalize(initialContent.replace(/<[^>]*>/g, '')).split(' ') 
-    });
+      const explode = (text: string) => {
+        return text.split(/\s+/).flatMap(w => {
+          if (w.includes('"')) return w.replace(/"/g, '').split('');
+          return [w];
+        });
+      };
 
-    let match;
-    while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-      const headerText = normalize(match[1].replace(/<[^>]*>/g, ''));
-      const start = headerRegex.lastIndex;
+      // 1. Pre-process source into sections based on headers
+      const sourceSections: { header: string, words: string[] }[] = [];
+      const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
       
-      // Peek for next header to define section end
-      const currentPos = headerRegex.lastIndex;
-      const nextMatch = headerRegex.exec(activeSourceContent);
-      const end = nextMatch ? nextMatch.index : activeSourceContent.length;
-      headerRegex.lastIndex = currentPos; // Reset regex state after peeking
+      let firstMatch = headerRegex.exec(activeSourceContent);
+      headerRegex.lastIndex = 0; 
       
-      const sectionContent = activeSourceContent.substring(start, end);
-      sourceSections.push({
-        header: headerText,
-        words: normalize(sectionContent.replace(/<[^>]*>/g, '')).split(' ')
+      const initialContent = firstMatch 
+        ? activeSourceContent.substring(0, firstMatch.index)
+        : activeSourceContent;
+      
+      sourceSections.push({ 
+        header: "_initial_", 
+        words: explode(normalize(initialContent.replace(/<[^>]*>/g, ''))) 
       });
-    }
 
-    const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
-
-    const nextFiles = loadedFiles.map(f => {
-      const paragraphs = f.content.split('\n');
-      let currentSourceWords = sourceSections[0].words;
-      
-      const newContent = paragraphs.map(p => {
-        const trimmed = p.trim();
-        if (!trimmed) return '';
-
-        // Check if this paragraph is a header in the commentary
-        const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
-        if (headerMatch) {
-          const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
-          const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
-          if (matchingSection) {
-            currentSourceWords = matchingSection.words;
-          }
-          return p; 
-        }
-
-        const cleanP = trimmed.replace(/<[^>]*>/g, '');
-        const words = cleanP.split(/\s+/);
-        const testLength = Math.min(words.length, 15);
-        let bestMatchEndIndex = 0;
-        let prevMaxScore = 100;
+      let match;
+      while ((match = headerRegex.exec(activeSourceContent)) !== null) {
+        const headerText = normalize(match[1].replace(/<[^>]*>/g, ''));
+        const start = headerRegex.lastIndex;
+        const currentPos = headerRegex.lastIndex;
+        const nextMatch = headerRegex.exec(activeSourceContent);
+        const end = nextMatch ? nextMatch.index : activeSourceContent.length;
+        headerRegex.lastIndex = currentPos; 
         
-        for (let i = 1; i <= testLength; i++) {
-          // 1. Stop Word Check: If current word is a known commentary starter, stop here
-          const currentWordClean = words[i-1].replace(/[.,:;?!"\-()]/g, '');
-          if (STOP_WORDS.includes(currentWordClean)) break;
+        const sectionContent = activeSourceContent.substring(start, end);
+        sourceSections.push({
+          header: headerText,
+          words: explode(normalize(sectionContent.replace(/<[^>]*>/g, '')))
+        });
+      }
 
-          const prefix = normalize(words.slice(0, i).join(' '));
-          let maxPrefixScore = 0;
-          
-          for (let j = 0; j <= currentSourceWords.length - i; j++) {
-            const window = currentSourceWords.slice(j, j + i).join(' ');
-            const score = fuzz.ratio(prefix, window);
-            if (score > maxPrefixScore) maxPrefixScore = score;
-            if (maxPrefixScore === 100) break; 
+      const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+
+      const nextFiles = loadedFiles.map(f => {
+        const paragraphs = f.content.split('\n');
+        let currentSourceWords = sourceSections[0].words;
+        
+        const newContent = paragraphs.map(p => {
+          const trimmed = p.trim();
+          if (!trimmed) return '';
+
+          const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
+          if (headerMatch) {
+            const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+            const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
+            if (matchingSection) {
+              currentSourceWords = matchingSection.words;
+            }
+            return p; 
           }
+
+          const cleanP = trimmed.replace(/<[^>]*>/g, '');
+          const originalWords = cleanP.split(/\s+/);
           
-          // 2. Dynamic Threshold: Increase strictness as phrase gets longer
-          const threshold = 85 + (i > 5 ? 2 : 0);
+          // Explode commentary words and keep map to original indices
+          const explodedWords: string[] = [];
+          const wordMap: number[] = []; 
+          originalWords.forEach((w, idx) => {
+            if (w.includes('"')) {
+              const letters = w.replace(/"/g, '').split('');
+              letters.forEach(l => {
+                explodedWords.push(l);
+                wordMap.push(idx);
+              });
+            } else {
+              explodedWords.push(w);
+              wordMap.push(idx);
+            }
+          });
+
+          const testLength = Math.min(explodedWords.length, 30);
+          let bestMatchEndIndex = 0;
+          let prevMaxScore = 100;
           
-          if (maxPrefixScore >= threshold) {
-            // 3. Score Regression Check: If score drops significantly, we've likely hit the commentary
-            if (i > 1 && maxPrefixScore < prevMaxScore - 7) break;
+          for (let i = 1; i <= testLength; i++) {
+            const currentWordClean = explodedWords[i-1].replace(/[.,:;?!"\-()]/g, '');
+            if (STOP_WORDS.includes(currentWordClean)) break;
+
+            const prefix = normalize(explodedWords.slice(0, i).join(' '));
+            let maxPrefixScore = 0;
             
-            bestMatchEndIndex = i;
-            prevMaxScore = maxPrefixScore;
-          } else if (i > 3 && maxPrefixScore < 70) {
-            break;
-          }
-        }
-        
-        if (bestMatchEndIndex > 0) {
-          const dhmWords = words.slice(0, bestMatchEndIndex).join(' ');
-          const dhmEndPos = p.indexOf(dhmWords) + dhmWords.length;
-          let finalEndPos = dhmEndPos;
-          if (p[dhmEndPos] && /[.:\-]/.test(p[dhmEndPos])) finalEndPos++;
-          const dhm = p.substring(0, finalEndPos);
-          const rest = p.substring(finalEndPos);
-          return `<b>${dhm}</b>${rest}`;
-        }
-        return p;
-      }).join('\n');
-      return { ...f, content: newContent };
-    });
+            for (let j = 0; j <= currentSourceWords.length - i; j++) {
+              const windowWords = currentSourceWords.slice(j, j + i);
+              const window = normalize(windowWords.join(' '));
+              let score = fuzz.ratio(prefix, window);
+              
+              // Initials check for abbreviations
+              const windowInitials = windowWords.map(w => w[0]).join('');
+              const initialsScore = fuzz.ratio(prefix.replace(/\s+/g, ''), windowInitials);
+              if (initialsScore > score) score = initialsScore;
 
-    setLoadedFiles(nextFiles);
-    addLog("הדגשה חכמה (מותאמת כותרות) הושלמה", 'success');
-    setIsModalOpen(false);
+              if (score > maxPrefixScore) maxPrefixScore = score;
+              if (maxPrefixScore === 100) break; 
+            }
+            
+            let threshold = 85;
+            if (i === 1) threshold = 75; 
+            else if (i === 2) threshold = 80;
+            else if (i > 8) threshold = 88;
+            
+            if (maxPrefixScore >= threshold) {
+              if (i > 1 && maxPrefixScore < prevMaxScore - 8) break;
+              bestMatchEndIndex = i;
+              prevMaxScore = maxPrefixScore;
+            } else if (i >= 5 && maxPrefixScore < 65) {
+              break;
+            }
+          }
+          
+          if (bestMatchEndIndex > 0) {
+            const originalWordIdx = wordMap[bestMatchEndIndex - 1];
+            const boldPartWords = originalWords.slice(0, originalWordIdx + 1).join(' ');
+            
+            // Find the actual position in the original paragraph to preserve punctuation
+            const boldPartEndPos = p.indexOf(boldPartWords) + boldPartWords.length;
+            let finalEndPos = boldPartEndPos;
+            if (p[boldPartEndPos] && /[.:\-]/.test(p[boldPartEndPos])) finalEndPos++;
+            
+            const boldPart = p.substring(0, finalEndPos);
+            const restPart = p.substring(finalEndPos);
+            return `<b>${boldPart}</b>${restPart}`;
+          }
+          return p;
+        }).join('\n');
+        return { ...f, content: newContent };
+      });
+
+      setLoadedFiles(nextFiles);
+      addLog("הדגשה חכמה (כולל ראשי תיבות) הושלמה", 'success');
+      setIsModalOpen(false);
+      setIsProcessing(false);
+    }, 100);
   };
 
   const downloadAll = async () => {
@@ -366,6 +425,27 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden" dir="rtl">
+      <AnimatePresence>
+        {isProcessing && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-md text-white"
+          >
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+              className="mb-6"
+            >
+              <RefreshCw size={64} className="text-blue-400" />
+            </motion.div>
+            <h2 className="text-2xl font-bold mb-2">מעבד נתונים...</h2>
+            <p className="text-slate-300">אנא המתן בזמן שהמערכת מבצעת את ההדגשות</p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <input ref={fileInputRef} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
       <input 
         ref={folderInputRef} 
