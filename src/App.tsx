@@ -59,6 +59,7 @@ const Modal = ({ isOpen, onClose, title, icon: Icon, children }: { isOpen: boole
 const App: React.FC = () => {
   const [loadedFiles, setLoadedFiles] = useState<ProcessedFile[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [processingProgress, setProcessingProgress] = useState(0);
   const [history, setHistory] = useState<ProcessedFile[][]>([]);
   const [activeTab, setActiveTab] = useState<TabId>('preview');
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -180,7 +181,8 @@ const App: React.FC = () => {
   const normalize = (text: string) => {
     if (!text) return '';
     return text
-      .replace(/[.,:;?!\-()]/g, ' ') // Remove punctuation
+      .replace(/[\u0591-\u05C7]/g, '') // Strip Hebrew Niqqud (vowels) for comparison
+      .replace(/[.,:;?!\-()]/g, ' ') // Remove punctuation for comparison
       .split(/\s+/)
       .map(word => {
         let w = word;
@@ -198,14 +200,22 @@ const App: React.FC = () => {
   };
 
   const processWithRegex = () => {
+    if (loadedFiles.length === 0) return;
     setIsProcessing(true);
-    setTimeout(() => {
+    setProcessingProgress(0);
+    
+    setTimeout(async () => {
       pushToHistory();
-      // Escape special regex characters
       const escapedChars = terminatorChar.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       const regex = new RegExp(`^([^${escapedChars}]*[${escapedChars}])`);
+      const nextFiles: ProcessedFile[] = [];
 
-      const nextFiles = loadedFiles.map(f => {
+      for (let i = 0; i < loadedFiles.length; i++) {
+        setProcessingProgress(Math.round((i / loadedFiles.length) * 100));
+        // Small delay to allow UI to update
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        const f = loadedFiles[i];
         const paragraphs = f.content.split('\n');
         const newContent = paragraphs.map(p => {
           if (!p.trim()) return '';
@@ -217,12 +227,14 @@ const App: React.FC = () => {
           }
           return p;
         }).join('\n');
-        return { ...f, content: newContent };
-      });
+        nextFiles.push({ ...f, content: newContent });
+      }
+
       setLoadedFiles(nextFiles);
       addLog("הדגשה באמצעות תוי סיום הושלמה", 'success');
       setIsModalOpen(false);
       setIsProcessing(false);
+      setProcessingProgress(0);
     }, 100);
   };
 
@@ -231,9 +243,12 @@ const App: React.FC = () => {
       addLog("יש לבחור מקור להשוואה", 'error');
       return;
     }
-    setIsProcessing(true);
+    if (loadedFiles.length === 0) return;
     
-    setTimeout(() => {
+    setIsProcessing(true);
+    setProcessingProgress(0);
+    
+    setTimeout(async () => {
       pushToHistory();
 
       const explode = (text: string) => {
@@ -276,8 +291,14 @@ const App: React.FC = () => {
       }
 
       const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+      const nextFiles: ProcessedFile[] = [];
 
-      const nextFiles = loadedFiles.map(f => {
+      for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
+        setProcessingProgress(Math.round((fileIdx / loadedFiles.length) * 100));
+        // Small delay to allow UI to update
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        const f = loadedFiles[fileIdx];
         const paragraphs = f.content.split('\n');
         let currentSourceWords = sourceSections[0].words;
         
@@ -354,13 +375,38 @@ const App: React.FC = () => {
           }
           
           if (bestMatchEndIndex > 0) {
-            const originalWordIdx = wordMap[bestMatchEndIndex - 1];
-            const boldPartWords = originalWords.slice(0, originalWordIdx + 1).join(' ');
-            
-            // Find the actual position in the original paragraph to preserve punctuation
-            const boldPartEndPos = p.indexOf(boldPartWords) + boldPartWords.length;
-            let finalEndPos = boldPartEndPos;
-            if (p[boldPartEndPos] && /[.:\-]/.test(p[boldPartEndPos])) finalEndPos++;
+            const targetWordCount = wordMap[bestMatchEndIndex - 1] + 1;
+            let currentWordIdx = -1;
+            let inWord = false;
+            let finalEndPos = 0;
+            let inTag = false;
+
+            for (let i = 0; i < p.length; i++) {
+              if (p[i] === '<') inTag = true;
+              
+              if (!inTag) {
+                const isWhitespace = /\s/.test(p[i]);
+                if (!isWhitespace && !inWord) {
+                  inWord = true;
+                  currentWordIdx++;
+                } else if (isWhitespace && inWord) {
+                  inWord = false;
+                }
+              }
+              
+              if (currentWordIdx < targetWordCount) {
+                finalEndPos = i + 1;
+              } else {
+                break;
+              }
+              
+              if (p[i] === '>') inTag = false;
+            }
+
+            // Include trailing punctuation if it's not followed by a space
+            while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) {
+              finalEndPos++;
+            }
             
             const boldPart = p.substring(0, finalEndPos);
             const restPart = p.substring(finalEndPos);
@@ -368,13 +414,14 @@ const App: React.FC = () => {
           }
           return p;
         }).join('\n');
-        return { ...f, content: newContent };
-      });
+        nextFiles.push({ ...f, content: newContent });
+      }
 
       setLoadedFiles(nextFiles);
       addLog("הדגשה חכמה (כולל ראשי תיבות) הושלמה", 'success');
       setIsModalOpen(false);
       setIsProcessing(false);
+      setProcessingProgress(0);
     }, 100);
   };
 
@@ -441,6 +488,16 @@ const App: React.FC = () => {
               <RefreshCw size={64} className="text-blue-400" />
             </motion.div>
             <h2 className="text-2xl font-bold mb-2">מעבד נתונים...</h2>
+            <div className="w-64 h-2 bg-slate-700 rounded-full overflow-hidden mb-2">
+              <motion.div 
+                initial={{ width: 0 }}
+                animate={{ width: `${processingProgress}%` }}
+                className="h-full bg-blue-400"
+              />
+            </div>
+            <div className="text-3xl font-mono font-bold text-blue-400 mb-4">
+              {processingProgress}%
+            </div>
             <p className="text-slate-300">אנא המתן בזמן שהמערכת מבצעת את ההדגשות</p>
           </motion.div>
         )}
