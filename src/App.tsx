@@ -16,7 +16,7 @@ import {
   Bold, Italic, Underline, RefreshCw, AArrowUp, AArrowDown,
   Highlighter, ArrowLeftRight
 } from 'lucide-react';
-import { ProcessedFile, TabId, LogEntry, HierarchySkip } from './types';
+import { ProcessedFile, TabId, LogEntry, HierarchySkip, ReviewItem } from './types';
 import { EMBEDDED_SOURCES } from './embeddedSources';
 
 const NavButton = ({ id, icon: Icon, label, onClick }: { id: TabId, icon: any, label: string, onClick: (id: TabId) => void }) => (
@@ -67,6 +67,12 @@ const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [previewIdx, setPreviewIdx] = useState(0);
   const [terminatorChar, setTerminatorChar] = useState('.:-');
+  
+  // Review States
+  const [reviewQueue, setReviewQueue] = useState<ReviewItem[]>([]);
+  const [currentReviewBatch, setCurrentReviewBatch] = useState<ReviewItem[]>([]);
+  const [reviewHeaders, setReviewHeaders] = useState<string[]>([]);
+  const [currentHeaderIdx, setCurrentHeaderIdx] = useState(0);
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
@@ -182,7 +188,7 @@ const App: React.FC = () => {
     if (!text) return '';
     return text
       .replace(/[\u0591-\u05C7]/g, '') // Strip Hebrew Niqqud (vowels) for comparison
-      .replace(/[.,:;?!\-()]/g, ' ') // Remove punctuation for comparison
+      .replace(/[.,:;?!\-()]/g, ' ') // Replace punctuation with space for comparison
       .split(/\s+/)
       .map(word => {
         let w = word;
@@ -238,7 +244,7 @@ const App: React.FC = () => {
     }, 100);
   };
 
-  const processWithFuzzy = () => {
+  const processWithFuzzy = (mode: 'auto' | 'review' = 'auto') => {
     if (!activeSourceContent) {
       addLog("יש לבחור מקור להשוואה", 'error');
       return;
@@ -249,7 +255,7 @@ const App: React.FC = () => {
     setProcessingProgress(0);
     
     setTimeout(async () => {
-      pushToHistory();
+      if (mode === 'auto') pushToHistory();
 
       const explode = (text: string) => {
         return text.split(/\s+/).flatMap(w => {
@@ -292,17 +298,20 @@ const App: React.FC = () => {
 
       const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
       const nextFiles: ProcessedFile[] = [];
+      const allReviewItems: ReviewItem[] = [];
+      const headersFound: string[] = ["_initial_"];
 
       for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
         setProcessingProgress(Math.round((fileIdx / loadedFiles.length) * 100));
-        // Small delay to allow UI to update
         await new Promise(resolve => setTimeout(resolve, 0));
 
         const f = loadedFiles[fileIdx];
         const paragraphs = f.content.split('\n');
         let currentSourceWords = sourceSections[0].words;
+        let currentHeader = "_initial_";
+        let lastMatchIndex = 0; 
         
-        const newContent = paragraphs.map(p => {
+        const newContent = paragraphs.map((p, pIdx) => {
           const trimmed = p.trim();
           if (!trimmed) return '';
 
@@ -312,6 +321,9 @@ const App: React.FC = () => {
             const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
             if (matchingSection) {
               currentSourceWords = matchingSection.words;
+              currentHeader = commentaryHeaderText;
+              if (!headersFound.includes(currentHeader)) headersFound.push(currentHeader);
+              lastMatchIndex = 0; 
             }
             return p; 
           }
@@ -319,7 +331,6 @@ const App: React.FC = () => {
           const cleanP = trimmed.replace(/<[^>]*>/g, '');
           const originalWords = cleanP.split(/\s+/);
           
-          // Explode commentary words and keep map to original indices
           const explodedWords: string[] = [];
           const wordMap: number[] = []; 
           originalWords.forEach((w, idx) => {
@@ -336,94 +347,183 @@ const App: React.FC = () => {
           });
 
           const testLength = Math.min(explodedWords.length, 30);
-          let bestMatchEndIndex = 0;
-          let prevMaxScore = 100;
           
-          for (let i = 1; i <= testLength; i++) {
-            const currentWordClean = explodedWords[i-1].replace(/[.,:;?!"\-()]/g, '');
-            if (STOP_WORDS.includes(currentWordClean)) break;
+          const findMatchInRange = (startIndex: number) => {
+            let localBestEnd = 0;
+            let localBestSourceIdx = -1;
+            let localPrevMax = 100;
+            let localSourceText = "";
+            let localSourceContext = "";
 
-            const prefix = normalize(explodedWords.slice(0, i).join(' '));
-            let maxPrefixScore = 0;
-            
-            for (let j = 0; j <= currentSourceWords.length - i; j++) {
-              const windowWords = currentSourceWords.slice(j, j + i);
-              const window = normalize(windowWords.join(' '));
-              let score = fuzz.ratio(prefix, window);
+            for (let i = 1; i <= testLength; i++) {
+              const currentWordClean = explodedWords[i-1].replace(/[.,:;?!"\-()]/g, '');
+              if (STOP_WORDS.includes(currentWordClean)) break;
+
+              const prefix = normalize(explodedWords.slice(0, i).join(' '));
+              let maxPrefixScore = 0;
+              let currentPrefixSourceIdx = -1;
               
-              // Initials check for abbreviations
-              const windowInitials = windowWords.map(w => w[0]).join('');
-              const initialsScore = fuzz.ratio(prefix.replace(/\s+/g, ''), windowInitials);
-              if (initialsScore > score) score = initialsScore;
+              for (let j = startIndex; j <= currentSourceWords.length - i; j++) {
+                const windowWords = currentSourceWords.slice(j, j + i);
+                const window = normalize(windowWords.join(' '));
+                let score = fuzz.ratio(prefix, window);
+                
+                const windowInitials = windowWords.map(w => w[0]).join('');
+                const initialsScore = fuzz.ratio(prefix.replace(/\s+/g, ''), windowInitials);
+                if (initialsScore > score) score = initialsScore;
 
-              if (score > maxPrefixScore) maxPrefixScore = score;
-              if (maxPrefixScore === 100) break; 
-            }
-            
-            let threshold = 85;
-            if (i === 1) threshold = 75; 
-            else if (i === 2) threshold = 80;
-            else if (i > 8) threshold = 88;
-            
-            if (maxPrefixScore >= threshold) {
-              if (i > 1 && maxPrefixScore < prevMaxScore - 8) break;
-              bestMatchEndIndex = i;
-              prevMaxScore = maxPrefixScore;
-            } else if (i >= 5 && maxPrefixScore < 65) {
-              break;
-            }
-          }
-          
-          if (bestMatchEndIndex > 0) {
-            const targetWordCount = wordMap[bestMatchEndIndex - 1] + 1;
-            let currentWordIdx = -1;
-            let inWord = false;
-            let finalEndPos = 0;
-            let inTag = false;
-
-            for (let i = 0; i < p.length; i++) {
-              if (p[i] === '<') inTag = true;
-              
-              if (!inTag) {
-                const isWhitespace = /\s/.test(p[i]);
-                if (!isWhitespace && !inWord) {
-                  inWord = true;
-                  currentWordIdx++;
-                } else if (isWhitespace && inWord) {
-                  inWord = false;
+                if (score > maxPrefixScore) {
+                  maxPrefixScore = score;
+                  currentPrefixSourceIdx = j;
                 }
+                if (maxPrefixScore === 100) break; 
               }
               
-              if (currentWordIdx < targetWordCount) {
-                finalEndPos = i + 1;
-              } else {
+              let threshold = 85;
+              if (i === 1) threshold = 75; 
+              else if (i === 2) threshold = 80;
+              else if (i > 8) threshold = 88;
+              
+              if (maxPrefixScore >= threshold) {
+                if (i > 1 && maxPrefixScore < localPrevMax - 8) break;
+                localBestEnd = i;
+                localBestSourceIdx = currentPrefixSourceIdx;
+                localPrevMax = maxPrefixScore;
+                
+                // Extract source text and context
+                const matchedSourceWords = currentSourceWords.slice(localBestSourceIdx, localBestSourceIdx + i);
+                localSourceText = matchedSourceWords.join(' ');
+                const contextWords = currentSourceWords.slice(localBestSourceIdx + i, localBestSourceIdx + i + 5);
+                localSourceContext = contextWords.join(' ');
+              } else if (i >= 5 && maxPrefixScore < 65) {
                 break;
               }
-              
-              if (p[i] === '>') inTag = false;
             }
+            return { endIdx: localBestEnd, sourceIdx: localBestSourceIdx, score: localPrevMax, sourceText: localSourceText, sourceContext: localSourceContext };
+          };
 
-            // Include trailing punctuation if it's not followed by a space
-            while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) {
-              finalEndPos++;
+          let result = findMatchInRange(lastMatchIndex);
+          if (result.endIdx === 0 && lastMatchIndex > 0) {
+            result = findMatchInRange(0);
+          }
+
+          if (result.endIdx > 0) {
+            if (mode === 'review') {
+              allReviewItems.push({
+                fileIdx,
+                paragraphIdx: pIdx,
+                originalText: p,
+                sourceText: result.sourceText,
+                sourceContext: result.sourceContext,
+                explodedWordCount: result.endIdx,
+                wordMap,
+                originalWords,
+                headerText: currentHeader
+              });
+              return p;
+            } else {
+              lastMatchIndex = result.sourceIdx + 1; 
+              const targetWordCount = wordMap[result.endIdx - 1] + 1;
+              let currentWordIdx = -1;
+              let inWord = false;
+              let finalEndPos = 0;
+              let inTag = false;
+
+              for (let i = 0; i < p.length; i++) {
+                if (p[i] === '<') inTag = true;
+                if (!inTag) {
+                  const isWhitespace = /\s/.test(p[i]);
+                  if (!isWhitespace && !inWord) {
+                    inWord = true;
+                    currentWordIdx++;
+                  } else if (isWhitespace && inWord) {
+                    inWord = false;
+                  }
+                }
+                if (currentWordIdx < targetWordCount) finalEndPos = i + 1;
+                else break;
+                if (p[i] === '>') inTag = false;
+              }
+              while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) finalEndPos++;
+              return `<b>${p.substring(0, finalEndPos)}</b>${p.substring(finalEndPos)}`;
             }
-            
-            const boldPart = p.substring(0, finalEndPos);
-            const restPart = p.substring(finalEndPos);
-            return `<b>${boldPart}</b>${restPart}`;
           }
           return p;
         }).join('\n');
         nextFiles.push({ ...f, content: newContent });
       }
 
-      setLoadedFiles(nextFiles);
-      addLog("הדגשה חכמה (כולל ראשי תיבות) הושלמה", 'success');
-      setIsModalOpen(false);
+      if (mode === 'review') {
+        setReviewQueue(allReviewItems);
+        setReviewHeaders(headersFound);
+        setCurrentHeaderIdx(0);
+        setActiveTab('review');
+        setIsModalOpen(false);
+      } else {
+        setLoadedFiles(nextFiles);
+        addLog("הדגשה חכמה הושלמה", 'success');
+        setIsModalOpen(false);
+      }
       setIsProcessing(false);
       setProcessingProgress(0);
     }, 100);
   };
+
+  const applyReviewBatch = () => {
+    pushToHistory();
+    const nextFiles = [...loadedFiles];
+    
+    currentReviewBatch.forEach(item => {
+      const f = nextFiles[item.fileIdx];
+      const paragraphs = f.content.split('\n');
+      const p = item.originalText;
+      
+      const targetWordCount = item.wordMap[item.explodedWordCount - 1] + 1;
+      let currentWordIdx = -1;
+      let inWord = false;
+      let finalEndPos = 0;
+      let inTag = false;
+
+      for (let i = 0; i < p.length; i++) {
+        if (p[i] === '<') inTag = true;
+        if (!inTag) {
+          const isWhitespace = /\s/.test(p[i]);
+          if (!isWhitespace && !inWord) {
+            inWord = true;
+            currentWordIdx++;
+          } else if (isWhitespace && inWord) {
+            inWord = false;
+          }
+        }
+        if (currentWordIdx < targetWordCount) finalEndPos = i + 1;
+        else break;
+        if (p[i] === '>') inTag = false;
+      }
+      while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) finalEndPos++;
+      
+      paragraphs[item.paragraphIdx] = `<b>${p.substring(0, finalEndPos)}</b>${p.substring(finalEndPos)}`;
+      nextFiles[item.fileIdx] = { ...f, content: paragraphs.join('\n') };
+    });
+
+    setLoadedFiles(nextFiles);
+    
+    if (currentHeaderIdx + 1 < reviewHeaders.length) {
+      setCurrentHeaderIdx(prev => prev + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setActiveTab('preview');
+      setReviewQueue([]);
+      addLog("תהליך אישור ההדגשות הושלם", 'success');
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'review' && reviewQueue.length > 0) {
+      const currentHeader = reviewHeaders[currentHeaderIdx];
+      const batch = reviewQueue.filter(item => item.headerText === currentHeader);
+      setCurrentReviewBatch(batch);
+    }
+  }, [activeTab, reviewQueue, currentHeaderIdx, reviewHeaders]);
 
   const downloadAll = async () => {
     if (loadedFiles.length === 0) return;
@@ -678,6 +778,101 @@ const App: React.FC = () => {
             </div>
           </div>
 
+          {activeTab === 'review' && (
+            <div className="fixed inset-0 z-[60] bg-slate-50 flex flex-col" dir="rtl">
+              <header className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between shrink-0">
+                <div className="flex items-center gap-4">
+                  <div className="p-2 bg-blue-600 rounded-lg text-white">
+                    <ListCheck size={24} />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-slate-800">אישור ועריכת הדגשות</h2>
+                    <p className="text-xs text-slate-500">
+                      כותרת: <span className="font-bold text-blue-600">{reviewHeaders[currentHeaderIdx] === '_initial_' ? 'תחילת הקובץ' : reviewHeaders[currentHeaderIdx]}</span>
+                      {' '}({currentHeaderIdx + 1} מתוך {reviewHeaders.length})
+                    </p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => { setActiveTab('preview'); setReviewQueue([]); }}
+                  className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors"
+                >
+                  <X size={24} />
+                </button>
+              </header>
+
+              <div className="flex-1 overflow-y-auto p-8">
+                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {currentReviewBatch.map((item, idx) => {
+                    const targetWordCount = item.wordMap[item.explodedWordCount - 1] + 1;
+                    const boldPart = item.originalWords.slice(0, targetWordCount).join(' ');
+                    const restPart = item.originalWords.slice(targetWordCount).join(' ');
+
+                    return (
+                      <div key={idx} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+                        <div className="p-4 bg-slate-50 border-b border-slate-100">
+                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">מקור + 5 מילים</div>
+                          <div className="text-sm text-slate-700 leading-relaxed">
+                            <span className="font-bold text-blue-600">{item.sourceText}</span>
+                            <span className="opacity-50"> {item.sourceContext}</span>
+                          </div>
+                        </div>
+                        <div className="p-6 flex-1">
+                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-2">טקסט להדגשה</div>
+                          <div className="text-lg leading-relaxed text-slate-800">
+                            <span className="bg-blue-50 text-blue-700 font-bold px-1 rounded">{boldPart}</span>
+                            <span> {restPart}</span>
+                          </div>
+                        </div>
+                        <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-center gap-4">
+                          <button 
+                            onClick={() => {
+                              const newQueue = [...reviewQueue];
+                              const queueIdx = newQueue.findIndex(q => q.paragraphIdx === item.paragraphIdx && q.fileIdx === item.fileIdx);
+                              if (queueIdx > -1 && item.explodedWordCount > 1) {
+                                newQueue[queueIdx].explodedWordCount--;
+                                setReviewQueue(newQueue);
+                              }
+                            }}
+                            className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors"
+                            title="הסר מילה"
+                          >
+                            <AArrowDown size={20} />
+                          </button>
+                          <span className="text-xs font-bold text-slate-500">{item.explodedWordCount} מילים</span>
+                          <button 
+                            onClick={() => {
+                              const newQueue = [...reviewQueue];
+                              const queueIdx = newQueue.findIndex(q => q.paragraphIdx === item.paragraphIdx && q.fileIdx === item.fileIdx);
+                              if (queueIdx > -1 && item.explodedWordCount < item.wordMap.length) {
+                                newQueue[queueIdx].explodedWordCount++;
+                                setReviewQueue(newQueue);
+                              }
+                            }}
+                            className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors"
+                            title="הוסף מילה"
+                          >
+                            <AArrowUp size={20} />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <footer className="bg-white border-t border-slate-200 p-6 flex justify-center">
+                <button 
+                  onClick={applyReviewBatch}
+                  className="flex items-center gap-3 px-12 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-700 transition-all"
+                >
+                  <CheckCircle size={24} />
+                  אשר והמשך לכותרת הבאה
+                </button>
+              </footer>
+            </div>
+          )}
+
           <Modal 
             isOpen={isModalOpen && activeTab === 'highlight_regex'} 
             onClose={() => setIsModalOpen(false)} 
@@ -750,12 +945,20 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <button 
-                onClick={processWithFuzzy} 
-                className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg"
-              >
-                בצע הדגשה באמצעות השוואה
-              </button>
+              <div className="grid grid-cols-2 gap-4">
+                <button 
+                  onClick={() => processWithFuzzy('auto')} 
+                  className="py-4 bg-slate-100 text-slate-700 rounded-xl font-bold hover:bg-slate-200 transition-all"
+                >
+                  הדגשה אוטומטית
+                </button>
+                <button 
+                  onClick={() => processWithFuzzy('review')} 
+                  className="py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 transition-all shadow-lg"
+                >
+                  אשר והדגש
+                </button>
+              </div>
             </div>
           </Modal>
         </div>
