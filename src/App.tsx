@@ -362,47 +362,39 @@ const App: React.FC = () => {
             const cleanP = trimmed.replace(/<[^>]*>/g, '');
             const originalWords = cleanP.split(/\s+/);
             
-            // 1. Find the best anchor position using up to 15 words
-            const anchorSize = Math.min(originalWords.length, 15);
-            const paragraphAnchor = normalize(originalWords.slice(0, anchorSize).join(' '));
-            
             let bestSourceIdx = -1;
-            let bestAnchorScore = 0;
+            let maxMatchCount = 0;
             
-            // Search for the best anchor in the source words
-            for (let j = 0; j <= currentSourceWords.length - Math.min(anchorSize, 3); j++) {
-              const windowSize = Math.min(anchorSize, currentSourceWords.length - j);
-              const sourceWindow = normalize(currentSourceWords.slice(j, j + windowSize).join(' '));
-              const score = fuzz.ratio(paragraphAnchor, sourceWindow);
-              
-              if (score > bestAnchorScore) {
-                bestAnchorScore = score;
-                bestSourceIdx = j;
-              }
-              if (score === 100) break;
-            }
-
-            // 2. Word-by-word refinement from the anchor
-            let finalWordCount = 0;
-            if (bestAnchorScore > 70) { // Minimum threshold to even consider it a match
+            for (let j = 0; j < currentSourceWords.length; j++) {
+              let currentMatch = 0;
               for (let k = 0; k < originalWords.length; k++) {
-                if (bestSourceIdx + k >= currentSourceWords.length) break;
-                
+                if (j + k >= currentSourceWords.length) break;
                 const pWord = normalize(originalWords[k]);
-                const sWord = normalize(currentSourceWords[bestSourceIdx + k]);
-                
-                // Very strict word-by-word comparison
-                const wordScore = fuzz.ratio(pWord, sWord);
-                if (wordScore >= 85) {
-                  finalWordCount = k + 1;
+                const sWord = normalize(currentSourceWords[j + k]);
+                if (fuzz.ratio(pWord, sWord) >= 85) {
+                  currentMatch++;
                 } else {
-                  // Stop at the first word that doesn't match well
                   break;
                 }
               }
+              if (currentMatch > maxMatchCount) {
+                maxMatchCount = currentMatch;
+                bestSourceIdx = j;
+              }
+              if (maxMatchCount >= 15) break; 
             }
 
-            if (finalWordCount > 0) {
+            // If we found a match (even 1 word), we highlight
+            if (maxMatchCount >= 1) {
+              const finalWordCount = maxMatchCount;
+              
+              // Safety: if only 1 word matches, ensure it's a strong match
+              if (finalWordCount === 1) {
+                const pWord = normalize(originalWords[0]);
+                const sWord = normalize(currentSourceWords[bestSourceIdx]);
+                if (fuzz.ratio(pWord, sWord) < 92) return p;
+              }
+
               let currentWordIdx = -1;
               let inWord = false;
               let finalEndPos = 0;
@@ -458,61 +450,81 @@ const App: React.FC = () => {
       const cleanP = p.replace(/<[^>]*>/g, '');
       const originalWords = cleanP.split(/\s+/);
       
-      // 1. Find the best anchor position using up to 15 words
-      const anchorSize = Math.min(originalWords.length, 15);
-      const paragraphAnchor = normalize(originalWords.slice(0, anchorSize).join(' '));
-      
       let bestSourceIdx = -1;
-      let bestAnchorScore = 0;
-      
-      for (let j = 0; j <= currentSourceWords.length - Math.min(anchorSize, 3); j++) {
-        const windowSize = Math.min(anchorSize, currentSourceWords.length - j);
-        const sourceWindow = normalize(currentSourceWords.slice(j, j + windowSize).join(' '));
-        const score = fuzz.ratio(paragraphAnchor, sourceWindow);
-        
-        if (score > bestAnchorScore) {
-          bestAnchorScore = score;
-          bestSourceIdx = j;
-        }
-        if (score === 100) break;
-      }
+      let maxMatchCount = 0;
+      const lastIdx = fileLastMatchIndices[item.fileIdx] || 0;
 
-      // 2. Word-by-word refinement
-      let finalWordCount = 0;
-      let matchedSourceText = "";
-      let matchedSourceContext = "";
-
-      if (bestAnchorScore > 70) {
+      // Search for the longest prefix match
+      // We prefer matches that appear after the last match in the same file
+      for (let j = lastIdx; j < currentSourceWords.length; j++) {
+        let currentMatch = 0;
         for (let k = 0; k < originalWords.length; k++) {
-          if (bestSourceIdx + k >= currentSourceWords.length) break;
-          
+          if (j + k >= currentSourceWords.length) break;
           const pWord = normalize(originalWords[k]);
-          const sWord = normalize(currentSourceWords[bestSourceIdx + k]);
-          
-          const wordScore = fuzz.ratio(pWord, sWord);
-          if (wordScore >= 85) {
-            finalWordCount = k + 1;
+          const sWord = normalize(currentSourceWords[j + k]);
+          if (fuzz.ratio(pWord, sWord) >= 85) {
+            currentMatch++;
           } else {
             break;
           }
         }
-        
-        if (finalWordCount > 0) {
-          matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + finalWordCount).join(' ');
-          matchedSourceContext = currentSourceWords.slice(bestSourceIdx + finalWordCount, bestSourceIdx + finalWordCount + 5).join(' ');
-          
-          batchItems.push({
-            fileIdx: item.fileIdx,
-            paragraphIdx: item.pIdx,
-            originalText: p,
-            sourceText: matchedSourceText,
-            sourceContext: matchedSourceContext,
-            explodedWordCount: finalWordCount,
-            wordMap: Array.from({length: finalWordCount}, (_, i) => i),
-            originalWords,
-            headerText: header
-          });
+        if (currentMatch > maxMatchCount) {
+          maxMatchCount = currentMatch;
+          bestSourceIdx = j;
         }
+        if (maxMatchCount >= 15) break;
+      }
+
+      // If no good match found after lastIdx, try from the beginning
+      if (maxMatchCount < 2) {
+        for (let j = 0; j < lastIdx; j++) {
+          let currentMatch = 0;
+          for (let k = 0; k < originalWords.length; k++) {
+            if (j + k >= currentSourceWords.length) break;
+            const pWord = normalize(originalWords[k]);
+            const sWord = normalize(currentSourceWords[j + k]);
+            if (fuzz.ratio(pWord, sWord) >= 85) {
+              currentMatch++;
+            } else {
+              break;
+            }
+          }
+          if (currentMatch > maxMatchCount) {
+            maxMatchCount = currentMatch;
+            bestSourceIdx = j;
+          }
+          if (maxMatchCount >= 15) break;
+        }
+      }
+
+      // If we found a match (even 1 word), we highlight
+      if (maxMatchCount >= 1) {
+        // Safety: if only 1 word matches, ensure it's a strong match
+        if (maxMatchCount === 1) {
+          const pWord = normalize(originalWords[0]);
+          const sWord = normalize(currentSourceWords[bestSourceIdx]);
+          if (fuzz.ratio(pWord, sWord) < 92) {
+            maxMatchCount = 0;
+          }
+        }
+      }
+
+      if (maxMatchCount >= 1) {
+        fileLastMatchIndices[item.fileIdx] = bestSourceIdx + 1;
+        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + maxMatchCount).join(' ');
+        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + maxMatchCount, bestSourceIdx + maxMatchCount + 5).join(' ');
+        
+        batchItems.push({
+          fileIdx: item.fileIdx,
+          paragraphIdx: item.pIdx,
+          originalText: p,
+          sourceText: matchedSourceText,
+          sourceContext: matchedSourceContext,
+          explodedWordCount: maxMatchCount,
+          wordMap: Array.from({length: maxMatchCount}, (_, i) => i),
+          originalWords,
+          headerText: header
+        });
       }
     }
 
