@@ -16,7 +16,7 @@ import {
   Bold, Italic, Underline, RefreshCw, AArrowUp, AArrowDown,
   Highlighter, ArrowLeftRight, Plus, Minus
 } from 'lucide-react';
-import { ProcessedFile, TabId, LogEntry, HierarchySkip, ReviewItem } from './types';
+import { ProcessedFile, TabId, LogEntry, ReviewItem } from './types';
 import { EMBEDDED_SOURCES } from './embeddedSources';
 
 const NavButton = ({ id, icon: Icon, label, onClick }: { id: TabId, icon: any, label: string, onClick: (id: TabId) => void }) => (
@@ -189,11 +189,10 @@ const App: React.FC = () => {
   const normalize = (text: string) => {
     if (!text) return '';
     return text
-      .replace(/[\u0591-\u05C7]/g, '') // Strip Hebrew Niqqud (vowels) for comparison
-      .replace(/[.,:;?!\-()]/g, ' ') // Replace punctuation with space for comparison
+      .replace(/[\u0591-\u05C7]/g, '') // Strip Hebrew Niqqud
+      .replace(/[.,:;?!\-()]/g, ' ') // Replace punctuation with space
       .split(/\s+/)
       .map(word => {
-        // Handle full/defective spelling: Remove 'ו' and 'י' for comparison purposes
         return word.replace(/[וי]/g, '');
       })
       .join(' ')
@@ -214,7 +213,6 @@ const App: React.FC = () => {
 
       for (let i = 0; i < loadedFiles.length; i++) {
         setProcessingProgress(Math.round((i / loadedFiles.length) * 100));
-        // Small delay to allow UI to update
         await new Promise(resolve => setTimeout(resolve, 0));
 
         const f = loadedFiles[i];
@@ -294,7 +292,6 @@ const App: React.FC = () => {
       setSourceSections(sections);
 
       if (mode === 'review') {
-        // Break into parts: Group paragraphs by header
         const groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]> = {};
         const headersOrder: string[] = ["_initial_"];
         groups["_initial_"] = [];
@@ -331,8 +328,7 @@ const App: React.FC = () => {
           setIsProcessing(false);
         }
       } else {
-        // Auto mode: process everything
-        const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+        // Auto mode
         const nextFiles: ProcessedFile[] = [];
 
         for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
@@ -362,9 +358,9 @@ const App: React.FC = () => {
             const cleanP = trimmed.replace(/<[^>]*>/g, '');
             const originalWords = cleanP.split(/\s+/);
             
-            let bestSourceIdx = -1;
-            let maxMatchCount = 0;
+            let candidates: { index: number, matchCount: number }[] = [];
             
+            // Gather all possible match candidates
             for (let j = 0; j < currentSourceWords.length; j++) {
               let currentMatch = 0;
               for (let k = 0; k < originalWords.length; k++) {
@@ -377,23 +373,48 @@ const App: React.FC = () => {
                   break;
                 }
               }
-              if (currentMatch > maxMatchCount) {
-                maxMatchCount = currentMatch;
-                bestSourceIdx = j;
+              if (currentMatch > 0) {
+                candidates.push({ index: j, matchCount: currentMatch });
               }
-              if (maxMatchCount >= 15) break; 
             }
 
-            // If we found a match (even 1 word), we highlight
-            if (maxMatchCount >= 1) {
-              const finalWordCount = maxMatchCount;
+            let bestSourceIdx = -1;
+            let maxMatchCount = 0;
+            let bestScore = -Infinity;
+
+            // Score candidates based on match length and distance from lastMatchIndex
+            candidates.forEach(candidate => {
+              let score = candidate.matchCount;
               
               // Safety: if only 1 word matches, ensure it's a strong match
-              if (finalWordCount === 1) {
+              if (candidate.matchCount === 1) {
                 const pWord = normalize(originalWords[0]);
-                const sWord = normalize(currentSourceWords[bestSourceIdx]);
-                if (fuzz.ratio(pWord, sWord) < 92) return p;
+                const sWord = normalize(currentSourceWords[candidate.index]);
+                if (fuzz.ratio(pWord, sWord) < 92) {
+                   score = -Infinity; // Discard poor single word matches
+                }
               }
+
+              if (score !== -Infinity) {
+                  const distance = candidate.index - lastMatchIndex;
+                  
+                  if (distance >= 0) {
+                      score -= (distance * 0.005); // Small penalty for jumping ahead
+                  } else {
+                      score -= 5; // Heavy penalty for matching text *before* the last match
+                  }
+
+                  if (score > bestScore) {
+                      bestScore = score;
+                      bestSourceIdx = candidate.index;
+                      maxMatchCount = candidate.matchCount;
+                  }
+              }
+            });
+
+            // If we found a valid candidate
+            if (maxMatchCount >= 1) {
+              lastMatchIndex = bestSourceIdx + 1; // Update index for next paragraph
 
               let currentWordIdx = -1;
               let inWord = false;
@@ -411,7 +432,7 @@ const App: React.FC = () => {
                     inWord = false;
                   }
                 }
-                if (currentWordIdx < finalWordCount) finalEndPos = i + 1;
+                if (currentWordIdx < maxMatchCount) finalEndPos = i + 1;
                 else break;
                 if (p[i] === '>') inTag = false;
               }
@@ -438,10 +459,7 @@ const App: React.FC = () => {
     const section = sections.find(s => s.header === header) || sections[0];
     const currentSourceWords = section.words;
     
-    const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
     const batchItems: ReviewItem[] = [];
-    
-    // Track lastMatchIndex per file within this group
     const fileLastMatchIndices: Record<number, number> = {};
 
     for (let i = 0; i < paragraphs.length; i++) {
@@ -450,13 +468,10 @@ const App: React.FC = () => {
       const cleanP = p.replace(/<[^>]*>/g, '');
       const originalWords = cleanP.split(/\s+/);
       
-      let bestSourceIdx = -1;
-      let maxMatchCount = 0;
       const lastIdx = fileLastMatchIndices[item.fileIdx] || 0;
+      let candidates: { index: number, matchCount: number }[] = [];
 
-      // Search for the longest prefix match
-      // We prefer matches that appear after the last match in the same file
-      for (let j = lastIdx; j < currentSourceWords.length; j++) {
+      for (let j = 0; j < currentSourceWords.length; j++) {
         let currentMatch = 0;
         for (let k = 0; k < originalWords.length; k++) {
           if (j + k >= currentSourceWords.length) break;
@@ -468,46 +483,42 @@ const App: React.FC = () => {
             break;
           }
         }
-        if (currentMatch > maxMatchCount) {
-          maxMatchCount = currentMatch;
-          bestSourceIdx = j;
+        if (currentMatch > 0) {
+          candidates.push({ index: j, matchCount: currentMatch });
         }
-        if (maxMatchCount >= 15) break;
       }
 
-      // If no good match found after lastIdx, try from the beginning
-      if (maxMatchCount < 2) {
-        for (let j = 0; j < lastIdx; j++) {
-          let currentMatch = 0;
-          for (let k = 0; k < originalWords.length; k++) {
-            if (j + k >= currentSourceWords.length) break;
-            const pWord = normalize(originalWords[k]);
-            const sWord = normalize(currentSourceWords[j + k]);
-            if (fuzz.ratio(pWord, sWord) >= 85) {
-              currentMatch++;
-            } else {
-              break;
+      let bestSourceIdx = -1;
+      let maxMatchCount = 0;
+      let bestScore = -Infinity;
+
+      candidates.forEach(candidate => {
+         let score = candidate.matchCount;
+         
+         if (candidate.matchCount === 1) {
+            const pWord = normalize(originalWords[0]);
+            const sWord = normalize(currentSourceWords[candidate.index]);
+            if (fuzz.ratio(pWord, sWord) < 92) {
+               score = -Infinity;
             }
-          }
-          if (currentMatch > maxMatchCount) {
-            maxMatchCount = currentMatch;
-            bestSourceIdx = j;
-          }
-          if (maxMatchCount >= 15) break;
-        }
-      }
+         }
 
-      // If we found a match (even 1 word), we highlight
-      if (maxMatchCount >= 1) {
-        // Safety: if only 1 word matches, ensure it's a strong match
-        if (maxMatchCount === 1) {
-          const pWord = normalize(originalWords[0]);
-          const sWord = normalize(currentSourceWords[bestSourceIdx]);
-          if (fuzz.ratio(pWord, sWord) < 92) {
-            maxMatchCount = 0;
-          }
-        }
-      }
+         if (score !== -Infinity) {
+             const distance = candidate.index - lastIdx;
+             
+             if (distance >= 0) {
+                 score -= (distance * 0.005);
+             } else {
+                 score -= 5;
+             }
+
+             if (score > bestScore) {
+                 bestScore = score;
+                 bestSourceIdx = candidate.index;
+                 maxMatchCount = candidate.matchCount;
+             }
+         }
+      });
 
       if (maxMatchCount >= 1) {
         fileLastMatchIndices[item.fileIdx] = bestSourceIdx + 1;
@@ -672,7 +683,7 @@ const App: React.FC = () => {
           <div className="p-2 bg-blue-600 rounded-lg text-white">
             <Highlighter size={24} />
           </div>
-          <h1 className="text-xl font-bold text-slate-800">מעבד טקסט תורני</h1>
+          <h1 className="text-xl font-bold text-slate-800">מעבד טקסט מתקדם</h1>
         </div>
         
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
