@@ -14,7 +14,7 @@ import {
   CheckCircle, AlertCircle, ChevronRight, Menu,
   Settings, ListCheck, ArrowLeft, Play, Undo2, Filter, Type, X,
   Bold, Italic, Underline, RefreshCw, AArrowUp, AArrowDown,
-  Highlighter, ArrowLeftRight
+  Highlighter, ArrowLeftRight, Plus, Minus
 } from 'lucide-react';
 import { ProcessedFile, TabId, LogEntry, HierarchySkip, ReviewItem } from './types';
 import { EMBEDDED_SOURCES } from './embeddedSources';
@@ -346,23 +346,30 @@ const App: React.FC = () => {
             }
           });
 
-          const testLength = Math.min(explodedWords.length, 30);
+          const testLength = Math.min(explodedWords.length, 40);
           
           const findMatchInRange = (startIndex: number) => {
             let localBestEnd = 0;
             let localBestSourceIdx = -1;
-            let localPrevMax = 100;
+            let localPrevMax = 0;
             let localSourceText = "";
             let localSourceContext = "";
 
             for (let i = 1; i <= testLength; i++) {
               const currentWordClean = explodedWords[i-1].replace(/[.,:;?!"\-()]/g, '');
-              if (STOP_WORDS.includes(currentWordClean)) break;
+              if (STOP_WORDS.includes(currentWordClean)) {
+                // If it's a stop word, we don't stop the whole process, 
+                // but we might want to be more careful. 
+                // For now, let's allow it to continue if it's not the very first word.
+                if (i === 1) continue; 
+              }
 
               const prefix = normalize(explodedWords.slice(0, i).join(' '));
               let maxPrefixScore = 0;
               let currentPrefixSourceIdx = -1;
               
+              // Optimization: if we already have a good match, search around it first?
+              // For now, let's just search the whole range to be safe.
               for (let j = startIndex; j <= currentSourceWords.length - i; j++) {
                 const windowWords = currentSourceWords.slice(j, j + i);
                 const window = normalize(windowWords.join(' '));
@@ -376,26 +383,35 @@ const App: React.FC = () => {
                   maxPrefixScore = score;
                   currentPrefixSourceIdx = j;
                 }
-                if (maxPrefixScore === 100) break; 
+                if (maxPrefixScore === 100) {
+                  // If we found a 100% match, we can stop searching for THIS i.
+                  // But we should prefer a match that is "consistent" with the previous i's match if possible.
+                  if (localBestSourceIdx === -1 || Math.abs(j - localBestSourceIdx) < 5) {
+                    break; 
+                  }
+                }
               }
               
-              let threshold = 85;
-              if (i === 1) threshold = 75; 
-              else if (i === 2) threshold = 80;
-              else if (i > 8) threshold = 88;
+              let threshold = 82;
+              if (i === 1) threshold = 72; 
+              else if (i === 2) threshold = 78;
+              else if (i > 10) threshold = 85;
               
               if (maxPrefixScore >= threshold) {
-                if (i > 1 && maxPrefixScore < localPrevMax - 8) break;
+                // We found a match for prefix of length i.
+                // We update the best match if the score is decent.
+                // We don't break just because the score dropped a bit, 
+                // as a longer match is often better even if slightly less perfect.
                 localBestEnd = i;
                 localBestSourceIdx = currentPrefixSourceIdx;
                 localPrevMax = maxPrefixScore;
                 
-                // Extract source text and context
                 const matchedSourceWords = currentSourceWords.slice(localBestSourceIdx, localBestSourceIdx + i);
                 localSourceText = matchedSourceWords.join(' ');
                 const contextWords = currentSourceWords.slice(localBestSourceIdx + i, localBestSourceIdx + i + 5);
                 localSourceContext = contextWords.join(' ');
-              } else if (i >= 5 && maxPrefixScore < 65) {
+              } else if (i >= 6 && maxPrefixScore < 60) {
+                // Only break if it's really not matching anymore
                 break;
               }
             }
@@ -408,6 +424,8 @@ const App: React.FC = () => {
           }
 
           if (result.endIdx > 0) {
+            lastMatchIndex = result.sourceIdx + 1; 
+
             if (mode === 'review') {
               allReviewItems.push({
                 fileIdx,
@@ -422,7 +440,6 @@ const App: React.FC = () => {
               });
               return p;
             } else {
-              lastMatchIndex = result.sourceIdx + 1; 
               const targetWordCount = wordMap[result.endIdx - 1] + 1;
               let currentWordIdx = -1;
               let inWord = false;
@@ -454,10 +471,15 @@ const App: React.FC = () => {
       }
 
       if (mode === 'review') {
+        const headersWithItems = headersFound.filter(h => allReviewItems.some(item => item.headerText === h));
         setReviewQueue(allReviewItems);
-        setReviewHeaders(headersFound);
+        setReviewHeaders(headersWithItems);
         setCurrentHeaderIdx(0);
-        setActiveTab('review');
+        if (headersWithItems.length > 0) {
+          setActiveTab('review');
+        } else {
+          addLog("לא נמצאו הדגשות לסקירה", 'info');
+        }
         setIsModalOpen(false);
       } else {
         setLoadedFiles(nextFiles);
@@ -509,7 +531,8 @@ const App: React.FC = () => {
     
     if (currentHeaderIdx + 1 < reviewHeaders.length) {
       setCurrentHeaderIdx(prev => prev + 1);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      const scrollContainer = document.getElementById('review-scroll-container');
+      if (scrollContainer) scrollContainer.scrollTop = 0;
     } else {
       setActiveTab('preview');
       setReviewQueue([]);
@@ -572,36 +595,24 @@ const App: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-slate-50 overflow-hidden" dir="rtl">
-      <AnimatePresence>
-        {isProcessing && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-md text-white"
-          >
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-              className="mb-6"
-            >
-              <RefreshCw size={64} className="text-blue-400" />
-            </motion.div>
-            <h2 className="text-2xl font-bold mb-2">מעבד נתונים...</h2>
-            <div className="w-64 h-2 bg-slate-700 rounded-full overflow-hidden mb-2">
-              <motion.div 
-                initial={{ width: 0 }}
-                animate={{ width: `${processingProgress}%` }}
-                className="h-full bg-blue-400"
-              />
-            </div>
-            <div className="text-3xl font-mono font-bold text-blue-400 mb-4">
-              {processingProgress}%
-            </div>
-            <p className="text-slate-300">אנא המתן בזמן שהמערכת מבצעת את ההדגשות</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isProcessing && (
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-md text-white">
+          <div className="mb-6">
+            <RefreshCw size={64} className="text-blue-400" />
+          </div>
+          <h2 className="text-2xl font-bold mb-2">מעבד נתונים...</h2>
+          <div className="w-64 h-2 bg-slate-700 rounded-full overflow-hidden mb-2">
+            <div 
+              className="h-full bg-blue-400"
+              style={{ width: `${processingProgress}%` }}
+            />
+          </div>
+          <div className="text-3xl font-mono font-bold text-blue-400 mb-4">
+            {processingProgress}%
+          </div>
+          <p className="text-slate-300">אנא המתן בזמן שהמערכת מבצעת את ההדגשות</p>
+        </div>
+      )}
 
       <input ref={fileInputRef} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
       <input 
@@ -779,30 +790,30 @@ const App: React.FC = () => {
           </div>
 
           {activeTab === 'review' && (
-            <div className="fixed inset-0 z-[60] bg-slate-50 flex flex-col" dir="rtl">
-              <header className="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between shrink-0">
-                <div className="flex items-center gap-4">
-                  <div className="p-2 bg-blue-600 rounded-lg text-white">
-                    <ListCheck size={24} />
+            <div className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm flex items-center justify-center p-4 md:p-8" dir="rtl">
+              <div className="bg-white w-full max-w-5xl h-full max-h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-white/20">
+                <header className="bg-white border-b border-slate-100 px-8 py-5 flex items-center justify-between shrink-0">
+                  <div className="flex items-center gap-4">
+                    <div className="p-2.5 bg-blue-600 rounded-xl text-white shadow-lg shadow-blue-200">
+                      <ListCheck size={24} />
+                    </div>
+                    <div>
+                      <h2 className="text-xl font-bold text-slate-800">אישור ועריכת הדגשות</h2>
+                      <p className="text-xs text-slate-500 mt-0.5">
+                        כותרת: <span className="font-bold text-blue-600">{reviewHeaders[currentHeaderIdx] === '_initial_' ? 'תחילת הקובץ' : reviewHeaders[currentHeaderIdx]}</span>
+                        {' '}({currentHeaderIdx + 1} מתוך {reviewHeaders.length})
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h2 className="text-xl font-bold text-slate-800">אישור ועריכת הדגשות</h2>
-                    <p className="text-xs text-slate-500">
-                      כותרת: <span className="font-bold text-blue-600">{reviewHeaders[currentHeaderIdx] === '_initial_' ? 'תחילת הקובץ' : reviewHeaders[currentHeaderIdx]}</span>
-                      {' '}({currentHeaderIdx + 1} מתוך {reviewHeaders.length})
-                    </p>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => { setActiveTab('preview'); setReviewQueue([]); }}
-                  className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors"
-                >
-                  <X size={24} />
-                </button>
-              </header>
+                  <button 
+                    onClick={() => { setActiveTab('preview'); setReviewQueue([]); }}
+                    className="p-2 hover:bg-slate-100 rounded-full text-slate-400 transition-colors"
+                  >
+                    <X size={24} />
+                  </button>
+                </header>
 
-              <div className="flex-1 overflow-y-auto p-8">
-                <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div id="review-scroll-container" className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/50">
                   {currentReviewBatch.map((item, idx) => {
                     const targetWordCount = item.wordMap[item.explodedWordCount - 1] + 1;
                     const boldPart = item.originalWords.slice(0, targetWordCount).join(' ');
@@ -811,20 +822,20 @@ const App: React.FC = () => {
                     return (
                       <div key={idx} className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
                         <div className="p-4 bg-slate-50 border-b border-slate-100">
-                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-1">מקור + 5 מילים</div>
+                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-1 tracking-wider">מקור + 5 מילים</div>
                           <div className="text-sm text-slate-700 leading-relaxed">
                             <span className="font-bold text-blue-600">{item.sourceText}</span>
                             <span className="opacity-50"> {item.sourceContext}</span>
                           </div>
                         </div>
-                        <div className="p-6 flex-1">
-                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-2">טקסט להדגשה</div>
+                        <div className="p-6">
+                          <div className="text-[10px] font-bold text-slate-400 uppercase mb-2 tracking-wider">טקסט להדגשה</div>
                           <div className="text-lg leading-relaxed text-slate-800">
-                            <span className="bg-blue-50 text-blue-700 font-bold px-1 rounded">{boldPart}</span>
-                            <span> {restPart}</span>
+                            <span className="bg-blue-50 text-blue-700 font-bold px-1.5 py-0.5 rounded-md">{boldPart}</span>
+                            <span className="text-slate-400"> {restPart}</span>
                           </div>
                         </div>
-                        <div className="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-center gap-4">
+                        <div className="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-center gap-8">
                           <button 
                             onClick={() => {
                               const newQueue = [...reviewQueue];
@@ -834,12 +845,15 @@ const App: React.FC = () => {
                                 setReviewQueue(newQueue);
                               }
                             }}
-                            className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-red-50 hover:text-red-600 transition-colors"
+                            className="w-12 h-12 flex items-center justify-center bg-white border border-slate-200 rounded-2xl hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all shadow-sm active:scale-95"
                             title="הסר מילה"
                           >
-                            <AArrowDown size={20} />
+                            <Minus size={24} />
                           </button>
-                          <span className="text-xs font-bold text-slate-500">{item.explodedWordCount} מילים</span>
+                          <div className="flex flex-col items-center min-w-[80px]">
+                            <span className="text-2xl font-black text-slate-700 leading-none">{item.explodedWordCount}</span>
+                            <span className="text-[10px] text-slate-400 font-bold uppercase mt-1">מילים מודגשות</span>
+                          </div>
                           <button 
                             onClick={() => {
                               const newQueue = [...reviewQueue];
@@ -849,27 +863,27 @@ const App: React.FC = () => {
                                 setReviewQueue(newQueue);
                               }
                             }}
-                            className="p-2 bg-white border border-slate-200 rounded-lg hover:bg-green-50 hover:text-green-600 transition-colors"
+                            className="w-12 h-12 flex items-center justify-center bg-white border border-slate-200 rounded-2xl hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all shadow-sm active:scale-95"
                             title="הוסף מילה"
                           >
-                            <AArrowUp size={20} />
+                            <Plus size={24} />
                           </button>
                         </div>
                       </div>
                     );
                   })}
                 </div>
-              </div>
 
-              <footer className="bg-white border-t border-slate-200 p-6 flex justify-center">
-                <button 
-                  onClick={applyReviewBatch}
-                  className="flex items-center gap-3 px-12 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl hover:bg-blue-700 transition-all"
-                >
-                  <CheckCircle size={24} />
-                  אשר והמשך לכותרת הבאה
-                </button>
-              </footer>
+                <footer className="bg-white border-t border-slate-100 p-6 flex justify-center shrink-0">
+                  <button 
+                    onClick={applyReviewBatch}
+                    className="flex items-center gap-3 px-16 py-4 bg-blue-600 text-white rounded-2xl font-bold shadow-xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-0.5 transition-all active:translate-y-0"
+                  >
+                    <CheckCircle size={24} />
+                    אשר והמשך לכותרת הבאה
+                  </button>
+                </footer>
+              </div>
             </div>
           )}
 
