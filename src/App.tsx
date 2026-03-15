@@ -73,6 +73,8 @@ const App: React.FC = () => {
   const [currentReviewBatch, setCurrentReviewBatch] = useState<ReviewItem[]>([]);
   const [reviewHeaders, setReviewHeaders] = useState<string[]>([]);
   const [currentHeaderIdx, setCurrentHeaderIdx] = useState(0);
+  const [reviewGroups, setReviewGroups] = useState<Record<string, { fileIdx: number, pIdx: number, text: string }[]>>({});
+  const [sourceSections, setSourceSections] = useState<{ header: string, words: string[] }[]>([]);
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
@@ -191,14 +193,8 @@ const App: React.FC = () => {
       .replace(/[.,:;?!\-()]/g, ' ') // Replace punctuation with space for comparison
       .split(/\s+/)
       .map(word => {
-        let w = word;
-        // 1. Handle prefixes: Remove ו, ב, ל, ד from the start of the word (if word length > 1)
-        if (w.length > 1 && /^[ובלד]/.test(w)) {
-          w = w.substring(1);
-        }
-        // 2. Handle full/defective spelling: Remove 'ו' and 'י' for comparison purposes
-        w = w.replace(/[וי]/g, '');
-        return w;
+        // Handle full/defective spelling: Remove 'ו' and 'י' for comparison purposes
+        return word.replace(/[וי]/g, '');
       })
       .join(' ')
       .replace(/\s+/g, ' ')
@@ -265,7 +261,7 @@ const App: React.FC = () => {
       };
 
       // 1. Pre-process source into sections based on headers
-      const sourceSections: { header: string, words: string[] }[] = [];
+      const sections: { header: string, words: string[] }[] = [];
       const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
       
       let firstMatch = headerRegex.exec(activeSourceContent);
@@ -275,7 +271,7 @@ const App: React.FC = () => {
         ? activeSourceContent.substring(0, firstMatch.index)
         : activeSourceContent;
       
-      sourceSections.push({ 
+      sections.push({ 
         header: "_initial_", 
         words: explode(normalize(initialContent.replace(/<[^>]*>/g, ''))) 
       });
@@ -290,157 +286,123 @@ const App: React.FC = () => {
         headerRegex.lastIndex = currentPos; 
         
         const sectionContent = activeSourceContent.substring(start, end);
-        sourceSections.push({
+        sections.push({
           header: headerText,
           words: explode(normalize(sectionContent.replace(/<[^>]*>/g, '')))
         });
       }
+      setSourceSections(sections);
 
-      const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
-      const nextFiles: ProcessedFile[] = [];
-      const allReviewItems: ReviewItem[] = [];
-      const headersFound: string[] = ["_initial_"];
+      if (mode === 'review') {
+        // Break into parts: Group paragraphs by header
+        const groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]> = {};
+        const headersOrder: string[] = ["_initial_"];
+        groups["_initial_"] = [];
 
-      for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
-        setProcessingProgress(Math.round((fileIdx / loadedFiles.length) * 100));
-        await new Promise(resolve => setTimeout(resolve, 0));
+        for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
+          const paragraphs = loadedFiles[fileIdx].content.split('\n');
+          let currentHeader = "_initial_";
+          paragraphs.forEach((p, pIdx) => {
+            const trimmed = p.trim();
+            if (!trimmed) return;
 
-        const f = loadedFiles[fileIdx];
-        const paragraphs = f.content.split('\n');
-        let currentSourceWords = sourceSections[0].words;
-        let currentHeader = "_initial_";
-        let lastMatchIndex = 0; 
-        
-        const newContent = paragraphs.map((p, pIdx) => {
-          const trimmed = p.trim();
-          if (!trimmed) return '';
-
-          const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
-          if (headerMatch) {
-            const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
-            const matchingSection = sourceSections.find(s => s.header === commentaryHeaderText);
-            if (matchingSection) {
-              currentSourceWords = matchingSection.words;
-              currentHeader = commentaryHeaderText;
-              if (!headersFound.includes(currentHeader)) headersFound.push(currentHeader);
-              lastMatchIndex = 0; 
+            const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
+            if (headerMatch) {
+              currentHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+              if (!groups[currentHeader]) {
+                groups[currentHeader] = [];
+                headersOrder.push(currentHeader);
+              }
+              return;
             }
-            return p; 
-          }
-
-          const cleanP = trimmed.replace(/<[^>]*>/g, '');
-          const originalWords = cleanP.split(/\s+/);
-          
-          const explodedWords: string[] = [];
-          const wordMap: number[] = []; 
-          originalWords.forEach((w, idx) => {
-            if (w.includes('"')) {
-              const letters = w.replace(/"/g, '').split('');
-              letters.forEach(l => {
-                explodedWords.push(l);
-                wordMap.push(idx);
-              });
-            } else {
-              explodedWords.push(w);
-              wordMap.push(idx);
-            }
+            groups[currentHeader].push({ fileIdx, pIdx, text: p });
           });
+        }
 
-          const testLength = Math.min(explodedWords.length, 40);
+        const finalHeaders = headersOrder.filter(h => groups[h].length > 0);
+        setReviewGroups(groups);
+        setReviewHeaders(finalHeaders);
+        setCurrentHeaderIdx(0);
+        
+        if (finalHeaders.length > 0) {
+          processHeaderGroup(0, groups, finalHeaders, sections);
+        } else {
+          addLog("לא נמצאו פסקאות להדגשה", 'info');
+          setIsProcessing(false);
+        }
+      } else {
+        // Auto mode: process everything
+        const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+        const nextFiles: ProcessedFile[] = [];
+
+        for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
+          setProcessingProgress(Math.round((fileIdx / loadedFiles.length) * 100));
+          await new Promise(resolve => setTimeout(resolve, 0));
+
+          const f = loadedFiles[fileIdx];
+          const paragraphs = f.content.split('\n');
+          let currentSourceWords = sections[0].words;
+          let lastMatchIndex = 0; 
           
-          const findMatchInRange = (startIndex: number) => {
-            let localBestEnd = 0;
-            let localBestSourceIdx = -1;
-            let localPrevMax = 0;
-            let localSourceText = "";
-            let localSourceContext = "";
+          const newContent = paragraphs.map((p) => {
+            const trimmed = p.trim();
+            if (!trimmed) return '';
 
-            for (let i = 1; i <= testLength; i++) {
-              const currentWordClean = explodedWords[i-1].replace(/[.,:;?!"\-()]/g, '');
-              if (STOP_WORDS.includes(currentWordClean)) {
-                // If it's a stop word, we don't stop the whole process, 
-                // but we might want to be more careful. 
-                // For now, let's allow it to continue if it's not the very first word.
-                if (i === 1) continue; 
+            const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
+            if (headerMatch) {
+              const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+              const matchingSection = sections.find(s => s.header === commentaryHeaderText);
+              if (matchingSection) {
+                currentSourceWords = matchingSection.words;
+                lastMatchIndex = 0; 
               }
+              return p; 
+            }
 
-              const prefix = normalize(explodedWords.slice(0, i).join(' '));
-              let maxPrefixScore = 0;
-              let currentPrefixSourceIdx = -1;
+            const cleanP = trimmed.replace(/<[^>]*>/g, '');
+            const originalWords = cleanP.split(/\s+/);
+            
+            // 1. Find the best anchor position using up to 15 words
+            const anchorSize = Math.min(originalWords.length, 15);
+            const paragraphAnchor = normalize(originalWords.slice(0, anchorSize).join(' '));
+            
+            let bestSourceIdx = -1;
+            let bestAnchorScore = 0;
+            
+            // Search for the best anchor in the source words
+            for (let j = 0; j <= currentSourceWords.length - Math.min(anchorSize, 3); j++) {
+              const windowSize = Math.min(anchorSize, currentSourceWords.length - j);
+              const sourceWindow = normalize(currentSourceWords.slice(j, j + windowSize).join(' '));
+              const score = fuzz.ratio(paragraphAnchor, sourceWindow);
               
-              // Optimization: if we already have a good match, search around it first?
-              // For now, let's just search the whole range to be safe.
-              for (let j = startIndex; j <= currentSourceWords.length - i; j++) {
-                const windowWords = currentSourceWords.slice(j, j + i);
-                const window = normalize(windowWords.join(' '));
-                let score = fuzz.ratio(prefix, window);
-                
-                const windowInitials = windowWords.map(w => w[0]).join('');
-                const initialsScore = fuzz.ratio(prefix.replace(/\s+/g, ''), windowInitials);
-                if (initialsScore > score) score = initialsScore;
-
-                if (score > maxPrefixScore) {
-                  maxPrefixScore = score;
-                  currentPrefixSourceIdx = j;
-                }
-                if (maxPrefixScore === 100) {
-                  // If we found a 100% match, we can stop searching for THIS i.
-                  // But we should prefer a match that is "consistent" with the previous i's match if possible.
-                  if (localBestSourceIdx === -1 || Math.abs(j - localBestSourceIdx) < 5) {
-                    break; 
-                  }
-                }
+              if (score > bestAnchorScore) {
+                bestAnchorScore = score;
+                bestSourceIdx = j;
               }
-              
-              let threshold = 82;
-              if (i === 1) threshold = 72; 
-              else if (i === 2) threshold = 78;
-              else if (i > 10) threshold = 85;
-              
-              if (maxPrefixScore >= threshold) {
-                // We found a match for prefix of length i.
-                // We update the best match if the score is decent.
-                // We don't break just because the score dropped a bit, 
-                // as a longer match is often better even if slightly less perfect.
-                localBestEnd = i;
-                localBestSourceIdx = currentPrefixSourceIdx;
-                localPrevMax = maxPrefixScore;
+              if (score === 100) break;
+            }
+
+            // 2. Word-by-word refinement from the anchor
+            let finalWordCount = 0;
+            if (bestAnchorScore > 70) { // Minimum threshold to even consider it a match
+              for (let k = 0; k < originalWords.length; k++) {
+                if (bestSourceIdx + k >= currentSourceWords.length) break;
                 
-                const matchedSourceWords = currentSourceWords.slice(localBestSourceIdx, localBestSourceIdx + i);
-                localSourceText = matchedSourceWords.join(' ');
-                const contextWords = currentSourceWords.slice(localBestSourceIdx + i, localBestSourceIdx + i + 5);
-                localSourceContext = contextWords.join(' ');
-              } else if (i >= 6 && maxPrefixScore < 60) {
-                // Only break if it's really not matching anymore
-                break;
+                const pWord = normalize(originalWords[k]);
+                const sWord = normalize(currentSourceWords[bestSourceIdx + k]);
+                
+                // Very strict word-by-word comparison
+                const wordScore = fuzz.ratio(pWord, sWord);
+                if (wordScore >= 85) {
+                  finalWordCount = k + 1;
+                } else {
+                  // Stop at the first word that doesn't match well
+                  break;
+                }
               }
             }
-            return { endIdx: localBestEnd, sourceIdx: localBestSourceIdx, score: localPrevMax, sourceText: localSourceText, sourceContext: localSourceContext };
-          };
 
-          let result = findMatchInRange(lastMatchIndex);
-          if (result.endIdx === 0 && lastMatchIndex > 0) {
-            result = findMatchInRange(0);
-          }
-
-          if (result.endIdx > 0) {
-            lastMatchIndex = result.sourceIdx + 1; 
-
-            if (mode === 'review') {
-              allReviewItems.push({
-                fileIdx,
-                paragraphIdx: pIdx,
-                originalText: p,
-                sourceText: result.sourceText,
-                sourceContext: result.sourceContext,
-                explodedWordCount: result.endIdx,
-                wordMap,
-                originalWords,
-                headerText: currentHeader
-              });
-              return p;
-            } else {
-              const targetWordCount = wordMap[result.endIdx - 1] + 1;
+            if (finalWordCount > 0) {
               let currentWordIdx = -1;
               let inWord = false;
               let finalEndPos = 0;
@@ -457,38 +419,108 @@ const App: React.FC = () => {
                     inWord = false;
                   }
                 }
-                if (currentWordIdx < targetWordCount) finalEndPos = i + 1;
+                if (currentWordIdx < finalWordCount) finalEndPos = i + 1;
                 else break;
                 if (p[i] === '>') inTag = false;
               }
               while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) finalEndPos++;
               return `<b>${p.substring(0, finalEndPos)}</b>${p.substring(finalEndPos)}`;
             }
-          }
-          return p;
-        }).join('\n');
-        nextFiles.push({ ...f, content: newContent });
-      }
-
-      if (mode === 'review') {
-        const headersWithItems = headersFound.filter(h => allReviewItems.some(item => item.headerText === h));
-        setReviewQueue(allReviewItems);
-        setReviewHeaders(headersWithItems);
-        setCurrentHeaderIdx(0);
-        if (headersWithItems.length > 0) {
-          setActiveTab('review');
-        } else {
-          addLog("לא נמצאו הדגשות לסקירה", 'info');
+            return p;
+          }).join('\n');
+          nextFiles.push({ ...f, content: newContent });
         }
-        setIsModalOpen(false);
-      } else {
+
         setLoadedFiles(nextFiles);
         addLog("הדגשה חכמה הושלמה", 'success');
         setIsModalOpen(false);
+        setIsProcessing(false);
+        setProcessingProgress(0);
       }
-      setIsProcessing(false);
-      setProcessingProgress(0);
     }, 100);
+  };
+
+  const processHeaderGroup = async (headerIdx: number, groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]>, headers: string[], sections: { header: string, words: string[] }[]) => {
+    const header = headers[headerIdx];
+    const paragraphs = groups[header];
+    const section = sections.find(s => s.header === header) || sections[0];
+    const currentSourceWords = section.words;
+    
+    const STOP_WORDS = ['פירוש', 'כלומר', 'פי"', 'ר"ל', 'והכי', 'פירושו', 'והוא', 'דלמא', 'הכי', 'ה"ק', 'הכי קאמר', 'פי\''];
+    const batchItems: ReviewItem[] = [];
+    
+    // Track lastMatchIndex per file within this group
+    const fileLastMatchIndices: Record<number, number> = {};
+
+    for (let i = 0; i < paragraphs.length; i++) {
+      const item = paragraphs[i];
+      const p = item.text;
+      const cleanP = p.replace(/<[^>]*>/g, '');
+      const originalWords = cleanP.split(/\s+/);
+      
+      // 1. Find the best anchor position using up to 15 words
+      const anchorSize = Math.min(originalWords.length, 15);
+      const paragraphAnchor = normalize(originalWords.slice(0, anchorSize).join(' '));
+      
+      let bestSourceIdx = -1;
+      let bestAnchorScore = 0;
+      
+      for (let j = 0; j <= currentSourceWords.length - Math.min(anchorSize, 3); j++) {
+        const windowSize = Math.min(anchorSize, currentSourceWords.length - j);
+        const sourceWindow = normalize(currentSourceWords.slice(j, j + windowSize).join(' '));
+        const score = fuzz.ratio(paragraphAnchor, sourceWindow);
+        
+        if (score > bestAnchorScore) {
+          bestAnchorScore = score;
+          bestSourceIdx = j;
+        }
+        if (score === 100) break;
+      }
+
+      // 2. Word-by-word refinement
+      let finalWordCount = 0;
+      let matchedSourceText = "";
+      let matchedSourceContext = "";
+
+      if (bestAnchorScore > 70) {
+        for (let k = 0; k < originalWords.length; k++) {
+          if (bestSourceIdx + k >= currentSourceWords.length) break;
+          
+          const pWord = normalize(originalWords[k]);
+          const sWord = normalize(currentSourceWords[bestSourceIdx + k]);
+          
+          const wordScore = fuzz.ratio(pWord, sWord);
+          if (wordScore >= 85) {
+            finalWordCount = k + 1;
+          } else {
+            break;
+          }
+        }
+        
+        if (finalWordCount > 0) {
+          matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + finalWordCount).join(' ');
+          matchedSourceContext = currentSourceWords.slice(bestSourceIdx + finalWordCount, bestSourceIdx + finalWordCount + 5).join(' ');
+          
+          batchItems.push({
+            fileIdx: item.fileIdx,
+            paragraphIdx: item.pIdx,
+            originalText: p,
+            sourceText: matchedSourceText,
+            sourceContext: matchedSourceContext,
+            explodedWordCount: finalWordCount,
+            wordMap: Array.from({length: finalWordCount}, (_, i) => i),
+            originalWords,
+            headerText: header
+          });
+        }
+      }
+    }
+
+    setCurrentReviewBatch(batchItems);
+    setActiveTab('review');
+    setIsProcessing(false);
+    setProcessingProgress(0);
+    setIsModalOpen(false);
   };
 
   const applyReviewBatch = () => {
@@ -529,24 +561,23 @@ const App: React.FC = () => {
 
     setLoadedFiles(nextFiles);
     
-    if (currentHeaderIdx + 1 < reviewHeaders.length) {
-      setCurrentHeaderIdx(prev => prev + 1);
-      const scrollContainer = document.getElementById('review-scroll-container');
-      if (scrollContainer) scrollContainer.scrollTop = 0;
+    const nextIdx = currentHeaderIdx + 1;
+    if (nextIdx < reviewHeaders.length) {
+      setCurrentHeaderIdx(nextIdx);
+      setIsProcessing(true);
+      setTimeout(() => {
+        processHeaderGroup(nextIdx, reviewGroups, reviewHeaders, sourceSections);
+        const scrollContainer = document.getElementById('review-scroll-container');
+        if (scrollContainer) scrollContainer.scrollTop = 0;
+      }, 100);
     } else {
       setActiveTab('preview');
-      setReviewQueue([]);
+      setReviewGroups({});
+      setReviewHeaders([]);
+      setCurrentReviewBatch([]);
       addLog("תהליך אישור ההדגשות הושלם", 'success');
     }
   };
-
-  useEffect(() => {
-    if (activeTab === 'review' && reviewQueue.length > 0) {
-      const currentHeader = reviewHeaders[currentHeaderIdx];
-      const batch = reviewQueue.filter(item => item.headerText === currentHeader);
-      setCurrentReviewBatch(batch);
-    }
-  }, [activeTab, reviewQueue, currentHeaderIdx, reviewHeaders]);
 
   const downloadAll = async () => {
     if (loadedFiles.length === 0) return;
