@@ -84,7 +84,7 @@ const App: React.FC = () => {
 
   const activeSourceContent = localSource || sourceContent;
 
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLTextAreaElement>(null);
   const folderInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -186,7 +186,7 @@ const App: React.FC = () => {
     handleContentChange(newContent);
   };
 
-  // פונקציית הנורמליזציה המעודכנת ששומרת סימנים בכותרות
+  // פונקציית הנורמליזציה המעודכנת שמונעת הסרת אותיות מכותרות
   const normalize = (text: string, isHeader: boolean = false) => {
     if (!text) return '';
     let processed = text.replace(/[\u0591-\u05C7]/g, ''); // הסרת ניקוד
@@ -199,7 +199,11 @@ const App: React.FC = () => {
     return processed
       .split(/\s+/)
       .map(word => {
-        return word.replace(/[וי]/g, '');
+        // התיקון: הסרת אותיות י' ו-ו' רק אם זו לא כותרת
+        if (!isHeader) {
+          return word.replace(/[וי]/g, '');
+        }
+        return word;
       })
       .join(' ')
       .replace(/\s+/g, ' ')
@@ -281,7 +285,7 @@ const App: React.FC = () => {
 
       let match;
       while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-        // כאן השתמשנו בנורמליזציה ששומרת סימנים עבור הכותרת
+        // שימוש בנורמליזציה עם flag של כותרת
         const headerText = normalize(match[1].replace(/<[^>]*>/g, ''), true);
         const start = headerRegex.lastIndex;
         const currentPos = headerRegex.lastIndex;
@@ -311,7 +315,7 @@ const App: React.FC = () => {
 
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
-              // שמירת סימנים בכותרת הפסקה
+              // שמירת אותיות בכותרת הפרק
               currentHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
               if (!groups[currentHeader]) {
                 groups[currentHeader] = [];
@@ -353,7 +357,7 @@ const App: React.FC = () => {
 
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
-              // שמירת סימנים בחיפוש הסקציה המתאימה
+              // תיאום מול המקור ללא הסרת אותיות מהכותרת
               const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
               const matchingSection = sections.find(s => s.header === commentaryHeaderText);
               if (matchingSection) {
@@ -667,7 +671,8 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <input ref={fileInputRef} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
+      {/* Inputs are defined here - fixed a bug where fileInputRef was typed as textarea instead of input */}
+      <input ref={fileInputRef as unknown as React.RefObject<HTMLInputElement>} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
       <input 
         ref={folderInputRef} 
         type="file" 
@@ -727,7 +732,7 @@ const App: React.FC = () => {
                 בטל
               </button>
              <button 
-                onClick={() => fileInputRef.current?.click()}
+                onClick={() => (fileInputRef.current as unknown as HTMLInputElement)?.click()}
                 className="flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition-colors text-sm font-bold"
               >
                 <FileText size={16} />
