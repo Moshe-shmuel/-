@@ -897,7 +897,7 @@ const App: React.FC = () => {
                           <button 
                             onClick={() => {
                               const newBatch = [...currentReviewBatch];
-                              if (newBatch[idx].explodedWordCount > 1) {
+                              if (newBatch[idx].explodedWordCount > 0) {
                                 newBatch[idx] = {
                                   ...newBatch[idx],
                                   explodedWordCount: newBatch[idx].explodedWordCount - 1
@@ -917,8 +917,7 @@ const App: React.FC = () => {
                           <button 
                             onClick={() => {
                               const newBatch = [...currentReviewBatch];
-                              if (newBatch[idx].explodedWordCount < item.wordMap.length) {
-                                newBatch[idx] = {
+                              if (newBatch[idx].explodedWordCount < item.originalWords.length) {                                newBatch[idx] = {
                                   ...newBatch[idx],
                                   explodedWordCount: newBatch[idx].explodedWordCount + 1
                                 };
