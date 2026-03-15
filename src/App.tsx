@@ -186,11 +186,17 @@ const App: React.FC = () => {
     handleContentChange(newContent);
   };
 
-  const normalize = (text: string) => {
+  // פונקציית הנורמליזציה המעודכנת ששומרת סימנים בכותרות
+  const normalize = (text: string, isHeader: boolean = false) => {
     if (!text) return '';
-    return text
-      .replace(/[\u0591-\u05C7]/g, '') // Strip Hebrew Niqqud
-      .replace(/[.,:;?!\-()]/g, ' ') // Replace punctuation with space
+    let processed = text.replace(/[\u0591-\u05C7]/g, ''); // הסרת ניקוד
+    
+    // הסרת פיסוק רק אם זה לא כותרת
+    if (!isHeader) {
+      processed = processed.replace(/[.,:;?!\-()]/g, ' ');
+    }
+
+    return processed
       .split(/\s+/)
       .map(word => {
         return word.replace(/[וי]/g, '');
@@ -258,7 +264,6 @@ const App: React.FC = () => {
         });
       };
 
-      // 1. Pre-process source into sections based on headers
       const sections: { header: string, words: string[] }[] = [];
       const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
       
@@ -276,7 +281,8 @@ const App: React.FC = () => {
 
       let match;
       while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-        const headerText = normalize(match[1].replace(/<[^>]*>/g, ''));
+        // כאן השתמשנו בנורמליזציה ששומרת סימנים עבור הכותרת
+        const headerText = normalize(match[1].replace(/<[^>]*>/g, ''), true);
         const start = headerRegex.lastIndex;
         const currentPos = headerRegex.lastIndex;
         const nextMatch = headerRegex.exec(activeSourceContent);
@@ -305,7 +311,8 @@ const App: React.FC = () => {
 
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
-              currentHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+              // שמירת סימנים בכותרת הפסקה
+              currentHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
               if (!groups[currentHeader]) {
                 groups[currentHeader] = [];
                 headersOrder.push(currentHeader);
@@ -346,7 +353,8 @@ const App: React.FC = () => {
 
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
-              const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''));
+              // שמירת סימנים בחיפוש הסקציה המתאימה
+              const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
               const matchingSection = sections.find(s => s.header === commentaryHeaderText);
               if (matchingSection) {
                 currentSourceWords = matchingSection.words;
@@ -360,7 +368,6 @@ const App: React.FC = () => {
             
             let candidates: { index: number, matchCount: number }[] = [];
             
-            // Gather all possible match candidates
             for (let j = 0; j < currentSourceWords.length; j++) {
               let currentMatch = 0;
               for (let k = 0; k < originalWords.length; k++) {
@@ -382,26 +389,22 @@ const App: React.FC = () => {
             let maxMatchCount = 0;
             let bestScore = -Infinity;
 
-            // Score candidates based on match length and distance from lastMatchIndex
             candidates.forEach(candidate => {
               let score = candidate.matchCount;
-              
-              // Safety: if only 1 word matches, ensure it's a strong match
               if (candidate.matchCount === 1) {
                 const pWord = normalize(originalWords[0]);
                 const sWord = normalize(currentSourceWords[candidate.index]);
                 if (fuzz.ratio(pWord, sWord) < 92) {
-                   score = -Infinity; // Discard poor single word matches
+                   score = -Infinity;
                 }
               }
 
               if (score !== -Infinity) {
                   const distance = candidate.index - lastMatchIndex;
-                  
                   if (distance >= 0) {
-                      score -= (distance * 0.005); // Small penalty for jumping ahead
+                      score -= (distance * 0.005);
                   } else {
-                      score -= 5; // Heavy penalty for matching text *before* the last match
+                      score -= 5;
                   }
 
                   if (score > bestScore) {
@@ -412,10 +415,8 @@ const App: React.FC = () => {
               }
             });
 
-            // If we found a valid candidate
             if (maxMatchCount >= 1) {
-              lastMatchIndex = bestSourceIdx + 1; // Update index for next paragraph
-
+              lastMatchIndex = bestSourceIdx + 1;
               let currentWordIdx = -1;
               let inWord = false;
               let finalEndPos = 0;
@@ -494,7 +495,6 @@ const App: React.FC = () => {
 
       candidates.forEach(candidate => {
          let score = candidate.matchCount;
-         
          if (candidate.matchCount === 1) {
             const pWord = normalize(originalWords[0]);
             const sWord = normalize(currentSourceWords[candidate.index]);
@@ -505,7 +505,6 @@ const App: React.FC = () => {
 
          if (score !== -Infinity) {
              const distance = candidate.index - lastIdx;
-             
              if (distance >= 0) {
                  score -= (distance * 0.005);
              } else {
