@@ -873,7 +873,7 @@ const App: React.FC = () => {
 
                 <div id="review-scroll-container" className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/50">
                   {currentReviewBatch.map((item, idx) => {
-                    const targetWordCount = item.wordMap[item.explodedWordCount - 1] + 1;
+                    const targetWordCount = item.explodedWordCount;
                     const boldPart = item.originalWords.slice(0, targetWordCount).join(' ');
                     const restPart = item.originalWords.slice(targetWordCount).join(' ');
 
