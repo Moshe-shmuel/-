@@ -896,11 +896,13 @@ const App: React.FC = () => {
                         <div className="p-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-center gap-8">
                           <button 
                             onClick={() => {
-                              const newQueue = [...reviewQueue];
-                              const queueIdx = newQueue.findIndex(q => q.paragraphIdx === item.paragraphIdx && q.fileIdx === item.fileIdx);
-                              if (queueIdx > -1 && item.explodedWordCount > 1) {
-                                newQueue[queueIdx].explodedWordCount--;
-                                setReviewQueue(newQueue);
+                              const newBatch = [...currentReviewBatch];
+                              if (newBatch[idx].explodedWordCount > 1) {
+                                newBatch[idx] = {
+                                  ...newBatch[idx],
+                                  explodedWordCount: newBatch[idx].explodedWordCount - 1
+                                };
+                                setCurrentReviewBatch(newBatch);
                               }
                             }}
                             className="w-12 h-12 flex items-center justify-center bg-white border border-slate-200 rounded-2xl hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition-all shadow-sm active:scale-95"
@@ -914,11 +916,13 @@ const App: React.FC = () => {
                           </div>
                           <button 
                             onClick={() => {
-                              const newQueue = [...reviewQueue];
-                              const queueIdx = newQueue.findIndex(q => q.paragraphIdx === item.paragraphIdx && q.fileIdx === item.fileIdx);
-                              if (queueIdx > -1 && item.explodedWordCount < item.wordMap.length) {
-                                newQueue[queueIdx].explodedWordCount++;
-                                setReviewQueue(newQueue);
+                              const newBatch = [...currentReviewBatch];
+                              if (newBatch[idx].explodedWordCount < item.wordMap.length) {
+                                newBatch[idx] = {
+                                  ...newBatch[idx],
+                                  explodedWordCount: newBatch[idx].explodedWordCount + 1
+                                };
+                                setCurrentReviewBatch(newBatch);
                               }
                             }}
                             className="w-12 h-12 flex items-center justify-center bg-white border border-slate-200 rounded-2xl hover:bg-green-50 hover:text-green-600 hover:border-green-200 transition-all shadow-sm active:scale-95"
