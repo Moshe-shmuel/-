@@ -558,7 +558,7 @@ const App: React.FC = () => {
       const paragraphs = f.content.split('\n');
       const p = item.originalText;
       
-      const targetWordCount = item.wordMap[item.explodedWordCount - 1] + 1;
+      const targetWordCount = item.explodedWordCount;
       let currentWordIdx = -1;
       let inWord = false;
       let finalEndPos = 0;
