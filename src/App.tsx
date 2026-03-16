@@ -67,6 +67,7 @@ const App: React.FC = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [previewIdx, setPreviewIdx] = useState(0);
   const [terminatorChar, setTerminatorChar] = useState('.:-');
+  const [generateLinks, setGenerateLinks] = useState(false);
   
   // Review States
   const [reviewQueue, setReviewQueue] = useState<ReviewItem[]>([]);
@@ -74,7 +75,7 @@ const App: React.FC = () => {
   const [reviewHeaders, setReviewHeaders] = useState<string[]>([]);
   const [currentHeaderIdx, setCurrentHeaderIdx] = useState(0);
   const [reviewGroups, setReviewGroups] = useState<Record<string, { fileIdx: number, pIdx: number, text: string }[]>>({});
-  const [sourceSections, setSourceSections] = useState<{ header: string, words: string[] }[]>([]);
+  const [sourceSections, setSourceSections] = useState<{ header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[]>([]);
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
@@ -261,32 +262,50 @@ const App: React.FC = () => {
     setTimeout(async () => {
       if (mode === 'auto') pushToHistory();
 
-      const explode = (text: string) => {
-        return text.split(/\s+/).flatMap(w => {
-          if (w.includes('"')) return w.replace(/"/g, '').split('');
-          return [w];
+      const explode = (text: string, startLine: number) => {
+        const lines = text.split('\n');
+        return lines.flatMap((line, i) => {
+          const normalizedLine = normalize(line.replace(/<[^>]*>/g, ''));
+          const words = normalizedLine.split(/\s+/).filter(w => w.length > 0);
+          return words.flatMap(w => {
+            if (w.includes('"')) return w.replace(/"/g, '').split('').map(char => ({ text: char, lineIdx: startLine + i }));
+            return [{ text: w, lineIdx: startLine + i }];
+          });
         });
       };
 
-      const sections: { header: string, words: string[] }[] = [];
-      const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
+      const sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[] = [];
+      const headerRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
       
       let firstMatch = headerRegex.exec(activeSourceContent);
       headerRegex.lastIndex = 0; 
       
-      const initialContent = firstMatch 
-        ? activeSourceContent.substring(0, firstMatch.index)
-        : activeSourceContent;
-      
-      sections.push({ 
-        header: "_initial_", 
-        words: explode(normalize(initialContent.replace(/<[^>]*>/g, ''))) 
-      });
+      if (firstMatch && firstMatch.index > 0) {
+        const initialContent = activeSourceContent.substring(0, firstMatch.index);
+        sections.push({ 
+          header: "_initial_", 
+          fullHeader: "",
+          words: explode(initialContent, 1) 
+        });
+      } else if (!firstMatch) {
+        sections.push({ 
+          header: "_initial_", 
+          fullHeader: "",
+          words: explode(activeSourceContent, 1) 
+        });
+      }
 
       let match;
+      const currentHierarchy: string[] = [];
       while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-        // שימוש בנורמליזציה עם flag של כותרת
-        const headerText = normalize(match[1].replace(/<[^>]*>/g, ''), true);
+        const level = parseInt(match[1]);
+        const rawHeaderText = match[2].replace(/<[^>]*>/g, '').trim();
+        const normalizedHeader = normalize(rawHeaderText, true);
+        
+        currentHierarchy[level - 1] = rawHeaderText;
+        for (let i = level; i < 6; i++) currentHierarchy[i] = '';
+        const hierarchyPath = currentHierarchy.filter(h => h).join(' ');
+
         const start = headerRegex.lastIndex;
         const currentPos = headerRegex.lastIndex;
         const nextMatch = headerRegex.exec(activeSourceContent);
@@ -294,9 +313,11 @@ const App: React.FC = () => {
         headerRegex.lastIndex = currentPos; 
         
         const sectionContent = activeSourceContent.substring(start, end);
+        const headerLine = activeSourceContent.substring(0, match.index).split('\n').length;
         sections.push({
-          header: headerText,
-          words: explode(normalize(sectionContent.replace(/<[^>]*>/g, '')))
+          header: normalizedHeader,
+          fullHeader: hierarchyPath,
+          words: explode(sectionContent, headerLine + 1)
         });
       }
       setSourceSections(sections);
@@ -345,13 +366,15 @@ const App: React.FC = () => {
         for (let fileIdx = 0; fileIdx < loadedFiles.length; fileIdx++) {
           setProcessingProgress(Math.round((fileIdx / loadedFiles.length) * 100));
           await new Promise(resolve => setTimeout(resolve, 0));
-
+          
           const f = loadedFiles[fileIdx];
           const paragraphs = f.content.split('\n');
-          let currentSourceWords = sections[0].words;
+          let currentSourceSection = sections[0];
+          let currentSourceWords = currentSourceSection.words;
           let lastMatchIndex = 0; 
+          const fileLinks: any[] = [];
           
-          const newContent = paragraphs.map((p) => {
+          const newContent = paragraphs.map((p, pIdx) => {
             const trimmed = p.trim();
             if (!trimmed) return '';
 
@@ -361,6 +384,7 @@ const App: React.FC = () => {
               const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
               const matchingSection = sections.find(s => s.header === commentaryHeaderText);
               if (matchingSection) {
+                currentSourceSection = matchingSection;
                 currentSourceWords = matchingSection.words;
                 lastMatchIndex = 0; 
               }
@@ -377,7 +401,7 @@ const App: React.FC = () => {
               for (let k = 0; k < originalWords.length; k++) {
                 if (j + k >= currentSourceWords.length) break;
                 const pWord = normalize(originalWords[k]);
-                const sWord = normalize(currentSourceWords[j + k]);
+                const sWord = normalize(currentSourceWords[j + k].text);
                 if (fuzz.ratio(pWord, sWord) >= 85) {
                   currentMatch++;
                 } else {
@@ -397,7 +421,7 @@ const App: React.FC = () => {
               let score = candidate.matchCount;
               if (candidate.matchCount === 1) {
                 const pWord = normalize(originalWords[0]);
-                const sWord = normalize(currentSourceWords[candidate.index]);
+                const sWord = normalize(currentSourceWords[candidate.index].text);
                 if (fuzz.ratio(pWord, sWord) < 92) {
                    score = -Infinity;
                 }
@@ -420,6 +444,25 @@ const App: React.FC = () => {
             });
 
             if (maxMatchCount >= 1) {
+              // Check for "כו'" or "וכו'" immediately after the match
+              if (maxMatchCount < originalWords.length) {
+                const nextWord = originalWords[maxMatchCount].replace(/[.,:;?!]/g, '');
+                if (nextWord === "כו'" || nextWord === "וכו'") {
+                  maxMatchCount++;
+                }
+              }
+              
+              const matchedLineIdx = currentSourceWords[bestSourceIdx].lineIdx;
+              if (generateLinks) {
+                fileLinks.push({
+                  line_index_1: pIdx + 1,
+                  line_index_2: matchedLineIdx,
+                  heRef_2: currentSourceSection.fullHeader,
+                  path_2: selectedSource.split('/').pop() || selectedSource,
+                  "Conection Type": "commentary"
+                });
+              }
+
               lastMatchIndex = bestSourceIdx + 1;
               let currentWordIdx = -1;
               let inWord = false;
@@ -446,7 +489,7 @@ const App: React.FC = () => {
             }
             return p;
           }).join('\n');
-          nextFiles.push({ ...f, content: newContent });
+          nextFiles.push({ ...f, content: newContent, links: generateLinks ? fileLinks : undefined });
         }
 
         setLoadedFiles(nextFiles);
@@ -458,7 +501,7 @@ const App: React.FC = () => {
     }, 100);
   };
 
-  const processHeaderGroup = async (headerIdx: number, groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]>, headers: string[], sections: { header: string, words: string[] }[]) => {
+  const processHeaderGroup = async (headerIdx: number, groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]>, headers: string[], sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[]) => {
     const header = headers[headerIdx];
     const paragraphs = groups[header];
     const section = sections.find(s => s.header === header) || sections[0];
@@ -481,7 +524,7 @@ const App: React.FC = () => {
         for (let k = 0; k < originalWords.length; k++) {
           if (j + k >= currentSourceWords.length) break;
           const pWord = normalize(originalWords[k]);
-          const sWord = normalize(currentSourceWords[j + k]);
+          const sWord = normalize(currentSourceWords[j + k].text);
           if (fuzz.ratio(pWord, sWord) >= 85) {
             currentMatch++;
           } else {
@@ -501,7 +544,7 @@ const App: React.FC = () => {
          let score = candidate.matchCount;
          if (candidate.matchCount === 1) {
             const pWord = normalize(originalWords[0]);
-            const sWord = normalize(currentSourceWords[candidate.index]);
+            const sWord = normalize(currentSourceWords[candidate.index].text);
             if (fuzz.ratio(pWord, sWord) < 92) {
                score = -Infinity;
             }
@@ -524,9 +567,16 @@ const App: React.FC = () => {
       });
 
       if (maxMatchCount >= 1) {
+        // Check for "כו'" or "וכו'" immediately after the match
+        if (maxMatchCount < originalWords.length) {
+          const nextWord = originalWords[maxMatchCount].replace(/[.,:;?!]/g, '');
+          if (nextWord === "כו'" || nextWord === "וכו'") {
+            maxMatchCount++;
+          }
+        }
         fileLastMatchIndices[item.fileIdx] = bestSourceIdx + 1;
-        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + maxMatchCount).join(' ');
-        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + maxMatchCount, bestSourceIdx + maxMatchCount + 5).join(' ');
+        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + maxMatchCount).map(w => w.text).join(' ');
+        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + maxMatchCount, bestSourceIdx + maxMatchCount + 5).map(w => w.text).join(' ');
         
         batchItems.push({
           fileIdx: item.fileIdx,
@@ -537,7 +587,9 @@ const App: React.FC = () => {
           explodedWordCount: maxMatchCount,
           wordMap: Array.from({length: maxMatchCount}, (_, i) => i),
           originalWords,
-          headerText: header
+          headerText: header,
+          fullHeader: section.fullHeader,
+          sourceLineIndex: currentSourceWords[bestSourceIdx].lineIdx
         });
       }
     }
@@ -582,6 +634,18 @@ const App: React.FC = () => {
       while (finalEndPos < p.length && /[.:\-]/.test(p[finalEndPos])) finalEndPos++;
       
       paragraphs[item.paragraphIdx] = `<b>${p.substring(0, finalEndPos)}</b>${p.substring(finalEndPos)}`;
+      
+      if (generateLinks) {
+        if (!nextFiles[item.fileIdx].links) nextFiles[item.fileIdx].links = [];
+        nextFiles[item.fileIdx].links.push({
+          line_index_1: item.paragraphIdx + 1,
+          line_index_2: item.sourceLineIndex,
+          heRef_2: item.fullHeader,
+          path_2: selectedSource.split('/').pop() || selectedSource,
+          "Conection Type": "commentary"
+        });
+      }
+
       nextFiles[item.fileIdx] = { ...f, content: paragraphs.join('\n') };
     });
 
@@ -608,7 +672,12 @@ const App: React.FC = () => {
   const downloadAll = async () => {
     if (loadedFiles.length === 0) return;
     const zip = new JSZip();
-    loadedFiles.forEach(f => zip.file(`${f.name}.txt`, f.content));
+    loadedFiles.forEach(f => {
+      zip.file(`${f.name}.txt`, f.content);
+      if (f.links && f.links.length > 0) {
+        zip.file(`${f.name}_links.json`, JSON.stringify(f.links, null, 2));
+      }
+    });
     const blob = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -1017,6 +1086,19 @@ const App: React.FC = () => {
                 </select>
                 <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 max-h-32 overflow-y-auto text-xs opacity-60 italic">
                   {activeSourceContent || 'בחר מקור כדי לראות תצוגה מקדימה...'}
+                </div>
+
+                <div className="flex items-center gap-3 p-3 bg-blue-50/50 rounded-xl border border-blue-100">
+                  <input 
+                    type="checkbox" 
+                    id="generate-links"
+                    checked={generateLinks}
+                    onChange={(e) => setGenerateLinks(e.target.checked)}
+                    className="w-5 h-5 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <label htmlFor="generate-links" className="text-sm font-bold text-slate-700 cursor-pointer">
+                    צור קובץ קישורים (_links.json)
+                  </label>
                 </div>
               </div>
 
