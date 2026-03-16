@@ -9,6 +9,7 @@ export interface ReviewItem {
   wordMap: number[];
   originalWords: string[];
   headerText?: string;
+  sourceLineIndex?: number;
 }
 
 export type TabId = 'process' | 'replace' | 'global' | 'split' | 'sync_h1' | 'fix' | 'preview' | 'highlight_regex' | 'highlight_fuzzy' | 'review';
@@ -17,6 +18,7 @@ export interface ProcessedFile {
   name: string;
   content: string;
   originalName?: string;
+  links?: any[];
 }
 
 export interface LogEntry {
