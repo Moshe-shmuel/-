@@ -80,6 +80,7 @@ const App: React.FC = () => {
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
   const [selectedSource, setSelectedSource] = useState<string>(Object.keys(EMBEDDED_SOURCES)[0] || '');
+  const [sourceCache, setSourceCache] = useState<Record<string, string>>(EMBEDDED_SOURCES);
   const [sourceContent, setSourceContent] = useState<string>(EMBEDDED_SOURCES[Object.keys(EMBEDDED_SOURCES)[0]] || '');
   const [localSource, setLocalSource] = useState<string>('');
 
@@ -102,16 +103,19 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (selectedSource && !localSource) {
-      if (EMBEDDED_SOURCES[selectedSource]) {
-        setSourceContent(EMBEDDED_SOURCES[selectedSource]);
+      if (sourceCache[selectedSource]) {
+        setSourceContent(sourceCache[selectedSource]);
       } else {
         fetch(`/api/sources/${selectedSource}`)
           .then(res => res.text())
-          .then(data => setSourceContent(data))
+          .then(data => {
+            setSourceContent(data);
+            setSourceCache(prev => ({ ...prev, [selectedSource]: data }));
+          })
           .catch(err => console.error('Error fetching source:', err));
       }
     }
-  }, [selectedSource, localSource]);
+  }, [selectedSource, localSource, sourceCache]);
 
   const currentFileContent = loadedFiles[previewIdx]?.content;
 
@@ -165,6 +169,94 @@ const App: React.FC = () => {
       setLoadedFiles(nextFiles);
     }
   };
+
+  const parseSections = useCallback((content: string) => {
+    const explode = (text: string, startLine: number) => {
+      const lines = text.split('\n');
+      return lines.flatMap((line, i) => {
+        const cleanLine = line.replace(/<[^>]*>/g, '');
+        const words = cleanLine.split(/\s+/).filter(w => w.length > 0);
+        return words.map(w => ({ text: w, lineIdx: startLine + i }));
+      });
+    };
+
+    const sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[] = [];
+    const headerRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
+    
+    let firstMatch = headerRegex.exec(content);
+    headerRegex.lastIndex = 0; 
+    
+    if (firstMatch && firstMatch.index > 0) {
+      const initialContent = content.substring(0, firstMatch.index);
+      sections.push({ 
+        header: "_initial_", 
+        fullHeader: "",
+        words: explode(initialContent, 1) 
+      });
+    } else if (!firstMatch) {
+      sections.push({ 
+        header: "_initial_", 
+        fullHeader: "",
+        words: explode(content, 1) 
+      });
+    }
+
+    let match;
+    const currentHierarchy: string[] = [];
+    while ((match = headerRegex.exec(content)) !== null) {
+      const level = parseInt(match[1]);
+      const rawHeaderText = match[2].replace(/<[^>]*>/g, '').trim();
+      const normalizedHeader = normalize(rawHeaderText, true);
+      
+      currentHierarchy[level - 1] = rawHeaderText;
+      for (let i = level; i < 6; i++) currentHierarchy[i] = '';
+      const hierarchyPath = currentHierarchy.filter(h => h).join(' ');
+
+      const start = headerRegex.lastIndex;
+      const currentPos = headerRegex.lastIndex;
+      const nextMatch = headerRegex.exec(content);
+      const end = nextMatch ? nextMatch.index : content.length;
+      headerRegex.lastIndex = currentPos; 
+      
+      const sectionContent = content.substring(start, end);
+      const headerLine = content.substring(0, match.index).split('\n').length;
+      sections.push({
+        header: normalizedHeader,
+        fullHeader: hierarchyPath,
+        words: explode(sectionContent, headerLine + 1)
+      });
+    }
+    return sections;
+  }, []);
+
+  const getTargetSections = useCallback((p: string, baseSourceName: string, currentHeader: string, sectionsCache: Record<string, any[]>) => {
+    const prefixMatch = p.match(/^(תוס' ד"ה|תוד"ה|תוספות|רשד"ה|רש"י ד"ה|רש"י)\s+/);
+    if (!prefixMatch) return null;
+    
+    const prefix = prefixMatch[1];
+    let targetName = "";
+    if (prefix.includes('תוס') || prefix.includes('תוד')) {
+      targetName = `תוספות על ${baseSourceName}`;
+    } else if (prefix.includes('רש')) {
+      targetName = `רשי על ${baseSourceName}`;
+    }
+
+    if (!targetName) return null;
+    
+    if (sectionsCache[targetName]) {
+      const matchingSection = sectionsCache[targetName].find((s: any) => s.header === currentHeader);
+      return { sections: sectionsCache[targetName], prefix, matchingSection };
+    }
+    
+    const content = sourceCache[targetName] || sourceCache[targetName + ".txt"];
+    if (content) {
+      const parsed = parseSections(content);
+      sectionsCache[targetName] = parsed;
+      const matchingSection = parsed.find((s: any) => s.header === currentHeader);
+      return { sections: parsed, prefix, matchingSection };
+    }
+    return { sections: null, prefix, matchingSection: null };
+  }, [sourceCache, parseSections]);
 
   const undo = () => {
     if (history.length === 0) return;
@@ -307,62 +399,11 @@ const App: React.FC = () => {
     setTimeout(async () => {
       if (mode === 'auto') pushToHistory();
 
-      const explode = (text: string, startLine: number) => {
-        const lines = text.split('\n');
-        return lines.flatMap((line, i) => {
-          const cleanLine = line.replace(/<[^>]*>/g, '');
-          const words = cleanLine.split(/\s+/).filter(w => w.length > 0);
-          return words.map(w => ({ text: w, lineIdx: startLine + i }));
-        });
-      };
-
-      const sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[] = [];
-      const headerRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
-      
-      let firstMatch = headerRegex.exec(activeSourceContent);
-      headerRegex.lastIndex = 0; 
-      
-      if (firstMatch && firstMatch.index > 0) {
-        const initialContent = activeSourceContent.substring(0, firstMatch.index);
-        sections.push({ 
-          header: "_initial_", 
-          fullHeader: "",
-          words: explode(initialContent, 1) 
-        });
-      } else if (!firstMatch) {
-        sections.push({ 
-          header: "_initial_", 
-          fullHeader: "",
-          words: explode(activeSourceContent, 1) 
-        });
-      }
-
-      let match;
-      const currentHierarchy: string[] = [];
-      while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-        const level = parseInt(match[1]);
-        const rawHeaderText = match[2].replace(/<[^>]*>/g, '').trim();
-        const normalizedHeader = normalize(rawHeaderText, true);
-        
-        currentHierarchy[level - 1] = rawHeaderText;
-        for (let i = level; i < 6; i++) currentHierarchy[i] = '';
-        const hierarchyPath = currentHierarchy.filter(h => h).join(' ');
-
-        const start = headerRegex.lastIndex;
-        const currentPos = headerRegex.lastIndex;
-        const nextMatch = headerRegex.exec(activeSourceContent);
-        const end = nextMatch ? nextMatch.index : activeSourceContent.length;
-        headerRegex.lastIndex = currentPos; 
-        
-        const sectionContent = activeSourceContent.substring(start, end);
-        const headerLine = activeSourceContent.substring(0, match.index).split('\n').length;
-        sections.push({
-          header: normalizedHeader,
-          fullHeader: hierarchyPath,
-          words: explode(sectionContent, headerLine + 1)
-        });
-      }
+      const sections = parseSections(activeSourceContent);
       setSourceSections(sections);
+
+      const sourceSectionsCache: Record<string, any[]> = { [selectedSource]: sections };
+      const baseSourceName = selectedSource.replace(/\.[^/.]+$/, "");
 
       if (mode === 'review') {
         const groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]> = {};
@@ -414,6 +455,7 @@ const App: React.FC = () => {
           let currentSourceSection = sections[0];
           let currentSourceWords = currentSourceSection.words;
           let lastMatchIndex = 0; 
+          let currentCommentaryHeader = "_initial_";
           const fileLinks: any[] = [];
           
           const newContent = paragraphs.map((p, pIdx) => {
@@ -423,8 +465,8 @@ const App: React.FC = () => {
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
               // תיאום מול המקור ללא הסרת אותיות מהכותרת
-              const commentaryHeaderText = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
-              const matchingSection = sections.find(s => s.header === commentaryHeaderText);
+              currentCommentaryHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
+              const matchingSection = sections.find(s => s.header === currentCommentaryHeader);
               if (matchingSection) {
                 currentSourceSection = matchingSection;
                 currentSourceWords = matchingSection.words;
@@ -436,15 +478,30 @@ const App: React.FC = () => {
             const cleanP = trimmed.replace(/<[^>]*>/g, '');
             const originalWords = cleanP.split(/\s+/);
             
+            const targetInfo = getTargetSections(cleanP, baseSourceName, currentCommentaryHeader, sourceSectionsCache);
+            let effectiveSourceWords = currentSourceWords;
+            let effectiveHeader = currentSourceSection.fullHeader;
+            let prefixWordCount = 0;
+
+            if (targetInfo) {
+              const prefixWords = targetInfo.prefix.split(/\s+/);
+              prefixWordCount = prefixWords.length;
+              if (targetInfo.matchingSection) {
+                effectiveSourceWords = targetInfo.matchingSection.words;
+                effectiveHeader = targetInfo.matchingSection.fullHeader;
+              }
+            }
+
             let candidates: { index: number, matchCount: number, consumedSource: number }[] = [];
-            
-            for (let j = 0; j < currentSourceWords.length; j++) {
+            const searchWords = targetInfo ? originalWords.slice(prefixWordCount) : originalWords;
+
+            for (let j = 0; j < effectiveSourceWords.length; j++) {
               let sourceOffset = 0;
               let matchedOriginalWords = 0;
               
-              for (let k = 0; k < originalWords.length; k++) {
-                const pWord = originalWords[k];
-                const remainingSource = currentSourceWords.slice(j + sourceOffset);
+              for (let k = 0; k < searchWords.length; k++) {
+                const pWord = searchWords[k];
+                const remainingSource = effectiveSourceWords.slice(j + sourceOffset);
                 
                 const match = checkMatch(pWord, remainingSource);
                 if (match.consumedSource > 0) {
@@ -472,10 +529,10 @@ const App: React.FC = () => {
             candidates.forEach(candidate => {
               let score = candidate.matchCount;
               if (candidate.matchCount === 1) {
-                const match = checkMatch(originalWords[0], currentSourceWords.slice(candidate.index));
+                const match = checkMatch(searchWords[0], effectiveSourceWords.slice(candidate.index));
                 if (match.consumedSource === 1) {
-                  const pWordNorm = normalize(originalWords[0].replace(/["']/g, ''));
-                  const sWordNorm = normalize(currentSourceWords[candidate.index].text.replace(/["']/g, ''));
+                  const pWordNorm = normalize(searchWords[0].replace(/["']/g, ''));
+                  const sWordNorm = normalize(effectiveSourceWords[candidate.index].text.replace(/["']/g, ''));
                   if (fuzz.ratio(pWordNorm, sWordNorm) < 92) {
                     score = -Infinity;
                   }
@@ -483,7 +540,7 @@ const App: React.FC = () => {
               }
 
               if (score !== -Infinity) {
-                  const distance = candidate.index - lastMatchIndex;
+                  const distance = candidate.index - (targetInfo ? 0 : lastMatchIndex);
                   if (distance >= 0) {
                       score -= (distance * 0.005);
                   } else {
@@ -499,27 +556,39 @@ const App: React.FC = () => {
               }
             });
 
-            if (maxMatchCount >= 1) {
-              // Check for "כו'" or "וכו'" immediately after the match
-              if (maxMatchCount < originalWords.length) {
-                const nextWord = originalWords[maxMatchCount].replace(/[.,:;?!]/g, '');
-                if (nextWord === "כו'" || nextWord === "וכו'") {
-                  maxMatchCount++;
+            if (maxMatchCount >= 1 || targetInfo) {
+              let finalMatchCount = maxMatchCount;
+              if (maxMatchCount >= 1) {
+                // Check for "כו'" or "וכו'" immediately after the match
+                if (maxMatchCount < searchWords.length) {
+                  const nextWord = searchWords[maxMatchCount].replace(/[.,:;?!]/g, '');
+                  if (nextWord === "כו'" || nextWord === "וכו'") {
+                    finalMatchCount++;
+                  }
                 }
-              }
-              
-              const matchedLineIdx = currentSourceWords[bestSourceIdx].lineIdx;
-              if (generateLinks) {
-                fileLinks.push({
-                  line_index_1: pIdx + 1,
-                  line_index_2: matchedLineIdx,
-                  heRef_2: currentSourceSection.fullHeader,
-                  path_2: selectedSource.split('/').pop() || selectedSource,
-                  "Conection Type": "commentary"
-                });
+              } else if (targetInfo) {
+                // Fallback: highlight prefix + 1 word
+                finalMatchCount = 1;
               }
 
-              lastMatchIndex = bestSourceIdx + bestConsumedSource;
+              const totalHighlightWords = prefixWordCount + finalMatchCount;
+              
+              if (maxMatchCount >= 1) {
+                const matchedLineIdx = effectiveSourceWords[bestSourceIdx].lineIdx;
+                if (generateLinks) {
+                  const cleanPath = selectedSource.split('/').pop() || selectedSource;
+                  const finalPath = cleanPath.endsWith('.txt') ? cleanPath : cleanPath + '.txt';
+                  fileLinks.push({
+                    line_index_1: pIdx + 1,
+                    line_index_2: matchedLineIdx,
+                    heRef_2: effectiveHeader,
+                    path_2: finalPath,
+                    "Conection Type": "commentary"
+                  });
+                }
+                if (!targetInfo) lastMatchIndex = bestSourceIdx + bestConsumedSource;
+              }
+
               let currentWordIdx = -1;
               let inWord = false;
               let finalEndPos = 0;
@@ -536,7 +605,7 @@ const App: React.FC = () => {
                     inWord = false;
                   }
                 }
-                if (currentWordIdx < maxMatchCount) finalEndPos = i + 1;
+                if (currentWordIdx < totalHighlightWords) finalEndPos = i + 1;
                 else break;
                 if (p[i] === '>') inTag = false;
               }
@@ -561,10 +630,11 @@ const App: React.FC = () => {
     const header = headers[headerIdx];
     const paragraphs = groups[header];
     const section = sections.find(s => s.header === header) || sections[0];
-    const currentSourceWords = section.words;
     
     const batchItems: ReviewItem[] = [];
     const fileLastMatchIndices: Record<number, number> = {};
+    const baseSourceName = selectedSource.replace(/\.[^/.]+$/, "");
+    const sectionsCache: Record<string, any[]> = { [selectedSource]: sections };
 
     for (let i = 0; i < paragraphs.length; i++) {
       const item = paragraphs[i];
@@ -572,16 +642,30 @@ const App: React.FC = () => {
       const cleanP = p.replace(/<[^>]*>/g, '');
       const originalWords = cleanP.split(/\s+/);
       
-      const lastIdx = fileLastMatchIndices[item.fileIdx] || 0;
+      const targetInfo = getTargetSections(cleanP, baseSourceName, header, sectionsCache);
+      let effectiveSourceWords = section.words;
+      let effectiveHeader = section.fullHeader;
+      let prefixWordCount = 0;
+
+      if (targetInfo) {
+        prefixWordCount = targetInfo.prefix.split(/\s+/).length;
+        if (targetInfo.matchingSection) {
+          effectiveSourceWords = targetInfo.matchingSection.words;
+          effectiveHeader = targetInfo.matchingSection.fullHeader;
+        }
+      }
+
+      const searchWords = targetInfo ? originalWords.slice(prefixWordCount) : originalWords;
+      const lastIdx = targetInfo ? 0 : (fileLastMatchIndices[item.fileIdx] || 0);
       let candidates: { index: number, matchCount: number, consumedSource: number }[] = [];
 
-      for (let j = 0; j < currentSourceWords.length; j++) {
+      for (let j = 0; j < effectiveSourceWords.length; j++) {
         let sourceOffset = 0;
         let matchedOriginalWords = 0;
         
-        for (let k = 0; k < originalWords.length; k++) {
-          const pWord = originalWords[k];
-          const remainingSource = currentSourceWords.slice(j + sourceOffset);
+        for (let k = 0; k < searchWords.length; k++) {
+          const pWord = searchWords[k];
+          const remainingSource = effectiveSourceWords.slice(j + sourceOffset);
           
           const match = checkMatch(pWord, remainingSource);
           if (match.consumedSource > 0) {
@@ -609,10 +693,10 @@ const App: React.FC = () => {
       candidates.forEach(candidate => {
          let score = candidate.matchCount;
          if (candidate.matchCount === 1) {
-            const match = checkMatch(originalWords[0], currentSourceWords.slice(candidate.index));
+            const match = checkMatch(searchWords[0], effectiveSourceWords.slice(candidate.index));
             if (match.consumedSource === 1) {
-              const pWordNorm = normalize(originalWords[0].replace(/["']/g, ''));
-              const sWordNorm = normalize(currentSourceWords[candidate.index].text.replace(/["']/g, ''));
+              const pWordNorm = normalize(searchWords[0].replace(/["']/g, ''));
+              const sWordNorm = normalize(effectiveSourceWords[candidate.index].text.replace(/["']/g, ''));
               if (fuzz.ratio(pWordNorm, sWordNorm) < 92) {
                 score = -Infinity;
               }
@@ -636,17 +720,29 @@ const App: React.FC = () => {
          }
       });
 
-      if (maxMatchCount >= 1) {
-        // Check for "כו'" or "וכו'" immediately after the match
-        if (maxMatchCount < originalWords.length) {
-          const nextWord = originalWords[maxMatchCount].replace(/[.,:;?!]/g, '');
-          if (nextWord === "כו'" || nextWord === "וכו'") {
-            maxMatchCount++;
+      if (maxMatchCount >= 1 || targetInfo) {
+        let finalMatchCount = maxMatchCount;
+        if (maxMatchCount >= 1) {
+          if (maxMatchCount < searchWords.length) {
+            const nextWord = searchWords[maxMatchCount].replace(/[.,:;?!]/g, '');
+            if (nextWord === "כו'" || nextWord === "וכו'") {
+              finalMatchCount++;
+            }
           }
+        } else if (targetInfo) {
+          finalMatchCount = 1;
         }
-        fileLastMatchIndices[item.fileIdx] = bestSourceIdx + bestConsumedSource;
-        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + bestConsumedSource).map(w => w.text).join(' ');
-        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + bestConsumedSource, bestSourceIdx + bestConsumedSource + 5).map(w => w.text).join(' ');
+
+        if (maxMatchCount >= 1 && !targetInfo) {
+          fileLastMatchIndices[item.fileIdx] = bestSourceIdx + bestConsumedSource;
+        }
+
+        const matchedSourceText = maxMatchCount >= 1 
+          ? effectiveSourceWords.slice(bestSourceIdx, bestSourceIdx + bestConsumedSource).map(w => w.text).join(' ')
+          : "(לא נמצאה התאמה מדויקת)";
+        const matchedSourceContext = maxMatchCount >= 1
+          ? effectiveSourceWords.slice(bestSourceIdx + bestConsumedSource, bestSourceIdx + bestConsumedSource + 5).map(w => w.text).join(' ')
+          : "";
         
         batchItems.push({
           fileIdx: item.fileIdx,
@@ -654,12 +750,12 @@ const App: React.FC = () => {
           originalText: p,
           sourceText: matchedSourceText,
           sourceContext: matchedSourceContext,
-          explodedWordCount: maxMatchCount,
-          wordMap: Array.from({length: maxMatchCount}, (_, i) => i),
+          explodedWordCount: prefixWordCount + finalMatchCount,
+          wordMap: Array.from({length: prefixWordCount + finalMatchCount}, (_, i) => i),
           originalWords,
           headerText: header,
-          fullHeader: section.fullHeader,
-          sourceLineIndex: currentSourceWords[bestSourceIdx].lineIdx
+          fullHeader: effectiveHeader,
+          sourceLineIndex: maxMatchCount >= 1 ? effectiveSourceWords[bestSourceIdx].lineIdx : 0
         });
       }
     }
@@ -705,13 +801,15 @@ const App: React.FC = () => {
       
       paragraphs[item.paragraphIdx] = `<b>${p.substring(0, finalEndPos)}</b>${p.substring(finalEndPos)}`;
       
-      if (generateLinks) {
+      if (generateLinks && item.sourceLineIndex > 0) {
         if (!nextFiles[item.fileIdx].links) nextFiles[item.fileIdx].links = [];
+        const cleanPath = selectedSource.split('/').pop() || selectedSource;
+        const finalPath = cleanPath.endsWith('.txt') ? cleanPath : cleanPath + '.txt';
         nextFiles[item.fileIdx].links.push({
           line_index_1: item.paragraphIdx + 1,
           line_index_2: item.sourceLineIndex,
           heRef_2: item.fullHeader,
-          path_2: selectedSource.split('/').pop() || selectedSource,
+          path_2: finalPath,
           "Conection Type": "commentary"
         });
       }
