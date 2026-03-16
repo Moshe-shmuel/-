@@ -86,7 +86,7 @@ const App: React.FC = () => {
 
   const activeSourceContent = localSource || sourceContent;
 
-  const fileInputRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const folderInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -256,11 +256,11 @@ const App: React.FC = () => {
       targetName = `רשי על ${baseSourceName}`;
     }
 
-    if (!targetName) return { sections: null, prefix, matchingSection: null, type: currentType };
+    if (!targetName) return { sections: null, prefix, matchingSection: null, type: currentType, targetName: baseSourceName };
     
     if (sectionsCache[targetName]) {
       const matchingSection = sectionsCache[targetName].find((s: any) => s.header === currentHeader);
-      return { sections: sectionsCache[targetName], prefix, matchingSection, type: currentType };
+      return { sections: sectionsCache[targetName], prefix, matchingSection, type: currentType, targetName };
     }
     
     const content = sourceCache[targetName] || sourceCache[targetName + ".txt"];
@@ -268,9 +268,9 @@ const App: React.FC = () => {
       const parsed = parseSections(content);
       sectionsCache[targetName] = parsed;
       const matchingSection = parsed.find((s: any) => s.header === currentHeader);
-      return { sections: parsed, prefix, matchingSection, type: currentType };
+      return { sections: parsed, prefix, matchingSection, type: currentType, targetName };
     }
-    return { sections: null, prefix, matchingSection: null, type: currentType };
+    return { sections: null, prefix, matchingSection: null, type: currentType, targetName };
   }, [sourceCache, parseSections]);
 
   const undo = () => {
@@ -482,8 +482,15 @@ const App: React.FC = () => {
 
             const headerMatch = trimmed.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
             if (headerMatch) {
-              // תיאום מול המקור ללא הסרת אותיות מהכותרת
-              currentCommentaryHeader = normalize(headerMatch[1].replace(/<[^>]*>/g, ''), true);
+              const headerText = headerMatch[1].replace(/<[^>]*>/g, '');
+              // Detect commentary type from header
+              if (headerText.includes('תוס') || headerText.includes('תוד')) {
+                lastCommentaryType = 'tosafot';
+              } else if (headerText.includes('רש')) {
+                lastCommentaryType = 'rashi';
+              }
+
+              currentCommentaryHeader = normalize(headerText, true);
               const matchingSection = sections.find(s => s.header === currentCommentaryHeader);
               if (matchingSection) {
                 currentSourceSection = matchingSection;
@@ -611,8 +618,8 @@ const App: React.FC = () => {
               if (maxMatchCount >= 1) {
                 const matchedLineIdx = effectiveSourceWords[bestSourceIdx].lineIdx;
                 if (generateLinks) {
-                  const cleanPath = selectedSource.split('/').pop() || selectedSource;
-                  const finalPath = cleanPath.endsWith('.txt') ? cleanPath : cleanPath + '.txt';
+                  const targetFileName = targetInfo ? targetInfo.targetName : baseSourceName;
+                  const finalPath = targetFileName.endsWith('.txt') ? targetFileName : targetFileName + '.txt';
                   
                   // Link 1: To the commentary (Rashi/Tosafot)
                   const link1 = {
@@ -652,8 +659,7 @@ const App: React.FC = () => {
                     }
 
                     if (mainBestIdx !== -1) {
-                      const mainCleanPath = selectedSource.split('/').pop() || selectedSource;
-                      const mainFinalPath = mainCleanPath.endsWith('.txt') ? mainCleanPath : mainCleanPath + '.txt';
+                      const mainFinalPath = baseSourceName.endsWith('.txt') ? baseSourceName : baseSourceName + '.txt';
                       const link2 = {
                         line_index_1: pIdx + 1,
                         line_index_2: currentSourceWords[mainBestIdx].lineIdx,
@@ -718,9 +724,21 @@ const App: React.FC = () => {
     const batchItems: ReviewItem[] = [];
     const fileLastMatchIndices: Record<number, number> = {};
     const fileLastCommentaryTypes: Record<number, 'tosafot' | 'rashi' | null> = {};
-    const fileLastLinkData: Record<number, { sourceLineIndex: number; fullHeader: string; mainSourceLineIndex?: number; mainSourceHeader?: string }> = {};
+    const fileLastLinkData: Record<number, { sourceLineIndex: number; fullHeader: string; mainSourceLineIndex?: number; mainSourceHeader?: string; targetName: string }> = {};
     const baseSourceName = selectedSource.replace(/\.[^/.]+$/, "");
     const sectionsCache: Record<string, any[]> = { [selectedSource]: sections };
+
+    // Update last commentary type from header
+    const fileIndices = new Set(paragraphs.map(p => p.fileIdx));
+    if (header.includes('תוס') || header.includes('תוד')) {
+      fileIndices.forEach(fIdx => {
+        fileLastCommentaryTypes[fIdx] = 'tosafot';
+      });
+    } else if (header.includes('רש')) {
+      fileIndices.forEach(fIdx => {
+        fileLastCommentaryTypes[fIdx] = 'rashi';
+      });
+    }
 
     for (let i = 0; i < paragraphs.length; i++) {
       const item = paragraphs[i];
@@ -746,7 +764,8 @@ const App: React.FC = () => {
           fullHeader: lastData.fullHeader,
           sourceLineIndex: lastData.sourceLineIndex,
           mainSourceLineIndex: lastData.mainSourceLineIndex,
-          mainSourceHeader: lastData.mainSourceHeader
+          mainSourceHeader: lastData.mainSourceHeader,
+          targetName: lastData.targetName
         });
         continue;
       }
@@ -901,14 +920,16 @@ const App: React.FC = () => {
           fullHeader: effectiveHeader,
           sourceLineIndex: maxMatchCount >= 1 ? effectiveSourceWords[bestSourceIdx].lineIdx : 0,
           mainSourceLineIndex,
-          mainSourceHeader
+          mainSourceHeader,
+          targetName: targetInfo ? targetInfo.targetName : baseSourceName
         });
 
         fileLastLinkData[item.fileIdx] = {
           sourceLineIndex: maxMatchCount >= 1 ? effectiveSourceWords[bestSourceIdx].lineIdx : 0,
           fullHeader: effectiveHeader,
           mainSourceLineIndex,
-          mainSourceHeader
+          mainSourceHeader,
+          targetName: targetInfo ? targetInfo.targetName : baseSourceName
         };
       }
     }
@@ -956,26 +977,26 @@ const App: React.FC = () => {
       
       if (generateLinks && item.sourceLineIndex && item.sourceLineIndex > 0) {
         if (!nextFiles[item.fileIdx].links) nextFiles[item.fileIdx].links = [];
-        const cleanPath = selectedSource.split('/').pop() || selectedSource;
-        const finalPath = cleanPath.endsWith('.txt') ? cleanPath : cleanPath + '.txt';
+        const targetFileName = item.targetName || selectedSource.replace(/\.[^/.]+$/, "");
+        const finalPath = targetFileName.endsWith('.txt') ? targetFileName : targetFileName + '.txt';
         
         // Link to Commentary
         nextFiles[item.fileIdx].links.push({
           line_index_1: item.paragraphIdx + 1,
           line_index_2: item.sourceLineIndex,
-          heRef_2: item.fullHeader,
+          heRef_2: item.fullHeader || "",
           path_2: finalPath,
           "Conection Type": "commentary"
         });
 
         // Link to Main Source
         if (item.mainSourceLineIndex && item.mainSourceLineIndex > 0) {
-          const mainCleanPath = selectedSource.split('/').pop() || selectedSource;
-          const mainFinalPath = mainCleanPath.endsWith('.txt') ? mainCleanPath : mainCleanPath + '.txt';
+          const baseSourceName = selectedSource.replace(/\.[^/.]+$/, "");
+          const mainFinalPath = baseSourceName.endsWith('.txt') ? baseSourceName : baseSourceName + '.txt';
           nextFiles[item.fileIdx].links.push({
             line_index_1: item.paragraphIdx + 1,
             line_index_2: item.mainSourceLineIndex,
-            heRef_2: item.mainSourceHeader,
+            heRef_2: item.mainSourceHeader || "",
             path_2: mainFinalPath,
             "Conection Type": "commentary"
           });
@@ -1077,7 +1098,7 @@ const App: React.FC = () => {
       )}
 
       {/* Inputs are defined here - fixed a bug where fileInputRef was typed as textarea instead of input */}
-      <input ref={fileInputRef as unknown as React.RefObject<HTMLInputElement>} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
+      <input ref={fileInputRef} type="file" multiple className="hidden" onChange={(e) => handleFiles(e.target.files)} />
       <input 
         ref={folderInputRef} 
         type="file" 

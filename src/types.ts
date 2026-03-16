@@ -13,6 +13,7 @@ export interface ReviewItem {
   sourceLineIndex?: number;
   mainSourceLineIndex?: number;
   mainSourceHeader?: string;
+  targetName?: string;
 }
 
 export type TabId = 'process' | 'replace' | 'global' | 'split' | 'sync_h1' | 'fix' | 'preview' | 'highlight_regex' | 'highlight_fuzzy' | 'review';
