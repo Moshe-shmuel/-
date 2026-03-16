@@ -230,11 +230,11 @@ const App: React.FC = () => {
   }, []);
 
   const getTargetSections = useCallback((p: string, baseSourceName: string, currentHeader: string, sectionsCache: Record<string, any[]>, lastType: 'tosafot' | 'rashi' | null) => {
-    const prefixMatch = p.match(/^(תוס' ד"ה|תוד"ה|תוספות|רשד"ה|רש"י ד"ה|רש"י|שם\s+ב?ד"ה|ב?ד"ה|ד"ה|בא"ד)\s+/);
+    const prefixMatch = p.match(/^(תוס' ד"ה|תוד"ה|תוספות|רשד"ה|רש"י ד"ה|רש"י|שם\s+ב?ד"ה|ב?ד"ה|ד"ה|בא"ד|באו"ד)\s+/);
     if (!prefixMatch) return null;
     
     const prefix = prefixMatch[1];
-    if (prefix === 'בא"ד') {
+    if (prefix === 'בא"ד' || prefix === 'באו"ד') {
       return { isSameAsPrevious: true, prefix, type: lastType, sections: null, matchingSection: null };
     }
 
