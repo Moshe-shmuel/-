@@ -75,7 +75,7 @@ const App: React.FC = () => {
   const [reviewHeaders, setReviewHeaders] = useState<string[]>([]);
   const [currentHeaderIdx, setCurrentHeaderIdx] = useState(0);
   const [reviewGroups, setReviewGroups] = useState<Record<string, { fileIdx: number, pIdx: number, text: string }[]>>({});
-  const [sourceSections, setSourceSections] = useState<{ header: string, words: { text: string, lineIdx: number }[] }[]>([]);
+  const [sourceSections, setSourceSections] = useState<{ header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[]>([]);
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
@@ -194,14 +194,15 @@ const App: React.FC = () => {
     
     // הסרת פיסוק רק אם זה לא כותרת
     if (!isHeader) {
+      // לא מסירים גרשיים וגרש כאן כי הם משמשים ללוגיקה של ראשי תיבות וקיצורים
       processed = processed.replace(/[.,:;?!\-()]/g, ' ');
     }
 
     return processed
       .split(/\s+/)
       .map(word => {
-        // התיקון: הסרת אותיות י' ו-ו' רק אם זו לא כותרת
-        if (!isHeader) {
+        // התיקון: הסרת אותיות י' ו-ו' רק אם זו לא כותרת והמילה ארוכה מספיק
+        if (!isHeader && word.length > 1) {
           return word.replace(/[וי]/g, '');
         }
         return word;
@@ -209,6 +210,50 @@ const App: React.FC = () => {
       .join(' ')
       .replace(/\s+/g, ' ')
       .trim();
+  };
+
+  const checkMatch = (pWord: string, sWords: { text: string }[]) => {
+    if (sWords.length === 0) return { matchCount: 0, consumedSource: 0 };
+
+    const cleanP = pWord.replace(/[\u0591-\u05C7]/g, '');
+    
+    // 1. Acronym check: " before last letter
+    if (cleanP.includes('"') && cleanP.length >= 3) {
+      const quoteIdx = cleanP.indexOf('"');
+      if (quoteIdx === cleanP.length - 2) {
+        const letters = cleanP.replace(/"/g, '').split('');
+        if (sWords.length >= letters.length) {
+          let allMatch = true;
+          for (let i = 0; i < letters.length; i++) {
+            const pChar = letters[i];
+            const sWordClean = sWords[i].text.replace(/[\u0591-\u05C7]/g, '');
+            if (sWordClean.charAt(0) !== pChar) {
+              allMatch = false;
+              break;
+            }
+          }
+          if (allMatch) return { matchCount: 1, consumedSource: letters.length };
+        }
+      }
+    }
+
+    // 2. Abbreviation check: ' at end
+    if (cleanP.endsWith("'") && cleanP.length > 1) {
+      const prefix = cleanP.slice(0, -1);
+      const sWordClean = sWords[0].text.replace(/[\u0591-\u05C7]/g, '');
+      if (sWordClean.startsWith(prefix)) {
+        return { matchCount: 1, consumedSource: 1 };
+      }
+    }
+
+    // 3. Standard fuzzy match
+    const pWordNorm = normalize(pWord.replace(/["']/g, ''));
+    const sWordNorm = normalize(sWords[0].text.replace(/["']/g, ''));
+    if (fuzz.ratio(pWordNorm, sWordNorm) >= 85) {
+      return { matchCount: 1, consumedSource: 1 };
+    }
+
+    return { matchCount: 0, consumedSource: 0 };
   };
 
   const processWithRegex = () => {
@@ -265,17 +310,14 @@ const App: React.FC = () => {
       const explode = (text: string, startLine: number) => {
         const lines = text.split('\n');
         return lines.flatMap((line, i) => {
-          const normalizedLine = normalize(line.replace(/<[^>]*>/g, ''));
-          const words = normalizedLine.split(/\s+/).filter(w => w.length > 0);
-          return words.flatMap(w => {
-            if (w.includes('"')) return w.replace(/"/g, '').split('').map(char => ({ text: char, lineIdx: startLine + i }));
-            return [{ text: w, lineIdx: startLine + i }];
-          });
+          const cleanLine = line.replace(/<[^>]*>/g, '');
+          const words = cleanLine.split(/\s+/).filter(w => w.length > 0);
+          return words.map(w => ({ text: w, lineIdx: startLine + i }));
         });
       };
 
-      const sections: { header: string, words: { text: string, lineIdx: number }[] }[] = [];
-      const headerRegex = /<h[1-6][^>]*>(.*?)<\/h[1-6]>/gi;
+      const sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[] = [];
+      const headerRegex = /<h([1-6])[^>]*>(.*?)<\/h[1-6]>/gi;
       
       let firstMatch = headerRegex.exec(activeSourceContent);
       headerRegex.lastIndex = 0; 
@@ -284,19 +326,28 @@ const App: React.FC = () => {
         const initialContent = activeSourceContent.substring(0, firstMatch.index);
         sections.push({ 
           header: "_initial_", 
+          fullHeader: "",
           words: explode(initialContent, 1) 
         });
       } else if (!firstMatch) {
         sections.push({ 
           header: "_initial_", 
+          fullHeader: "",
           words: explode(activeSourceContent, 1) 
         });
       }
 
       let match;
+      const currentHierarchy: string[] = [];
       while ((match = headerRegex.exec(activeSourceContent)) !== null) {
-        // שימוש בנורמליזציה עם flag של כותרת
-        const headerText = normalize(match[1].replace(/<[^>]*>/g, ''), true);
+        const level = parseInt(match[1]);
+        const rawHeaderText = match[2].replace(/<[^>]*>/g, '').trim();
+        const normalizedHeader = normalize(rawHeaderText, true);
+        
+        currentHierarchy[level - 1] = rawHeaderText;
+        for (let i = level; i < 6; i++) currentHierarchy[i] = '';
+        const hierarchyPath = currentHierarchy.filter(h => h).join(' ');
+
         const start = headerRegex.lastIndex;
         const currentPos = headerRegex.lastIndex;
         const nextMatch = headerRegex.exec(activeSourceContent);
@@ -306,7 +357,8 @@ const App: React.FC = () => {
         const sectionContent = activeSourceContent.substring(start, end);
         const headerLine = activeSourceContent.substring(0, match.index).split('\n').length;
         sections.push({
-          header: headerText,
+          header: normalizedHeader,
+          fullHeader: hierarchyPath,
           words: explode(sectionContent, headerLine + 1)
         });
       }
@@ -384,36 +436,49 @@ const App: React.FC = () => {
             const cleanP = trimmed.replace(/<[^>]*>/g, '');
             const originalWords = cleanP.split(/\s+/);
             
-            let candidates: { index: number, matchCount: number }[] = [];
+            let candidates: { index: number, matchCount: number, consumedSource: number }[] = [];
             
             for (let j = 0; j < currentSourceWords.length; j++) {
-              let currentMatch = 0;
+              let sourceOffset = 0;
+              let matchedOriginalWords = 0;
+              
               for (let k = 0; k < originalWords.length; k++) {
-                if (j + k >= currentSourceWords.length) break;
-                const pWord = normalize(originalWords[k]);
-                const sWord = normalize(currentSourceWords[j + k].text);
-                if (fuzz.ratio(pWord, sWord) >= 85) {
-                  currentMatch++;
+                const pWord = originalWords[k];
+                const remainingSource = currentSourceWords.slice(j + sourceOffset);
+                
+                const match = checkMatch(pWord, remainingSource);
+                if (match.consumedSource > 0) {
+                  matchedOriginalWords++;
+                  sourceOffset += match.consumedSource;
                 } else {
                   break;
                 }
               }
-              if (currentMatch > 0) {
-                candidates.push({ index: j, matchCount: currentMatch });
+              
+              if (matchedOriginalWords > 0) {
+                candidates.push({ 
+                  index: j, 
+                  matchCount: matchedOriginalWords, 
+                  consumedSource: sourceOffset 
+                });
               }
             }
 
             let bestSourceIdx = -1;
             let maxMatchCount = 0;
             let bestScore = -Infinity;
+            let bestConsumedSource = 0;
 
             candidates.forEach(candidate => {
               let score = candidate.matchCount;
               if (candidate.matchCount === 1) {
-                const pWord = normalize(originalWords[0]);
-                const sWord = normalize(currentSourceWords[candidate.index].text);
-                if (fuzz.ratio(pWord, sWord) < 92) {
-                   score = -Infinity;
+                const match = checkMatch(originalWords[0], currentSourceWords.slice(candidate.index));
+                if (match.consumedSource === 1) {
+                  const pWordNorm = normalize(originalWords[0].replace(/["']/g, ''));
+                  const sWordNorm = normalize(currentSourceWords[candidate.index].text.replace(/["']/g, ''));
+                  if (fuzz.ratio(pWordNorm, sWordNorm) < 92) {
+                    score = -Infinity;
+                  }
                 }
               }
 
@@ -429,6 +494,7 @@ const App: React.FC = () => {
                       bestScore = score;
                       bestSourceIdx = candidate.index;
                       maxMatchCount = candidate.matchCount;
+                      bestConsumedSource = candidate.consumedSource;
                   }
               }
             });
@@ -447,13 +513,13 @@ const App: React.FC = () => {
                 fileLinks.push({
                   line_index_1: pIdx + 1,
                   line_index_2: matchedLineIdx,
-                  heRef_2: currentSourceSection.header === "_initial_" ? "" : currentSourceSection.header,
-                  path_2: selectedSource,
+                  heRef_2: currentSourceSection.fullHeader,
+                  path_2: selectedSource.split('/').pop() || selectedSource,
                   "Conection Type": "commentary"
                 });
               }
 
-              lastMatchIndex = bestSourceIdx + 1;
+              lastMatchIndex = bestSourceIdx + bestConsumedSource;
               let currentWordIdx = -1;
               let inWord = false;
               let finalEndPos = 0;
@@ -491,7 +557,7 @@ const App: React.FC = () => {
     }, 100);
   };
 
-  const processHeaderGroup = async (headerIdx: number, groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]>, headers: string[], sections: { header: string, words: { text: string, lineIdx: number }[] }[]) => {
+  const processHeaderGroup = async (headerIdx: number, groups: Record<string, { fileIdx: number, pIdx: number, text: string }[]>, headers: string[], sections: { header: string, fullHeader: string, words: { text: string, lineIdx: number }[] }[]) => {
     const header = headers[headerIdx];
     const paragraphs = groups[header];
     const section = sections.find(s => s.header === header) || sections[0];
@@ -507,36 +573,49 @@ const App: React.FC = () => {
       const originalWords = cleanP.split(/\s+/);
       
       const lastIdx = fileLastMatchIndices[item.fileIdx] || 0;
-      let candidates: { index: number, matchCount: number }[] = [];
+      let candidates: { index: number, matchCount: number, consumedSource: number }[] = [];
 
       for (let j = 0; j < currentSourceWords.length; j++) {
-        let currentMatch = 0;
+        let sourceOffset = 0;
+        let matchedOriginalWords = 0;
+        
         for (let k = 0; k < originalWords.length; k++) {
-          if (j + k >= currentSourceWords.length) break;
-          const pWord = normalize(originalWords[k]);
-          const sWord = normalize(currentSourceWords[j + k].text);
-          if (fuzz.ratio(pWord, sWord) >= 85) {
-            currentMatch++;
+          const pWord = originalWords[k];
+          const remainingSource = currentSourceWords.slice(j + sourceOffset);
+          
+          const match = checkMatch(pWord, remainingSource);
+          if (match.consumedSource > 0) {
+            matchedOriginalWords++;
+            sourceOffset += match.consumedSource;
           } else {
             break;
           }
         }
-        if (currentMatch > 0) {
-          candidates.push({ index: j, matchCount: currentMatch });
+        
+        if (matchedOriginalWords > 0) {
+          candidates.push({ 
+            index: j, 
+            matchCount: matchedOriginalWords, 
+            consumedSource: sourceOffset 
+          });
         }
       }
 
       let bestSourceIdx = -1;
       let maxMatchCount = 0;
       let bestScore = -Infinity;
+      let bestConsumedSource = 0;
 
       candidates.forEach(candidate => {
          let score = candidate.matchCount;
          if (candidate.matchCount === 1) {
-            const pWord = normalize(originalWords[0]);
-            const sWord = normalize(currentSourceWords[candidate.index].text);
-            if (fuzz.ratio(pWord, sWord) < 92) {
-               score = -Infinity;
+            const match = checkMatch(originalWords[0], currentSourceWords.slice(candidate.index));
+            if (match.consumedSource === 1) {
+              const pWordNorm = normalize(originalWords[0].replace(/["']/g, ''));
+              const sWordNorm = normalize(currentSourceWords[candidate.index].text.replace(/["']/g, ''));
+              if (fuzz.ratio(pWordNorm, sWordNorm) < 92) {
+                score = -Infinity;
+              }
             }
          }
 
@@ -552,6 +631,7 @@ const App: React.FC = () => {
                  bestScore = score;
                  bestSourceIdx = candidate.index;
                  maxMatchCount = candidate.matchCount;
+                 bestConsumedSource = candidate.consumedSource;
              }
          }
       });
@@ -564,9 +644,9 @@ const App: React.FC = () => {
             maxMatchCount++;
           }
         }
-        fileLastMatchIndices[item.fileIdx] = bestSourceIdx + 1;
-        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + maxMatchCount).map(w => w.text).join(' ');
-        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + maxMatchCount, bestSourceIdx + maxMatchCount + 5).map(w => w.text).join(' ');
+        fileLastMatchIndices[item.fileIdx] = bestSourceIdx + bestConsumedSource;
+        const matchedSourceText = currentSourceWords.slice(bestSourceIdx, bestSourceIdx + bestConsumedSource).map(w => w.text).join(' ');
+        const matchedSourceContext = currentSourceWords.slice(bestSourceIdx + bestConsumedSource, bestSourceIdx + bestConsumedSource + 5).map(w => w.text).join(' ');
         
         batchItems.push({
           fileIdx: item.fileIdx,
@@ -578,6 +658,7 @@ const App: React.FC = () => {
           wordMap: Array.from({length: maxMatchCount}, (_, i) => i),
           originalWords,
           headerText: header,
+          fullHeader: section.fullHeader,
           sourceLineIndex: currentSourceWords[bestSourceIdx].lineIdx
         });
       }
@@ -629,8 +710,8 @@ const App: React.FC = () => {
         nextFiles[item.fileIdx].links.push({
           line_index_1: item.paragraphIdx + 1,
           line_index_2: item.sourceLineIndex,
-          heRef_2: item.headerText === "_initial_" ? "" : item.headerText,
-          path_2: selectedSource,
+          heRef_2: item.fullHeader,
+          path_2: selectedSource.split('/').pop() || selectedSource,
           "Conection Type": "commentary"
         });
       }
@@ -919,6 +1000,12 @@ const App: React.FC = () => {
                         כותרת: <span className="font-bold text-blue-600">{reviewHeaders[currentHeaderIdx] === '_initial_' ? 'תחילת הקובץ' : reviewHeaders[currentHeaderIdx]}</span>
                         {' '}({currentHeaderIdx + 1} מתוך {reviewHeaders.length})
                       </p>
+                      <div className="w-full h-1.5 bg-slate-100 rounded-full mt-2 overflow-hidden">
+                        <div 
+                          className="h-full bg-blue-600 transition-all duration-300 ease-out"
+                          style={{ width: `${((currentHeaderIdx + 1) / reviewHeaders.length) * 100}%` }}
+                        />
+                      </div>
                     </div>
                   </div>
                   <button 
