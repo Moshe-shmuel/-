@@ -1,6 +1,6 @@
 <h1>רש"י על סוכה</h1>
 רש״י
-<h2>דף ב</h2>
+<h2>דף ב.</h2>
 מתני' סוכה ורבי יהודה מכשיר 
 ושאינה גבוהה עשרה 
 שלש דפנות 
@@ -47,7 +47,7 @@
 מיתיבי 
 קטן שאינו צריך לאמו 
 מדרבנן 
-<h2>דף ג</h2>
+<h2>דף ג.</h2>
 משום אוירא 
 אלא למ"ד בקטנה פליגי 
 וכי דרכה של מלכה 
@@ -89,7 +89,7 @@
 היתה גבוהה מעשרים 
 ובא למעטה 
 לא הוי מיעוט 
-<h2>דף ד</h2>
+<h2>דף ד.</h2>
 ואף על גב דבטלינהו 
 תבן וביטלו 
 תבן ואין עתיד לפנותו 
@@ -137,7 +137,7 @@
 רב ורבי חנינא ורבי יוחנן ורב חביבא מתנו 
 בכולי סדר מועד 
 ארון תשעה 
-<h2>דף ה</h2>
+<h2>דף ה.</h2>
 ותניא מעולם לא ירדה שכינה למטה 
 למעלה מעשרה טפחים 
 שפירש שדי מזיו שכינתו 
@@ -179,7 +179,7 @@
 כליו על כתפיו 
 וסנדליו וטבעותיו בידו 
 טמאין מיד 
-<h2>דף ו</h2>
+<h2>דף ו.</h2>
 היה לבוש כליו 
 הוא טמא מיד 
 והן טהורין עד שישהה 
@@ -226,7 +226,7 @@
 דורשין תחילות 
 למחסה ולמסתור וגו' 
 כנגד היוצא <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAH0AAAB5CAYAAAAUES4zAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVHhe7dHBCcAwEANB99+0A8EFHPnFOwMqQOza5IgeJHqQ6EGiB4keJHrQKPpay36wKdEv2pToF21K9Is29Sk6/yZ6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHiR6kOhBogeJHvQp+o0rEf2sRPSzEtHPSlpveYkeJHqQ6EGiB4keJHqQ6EGi5+z9AA8MUO4mDfC+AAAAAElFTkSuQmCC"> או במזרחית לצד דרום: <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHQAAAByCAYAAACCw/U6AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFuSURBVHhe7dHBacAAEMRA99+08zeEyzMrRqAK5nmVCmgsoLGAxvoV9HkeD/wN6PjfgI7/Dej43/4Mqv/R5QJ0rMsF6FiXC9CxLhegY10uQMe6XICOdbkAHetyATrW5QJ0rMsF6FiXC9CxLhegY10uQMe6XICOdbkAHetyATrW5QJ0rMsF6FiXC9CxLhegY10uQMe6XICOdbkAHetyATrW5QJ0rMsF6FiXC9CxLhegY10uQMe6XICOdbkAHetyATrW5QJ0rMsF6FiXC9CxLhegsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsYDGAhoLaCygsUjFAhoLaCygsYCmet8fh46EI6+5nD8AAAAASUVORK5CYII=">
-<h2>דף ז</h2>
+<h2>דף ז.</h2>
 ויעמידנו כנגד ראש תור <img src="data:image/png;base64,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"> דנראה נוטה לב' מחיצות ומיחזי כארבע מחיצות ראש תור היא תלם מענה של סוף שדה שהתלמים כלים והולכין באלכסון זה ארוך מזה מעט:
 טפח שוחק 
 ומעמידו בפחות מג' <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAAB1CAYAAAAGPhw3AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAE3SURBVHhe7dCxDcAgEARB+m8aJxTwKzIzK10BN2trHKwQrBCsEKwQrFDCWmv9dpNgnU2CdTYJ1tmkK6zXghWCFYIVghWCFYIVghWCFYIVghWCFYIVghV6Gqv+gRX+wAp/YIU/sMIfWOEPrPAHVvgDK/yBFf7ACn9ghT+wwh9Y4Q+s8AdW+AMr/IEV/sAKf2CFP7DCH1jhD6zwB1b4Ayv8gRX+wAp/YIU/sMIfWOEPrPAHVvgDK/yBFf7ACn9ghT+wwp+nsWqwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQu89vghWCFYIVghWCNa4vT9FhJdirjhZegAAAABJRU5ErkJggg=="> ופחות מג' כלבוד והויא ליה כמחיצה של ד' טפחים ומשך סוכה שבעה נמצא רובו של דופן עשוי:
@@ -273,7 +273,7 @@
 כדי לישב בה כו' 
 כמאן 
 באמתא יתיב 
-<h2>דף ח</h2>
+<h2>דף ח.</h2>
 הני מילי 
 בעיגולא 
 מכדי כמה מרובע יתר על העיגול רביע 
@@ -312,7 +312,7 @@
 סוכה מכל מקום 
 אלימא 
 סוכת רקב"ש לא קביעי 
-<h2>דף ט</h2>
+<h2>דף ט.</h2>
 מתני' סוכה ישנה 
 בית שמאי פוסלין 
 ובית הלל מכשירין 
@@ -352,7 +352,7 @@
 דיעבד 
 ה"ג שתיהן כשירות היכי דמי כגון שהתחתונה חמתה מרובה מצלתה ועליונה צלתה מרובה מחמתה וקיימא עליונה בתוך עשרים שתיהן פסולות ה"ד כגון דתרוייהו צלתן מרובה מחמתן וקיימא עליונה למעלה מכ' תחתונה כשרה ועליונה פסולה היכי דמי כגון שהתחתונה צלתה מרובה מחמתה והעליונה חמתה מרובה מצלתה וקיימי תרוייהו בתוך כ' עליונה כשרה ותחתונה פסולה היכי דמי כגון דתרוייהו צלתן מרובה מחמתן וקיימא עליונה בתוך כ' פשיטא תחתונה כשרה ועליונה פסולה איצטריכא ליה מ"ד ניגזר דילמא מצטרף סכך פסול כו' ול"ג בהא סיומא וכגון דקיימא עליונה כו' 
 שתיהן פסולות כו' וקיימא עליונה למעלה מכ' 
-<h2>דף י</h2>
+<h2>דף י.</h2>
 תחתונה כשרה ועליונה פסולה ה"ד כגון שהתחתונה צלתה מרובה כו' 
 ה"ד דתחתונה פסולה 
 וקיימא עליונה בתוך כ' 
@@ -401,7 +401,7 @@
 הכא דלשוייה אוהלא 
 בציר מעשרה נמי הוי אוהלא 
 וקורא קריאת שמע 
-<h2>דף יא</h2>
+<h2>דף יא.</h2>
 ה"ג ובית נמי אע"ג דלא גבוה עשרה כיון דקביע הוי אוהלא דלא גרע מקינופות 
 כילת חתנים 
 ליהוי כקינופות 
@@ -449,7 +449,7 @@
 סוכות ממש 
 מאי איכא למימר 
 כי חגיגה 
-<h2>דף יב</h2>
+<h2>דף יב.</h2>
 פסולת גורן 
 פסולת יקב 
 גורן עצמו ויקב עצמו 
@@ -501,7 +501,7 @@
 שושי 
 שווצרי 
 מסככין בהם 
-<h2>דף יג</h2>
+<h2>דף יג.</h2>
 דסרי ריחייהו 
 היזמי והיגי 
 דנתרי טרפייהו 
@@ -564,7 +564,7 @@
 לרבי אבא 
 אלא לרב מנשיא 
 ומי בטלה מחשבה 
-<h2>דף יד</h2>
+<h2>דף יד.</h2>
 יורדין לידי טומאה במחשבה 
 ואין עולים מטומאתן 
 אלא בשינוי מעשה 
@@ -627,7 +627,7 @@
 לאו שהפכן 
 דאנחה 
 אפומא דמטללתא 
-<h2>דף טו</h2>
+<h2>דף טו.</h2>
 מתני' תקרה שאין עליה מעזיבה 
 מעזיבה 
 ר' יהודה אומר 
@@ -659,7 +659,7 @@
 בבלאי כלים 
 בארוכה ושתי כרעים עמה 
 קצרה 
-<h2>דף טז</h2>
+<h2>דף טז.</h2>
 חבילה 
 ומטהרת חבילה 
 למסמכינהו אגודא 
@@ -704,7 +704,7 @@
 בסוכה גדולה 
 פס ד' ומשהו מתיר בסוכה 
 ומוקי לה בפחות מג' סמוך לדופן 
-<h2>דף יז</h2>
+<h2>דף יז.</h2>
 מתני' הרחיק הסיכוך מן הדפנות 
 פסולה 
 בית שנפחת וסיכך כו' 
@@ -757,7 +757,7 @@
 רבי מאיר אומר אף נסרים 
 ה"ג בשלמא להך לישנא דאמר רב בין באמצע בין מן הצד בארבע אמות מאי מצטרפין כו' 
 אלא להך לישנא דאמר רב באמצע בארבעה טפחים 
-<h2>דף יח</h2>
+<h2>דף יח.</h2>
 ומודה ר' מאיר 
 אמאי כשרה 
 שאין בה אלא שמונה אמות מצומצמות 
@@ -798,7 +798,7 @@
 בבקעה 
 לא אמרינן פי תקרה יורד וסותם 
 אליבא דשמואל כולי עלמא לא פליגי 
-<h2>דף יט</h2>
+<h2>דף יט.</h2>
 כי פליגי 
 אליבא דרב 
 דמחיצות 
@@ -853,7 +853,7 @@
 גמ' כאן בגדולה כאן בקטנה 
 אימא סיפא כו' 
 אלא אמר רבא בגדולה כ"ע לא פליגי דסתמא לסיכוך 
-<h2>דף כ</h2>
+<h2>דף כ.</h2>
 והכי קאמר 
 ואתא ר' אליעזר למימר 
 אי הכי 
@@ -914,7 +914,7 @@
 וכן סואר של קורות 
 בידי אדם 
 אינו אהל 
-<h2>דף כא</h2>
+<h2>דף כא.</h2>
 אהל אהל ריבה 
 מפני קבר התהום 
 ומביאין נשים עוברות כו' 
@@ -949,7 +949,7 @@
 גמ' שאין לה קבע 
 שמעמידה כו' 
 אבל סיכך על המטה 
-<h2>דף כב</h2>
+<h2>דף כב.</h2>
 מתני' סוכה המדובללת 
 ושצילתה מרובה מחמתה כשרה 
 המעובה כמין בית 
@@ -998,7 +998,7 @@
 כשרה 
 ואין עולין לה ביום טוב 
 שתים באילן ואחת בידי אדם 
-<h2>דף כג</h2>
+<h2>דף כג.</h2>
 גמ' לא כלום היא 
 שאינה מצויה דיבשה 
 יכולה לעמוד ברוח שאינה מצויה דיבשה 
@@ -1029,7 +1029,7 @@
 אומר שני לוגין שאני עתיד להפריש 
 ומיחל 
 ושותה מיד 
-<h2>דף כד</h2>
+<h2>דף כד.</h2>
 אוסרין 
 איפוך 
 קשיא דרבי מאיר 
@@ -1073,7 +1073,7 @@
 מטלטלין תחתיו 
 אי הכי 
 ליטלטל בכוליה 
-<h2>דף כה</h2>
+<h2>דף כה.</h2>
 שתשמישה לאויר 
 שבת בתל 
 והוא מארבע אמות עד בית סאתים 
@@ -1119,7 +1119,7 @@
 פטורין מן התפלה 
 ומן התפילין 
 וחייבין בקרית שמע 
-<h2>דף כו</h2>
+<h2>דף כו.</h2>
 משום ר' שילא אמרו חתן פטור 
 תגריהן 
 מוכרי תכלת 
@@ -1171,7 +1171,7 @@
 מתני' אוכל פחות מכביצה 
 נטלו במפה 
 גמ' מעשה לסתור 
-<h2>דף כז</h2>
+<h2>דף כז.</h2>
 הכי גרסינן נימא תיהוי תיובתיה דרב יוסף 
 ואביי 
 הא כביצה בעי נטילת ידים וברכה 
@@ -1225,7 +1225,7 @@
 שקשור ותלוי 
 פוקקין בו 
 ואם לאו אין פוקקין בו 
-<h2>דף כח</h2>
+<h2>דף כח.</h2>
 התם מבטל ליה 
 אינן אלא מפי השמועה 
 הזקקתוני 
@@ -1283,7 +1283,7 @@
 בר ממטללא 
 הא למיגרס כו' 
 לעיוני 
-<h2>דף כט</h2>
+<h2>דף כט.</h2>
 כי הא כו' 
 כי הוו קיימי מקמיה דרב חסדא 
 מרהטי בגמרא 
@@ -1354,7 +1354,7 @@
 לא שנא בי"ט שני 
 בשלמא יבש 
 אמאי לא 
-<h2>דף ל</h2>
+<h2>דף ל.</h2>
 שנאמר והבאתם גזול וגו' 
 מה פסח אין לו תקנה 
 אף גזול 
@@ -1377,7 +1377,7 @@
 דאוונכרי גופייהו 
 ליקניוה בשינוי מעשה 
 החוזר לברייתו 
-<h2>דף לא</h2>
+<h2>דף לא.</h2>
 הושענא קרו לה 
 והמסכך ברשות הרבים 
 מחלוקת 
@@ -1420,7 +1420,7 @@
 באשרה דמשה 
 נסדק 
 כפוף 
-<h2>דף לב</h2>
+<h2>דף לב.</h2>
 קווץ 
 עקום דומה למגל 
 חרות 
@@ -1477,7 +1477,7 @@
 מהדר אתרי וחד 
 אבא לההוא 
 רוב עליו 
-<h2>דף לג</h2>
+<h2>דף לג.</h2>
 אסא מצראה 
 שלשה בדי עלין לחין 
 ובראש כל אחד 
@@ -1545,7 +1545,7 @@
 משוך 
 ושל הרים 
 ערבי מ"מ 
-<h2>דף לד</h2>
+<h2>דף לד.</h2>
 אבא שאול אומר 
 ורבנן 
 עשר נטיעות ערבה ונסוך המים הלכה למשה מסיני 
@@ -1597,7 +1597,7 @@
 הכושי 
 כרתי 
 ובגדול 
-<h2>דף לה</h2>
+<h2>דף לה.</h2>
 גמ' פרי עץ 
 ממשמע שנאמר ונטעתם 
 חייבין בערלה 
@@ -1643,7 +1643,7 @@
 תני רבי יצחק בר אלעזר נטלה בוכנתו 
 האי אתרוג דאגליד 
 כאהינא סומקא 
-<h2>דף לו</h2>
+<h2>דף לו.</h2>
 בכולה 
 במקצתה 
 תני עולא בר חנינא 
@@ -1698,7 +1698,7 @@
 ואי מייתי מינא אחרינא כו' 
 אלא בארבעת מינין שבלולב וכו' 
 אמרו לו כל דין ק"ו שאתה דן שתחילתו להחמיר וסופו להקל אינו דין 
-<h2>דף לז</h2>
+<h2>דף לז.</h2>
 לא מצא אחד מד' מינין הללו יהא יושב ובטל 
 עלי זית ועלי עץ שמן 
 ור"י סבר הנך לדפנות ועלי הדס ועלי תמרים ועלי עץ עבות לסכך ותנן מסככין בנסרים 
@@ -1740,7 +1740,7 @@
 הורם 
 למי שארבע רוחות שלו 
 זאת אומרת 
-<h2>דף לח</h2>
+<h2>דף לח.</h2>
 שירי מצוה 
 שהרי תנופה שירי מצוה היא 
 וכן לולב 
@@ -1777,7 +1777,7 @@
 וספריא 
 אשר קרא המלך וגו' 
 לא לימא איניש 
-<h2>דף לט</h2>
+<h2>דף לט.</h2>
 משה 
 שפיר קאמרת] 
 כל אסוקי מלתא הואיל וכוונתו לגמור לית לן בה:
@@ -1819,7 +1819,7 @@
 בין לר"א בין לר"ג 
 לערלה 
 ולשביעית 
-<h2>דף מ</h2>
+<h2>דף מ.</h2>
 שבשעת לקיטתו עישורו 
 לכל דבר 
 הוא דאמר 
@@ -1859,7 +1859,7 @@
 ופרי עצמו 
 מתחללין 
 שמא יגדל מהם 
-<h2>דף מא</h2>
+<h2>דף מא.</h2>
 בזכרים 
 אמר רב אשי מחלוקת 
 בפרי ראשון 
@@ -1919,7 +1919,7 @@
 הכא 
 קורא בתורה 
 נכנס לבית המדרש 
-<h2>דף מב</h2>
+<h2>דף מב.</h2>
 לא שנו 
 ה"ג הא מדאגבהיה נפיק ביה אמר אביי כשהפכו 
 דרך כבוד 
@@ -1977,7 +1977,7 @@
 ומלמדין 
 גמ' טלטול בעלמא 
 ללמוד 
-<h2>דף מג</h2>
+<h2>דף מג.</h2>
 ויעבירנו ארבע אמות ברה"ר 
 הא תקינו ליה רבנן ליטלו בביתו 
 אלא ראשון 
@@ -2026,7 +2026,7 @@
 והביאום הכהנים וזקפום כו' 
 ואלא לידחי 
 כיון דאנן 
-<h2>דף מד</h2>
+<h2>דף מד.</h2>
 לדידהו נמי לא דחי 
 בגבולין 
 דלא עבדינן לה שבעה 
@@ -2077,7 +2077,7 @@
 אפי' לביתו 
 כסא דהרסנא 
 על גג האיצטבא 
-<h2>דף מה</h2>
+<h2>דף מה.</h2>
 וכי לייבשן הוא צריך 
 סטיו כפול 
 מתני' ונקרא מוצא 
@@ -2130,7 +2130,7 @@
 ולולב יום אחד 
 נקוט דרבה בר בר חנה בידך 
 דכולהו אמוראי 
-<h2>דף מו</h2>
+<h2>דף מו.</h2>
 העושה לולב 
 לעצמו 
 כאן בזמן בית המקדש 
@@ -2187,7 +2187,7 @@
 ושמיני לברכה 
 שמיני לזה ולזה 
 כולי עלמא לא פליגי דיתבינן בסוכה 
-<h2>דף מז</h2>
+<h2>דף מז.</h2>
 לברוכי 
 ברוכי לא מברכינן 
 נקוט דר' יוחנן בידך 
@@ -2239,7 +2239,7 @@
 מה כאן 
 תחת יד הבעלים 
 מאי הוי עלה 
-<h2>דף מח</h2>
+<h2>דף מח.</h2>
 פז"ר קש"ב 
 פייס בפני עצמו 
 זמן 
@@ -2302,7 +2302,7 @@
 בול של מלח 
 לא מפני 
 אלא כדי שלא יראה פגום 
-<h2>דף מט</h2>
+<h2>דף מט.</h2>
 שכל מזבח כו' 
 רבי יוסי בר יהודה אומר אף הסובב 
 שיתין 
@@ -2353,7 +2353,7 @@
 שמא כל הבא לקפוץ 
 ואמאי נייתי במקודשת 
 אין שיעור למים 
-<h2>דף נ</h2>
+<h2>דף נ.</h2>
 ואי מייתי במקודשת איפסלו בלינה 
 חזקיה אמר 
 ר' ינאי אמר 
@@ -2380,7 +2380,7 @@
 ה"ג ואיבעית אימא עיקר שירה בפה ואין דנין אפשר משאי אפשר 
 והכא במילף מנורה בכללי ופרטי או בריבויי ומיעוטי קמיפלגי ה"ג ול"ג ממנורה 
 מיעט של חרס 
-<h2>דף נא</h2>
+<h2>דף נא.</h2>
 כתנאי 
 עבדי כהנים היו 
 משפחת בית הפגרים ומשפחת בית ציפריא 
@@ -2448,7 +2448,7 @@
 והכתיב 
 הכל בכתב מיד ה' עלי השכיל 
 קרא אשכחו 
-<h2>דף נב</h2>
+<h2>דף נב.</h2>
 וספדה הארץ 
 שעסוקין בהספד 
 כאן שעסוקין בשמחה 
@@ -2517,7 +2517,7 @@
 אי משום יוקרא 
 הנך יקירי טפי 
 כבש ומרובע 
-<h2>דף נג</h2>
+<h2>דף נג.</h2>
 יש מהם אומרים 
 אלו חסידים 
 שלא ביישה כו' 
@@ -2582,7 +2582,7 @@
 ההוא לסימנא בעלמא הוא 
 רחמנא שויה מצוה 
 ולא כלום 
-<h2>דף נד</h2>
+<h2>דף נד.</h2>
 מהו דתימא רבנן היא 
 תשע תקיעות 
 ולא כלום 
@@ -2633,7 +2633,7 @@
 ניתנין מחצי כבש ולמטה במזרח 
 ושל מוספין 
 ושל ראשי חדשים 
-<h2>דף נה</h2>
+<h2>דף נה.</h2>
 וא"ר יוחנן 
 יכול כשם שתוקעין 
 כך תוקעין על כל מוסף ומוסף 
@@ -2695,7 +2695,7 @@
 ובא בכל אות נפשו ושרת ככל אחיו 
 ת"ל מאחד שעריך 
 מנין שכל המשמרות שוות 
-<h2>דף נו</h2>
+<h2>דף נו.</h2>
 תלמוד לומר חלק כחלק 
 חלק אכילה 
 ומאי אכילה 

@@ -250,27 +250,25 @@ const App: React.FC = () => {
       currentType = lastType;
     }
 
-    if (currentType === 'tosafot') {
-      targetName = `תוספות על ${baseSourceName}`;
-    } else if (currentType === 'rashi') {
-      targetName = `רשי על ${baseSourceName}`;
-    }
+    const shortBaseName = baseSourceName.split('/').pop() || baseSourceName;
+    const shortTargetName = currentType === 'tosafot' ? `תוספות על ${shortBaseName}` : `רשי על ${shortBaseName}`;
+    const fullTargetName = currentType === 'tosafot' ? `תוספות על ${baseSourceName}` : `רשי על ${baseSourceName}`;
 
-    if (!targetName) return { sections: null, prefix, matchingSection: null, type: currentType, targetName: baseSourceName };
+    if (!currentType) return { sections: null, prefix, matchingSection: null, type: currentType, targetName: shortBaseName };
     
-    if (sectionsCache[targetName]) {
-      const matchingSection = sectionsCache[targetName].find((s: any) => s.header === currentHeader);
-      return { sections: sectionsCache[targetName], prefix, matchingSection, type: currentType, targetName };
+    if (sectionsCache[fullTargetName]) {
+      const matchingSection = sectionsCache[fullTargetName].find((s: any) => s.header === currentHeader);
+      return { sections: sectionsCache[fullTargetName], prefix, matchingSection, type: currentType, targetName: shortTargetName };
     }
     
-    const content = sourceCache[targetName] || sourceCache[targetName + ".txt"];
+    const content = sourceCache[fullTargetName] || sourceCache[fullTargetName + ".txt"];
     if (content) {
       const parsed = parseSections(content);
-      sectionsCache[targetName] = parsed;
+      sectionsCache[fullTargetName] = parsed;
       const matchingSection = parsed.find((s: any) => s.header === currentHeader);
-      return { sections: parsed, prefix, matchingSection, type: currentType, targetName };
+      return { sections: parsed, prefix, matchingSection, type: currentType, targetName: shortTargetName };
     }
-    return { sections: null, prefix, matchingSection: null, type: currentType, targetName };
+    return { sections: null, prefix, matchingSection: null, type: currentType, targetName: shortTargetName };
   }, [sourceCache, parseSections]);
 
   const undo = () => {
@@ -618,7 +616,7 @@ const App: React.FC = () => {
               if (maxMatchCount >= 1) {
                 const matchedLineIdx = effectiveSourceWords[bestSourceIdx].lineIdx;
                 if (generateLinks) {
-                  const targetFileName = targetInfo ? targetInfo.targetName : baseSourceName;
+                  const targetFileName = targetInfo ? targetInfo.targetName : (baseSourceName.split('/').pop() || baseSourceName);
                   const finalPath = targetFileName.endsWith('.txt') ? targetFileName : targetFileName + '.txt';
                   
                   // Link 1: To the commentary (Rashi/Tosafot)
@@ -659,7 +657,8 @@ const App: React.FC = () => {
                     }
 
                     if (mainBestIdx !== -1) {
-                      const mainFinalPath = baseSourceName.endsWith('.txt') ? baseSourceName : baseSourceName + '.txt';
+                      const shortBaseName = baseSourceName.split('/').pop() || baseSourceName;
+                      const mainFinalPath = shortBaseName.endsWith('.txt') ? shortBaseName : shortBaseName + '.txt';
                       const link2 = {
                         line_index_1: pIdx + 1,
                         line_index_2: currentSourceWords[mainBestIdx].lineIdx,
@@ -977,7 +976,7 @@ const App: React.FC = () => {
       
       if (generateLinks && item.sourceLineIndex && item.sourceLineIndex > 0) {
         if (!nextFiles[item.fileIdx].links) nextFiles[item.fileIdx].links = [];
-        const targetFileName = item.targetName || selectedSource.replace(/\.[^/.]+$/, "");
+        const targetFileName = item.targetName || (selectedSource.split('/').pop() || selectedSource).replace(/\.[^/.]+$/, "");
         const finalPath = targetFileName.endsWith('.txt') ? targetFileName : targetFileName + '.txt';
         
         // Link to Commentary
@@ -991,8 +990,8 @@ const App: React.FC = () => {
 
         // Link to Main Source
         if (item.mainSourceLineIndex && item.mainSourceLineIndex > 0) {
-          const baseSourceName = selectedSource.replace(/\.[^/.]+$/, "");
-          const mainFinalPath = baseSourceName.endsWith('.txt') ? baseSourceName : baseSourceName + '.txt';
+          const shortBaseName = (selectedSource.split('/').pop() || selectedSource).replace(/\.[^/.]+$/, "");
+          const mainFinalPath = shortBaseName.endsWith('.txt') ? shortBaseName : shortBaseName + '.txt';
           nextFiles[item.fileIdx].links.push({
             line_index_1: item.paragraphIdx + 1,
             line_index_2: item.mainSourceLineIndex,

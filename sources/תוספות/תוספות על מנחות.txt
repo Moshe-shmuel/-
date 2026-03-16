@@ -1,6 +1,6 @@
 <h1>תוספות על מנחות</h1>
 תוספות
-<h2>דף ב</h2>
+<h2>דף ב.</h2>
 מתני' כל המנחות שנקמצו שלא לשמן כשירות אלא שלא עלו לבעלים כו'
 שלא לשמן
 לשמן ושלא לשמן
@@ -12,7 +12,7 @@
 מנחת חוטא הרי היא כחטאת
 מכדי מחשבה דפסל רחמנא הקישא הוא
 עולת העוף שמלקה למעלה
-<h2>דף ג</h2>
+<h2>דף ג.</h2>
 מיצה דמה בכל מקום במזבח כשירה
 חטאת העוף שהזה דמה
 דאי קדשים קלים בדרום הוה עביד להו
@@ -28,7 +28,7 @@
 לר"ש ה"נ
 לשם חטאת דם לשם חטאת עבודת כוכבים כשירה
 כאן בקומץ מחבת לשם מרחשת גרסינן
-<h2>דף ד</h2>
+<h2>דף ד.</h2>
 חטאת קרייה רחמנא
 מאי נפקא מינה הא תנא דבי רבי ישמעאל
 ליגמר עונו מעונו דשמיעת הקול
@@ -42,7 +42,7 @@
 לא יביאו יורשין חטאתה
 לא נהנין ולא מועלין
 ואין טעונין לחם
-<h2>דף ה</h2>
+<h2>דף ה.</h2>
 גילח על אחד משלשתן יצא
 תיובתא
 שהמנחות טעונות כלי
@@ -59,7 +59,7 @@
 שכן קדושתה אוסרתה
 כרבי עקיבא דאמר ספיחים אסורין
 שכן באה להתיר לאו שבתוכה
-<h2>דף ו</h2>
+<h2>דף ו.</h2>
 מה לכלאים שכן מצותו בכך
 בעל מום נמי הותר בעופות
 שכן מומן ניכר
@@ -78,7 +78,7 @@
 אלא טעמא דאשמועינן
 ממקום שרגלי הזר עומדות
 וכיון דקרא סתמא כתיב מה לי שמאל כו'
-<h2>דף ז</h2>
+<h2>דף ז.</h2>
 וכי מהדר ליה לקומץ לדוכתיה ליקדוש
 א"ר יוחנן זאת אומרת כלי שרת אין מקדשין אלא מדעת
 אין מקדשים ליקרב
@@ -89,7 +89,7 @@
 גמר מלהזות
 מקנח ידו בגופה של פרה
 אלא אצבעו במאי מקנח
-<h2>דף ח</h2>
+<h2>דף ח.</h2>
 ואם איתא לילף מדם
 מנחה שנקמצה בהיכל כשרה שכן מצינו בסילוק בזיכין
 מקטיר עליו את הבזיכין
@@ -98,7 +98,7 @@
 ולרבי חנינא עשרון למה נמשח למנחת חוטא
 כלי הלח מקדשין את הלח ומדות היבש כו'
 אבל מזרקות מקדשין כו'] שנאמר שניהם מלאים סולת
-<h2>דף ט</h2>
+<h2>דף ט.</h2>
 רבי יוחנן אמר פסולה
 ריש לקיש אמר כשרה
 מקמיצה ואילך מצות כהונה
@@ -111,7 +111,7 @@
 אותן שיריים מה הן באכילה
 אין מיעוט אחר מיעוט אלא לרבות
 על בהן ידו הימנית כו'
-<h2>דף י</h2>
+<h2>דף י.</h2>
 על דם האשם ועל מקום דם האשם למאי אתו
 אמר רבא מאחר דכתב על דם
 שמאל למאי אתא
@@ -122,7 +122,7 @@
 בשמאל אכשורי מכשר
 לקומץ דמנחת חוטא
 קמץ ועלה בידו צרור
-<h2>דף יא</h2>
+<h2>דף יא.</h2>
 וזו היא עבודה קשה שבמקדש
 והא איכא חפינה
 מלמטה למעלה
@@ -132,7 +132,7 @@
 ורבי שמעון את לא דריש
 כגון שהפריש לה שני קמצים
 כגון שהפריש לה שני קמצין
-<h2>דף יב</h2>
+<h2>דף יב.</h2>
 וחכ"א אחד זה ואחד זה פסול ואין בו כרת
 ה"מ יוצא דאיתיה בעיניה כו'
 ותני רבי חייא כו'
@@ -140,14 +140,14 @@
 הוא שאם נפרסה אחת כו'
 שאם נפרסה אחת מחלותיה כולן פסולות
 אלא אימא הא לאכול ולאכול דבר שדרכו לאכול
-<h2>דף יג</h2>
+<h2>דף יג.</h2>
 מתני' הקומץ את המנחה
 <h2>דף יג:</h2>
 קמ"ל דבהאי מודה
 משום הולכה נגעו בה קסבר הולכה שלא ברגל כו'
 לאכול אחד מן הסדרים
 אי אמרת בשלמא חד גופא
-<h2>דף יד</h2>
+<h2>דף יד.</h2>
 פיגל בדבר הנעשה בפנים לא פיגל
 הקומץ והלבונה
 והלבונה
@@ -156,7 +156,7 @@
 הכתוב עשאן גוף אחד
 פיגל בלחמי תודה מהו
 שחיטה וזריקה תרווייהו מתירין הן
-<h2>דף טו</h2>
+<h2>דף טו.</h2>
 רבנן סברי הציץ מרצה על אכילות
 ורבי יהודה סבר אין הציץ מרצה
 והא עולין דציץ מרצה כו'
@@ -172,7 +172,7 @@
 והתירו הגפנים
 אפשר לשנותן לזבח אחר
 הוקבעו בשחיטה
-<h2>דף טז</h2>
+<h2>דף טז.</h2>
 חדא דהיינו קמייתא
 בין בראשונה בין בשניה בין בשלישית
 קתני מיהא פיגל בראשון וכו' ופליגי
@@ -180,7 +180,7 @@
 <h2>דף טז:</h2>
 כי מדי בהיכל מיא בעלמא קא מדי
 משכחת לה בד' פרים
-<h2>דף יז</h2>
+<h2>דף יז.</h2>
 מתני' הקומץ את המנחה כו'
 שאין אכילה והקטרה מצטרפין
 מדאפקינהו רחמנא בלשון אכילה
@@ -190,7 +190,7 @@
 מאי האכל יאכל ש"מ תרתי
 אמר ליה תנאי היא
 דת"ק סבר להניח פסולא בעלמא בהנך כרת נמי מיחייב
-<h2>דף יח</h2>
+<h2>דף יח.</h2>
 גזירה מקצת דמו כו'
 עד אחת
 אלא לעולם דברי הכל פסול אתנייה
@@ -204,7 +204,7 @@
 כאן במנחת כהנים כאן במנחת ישראל
 מקמיצה ואילך מצות כהונה
 ורבי שמעון בני אהרן נדרש לפניו ולאחריו
-<h2>דף יט</h2>
+<h2>דף יט.</h2>
 במקרא נדרש לפניו ולאחריו קא מיפלגי
 אלא ה"ט דר"ש והביאה וי"ו מוסיף על ענין ראשון
 גלי רחמנא גבי פרו של אהרן כו'
@@ -222,7 +222,7 @@
 כנגד חודו של קרן ודיו
 למערבה של קרן לדרומה של קרן
 הרי מלח דלא תנא ביה קרא
-<h2>דף כ</h2>
+<h2>דף כ.</h2>
 אימא מה הפרט מפורש שאחרים באים חובה לה וגם מתרת
 מדאיצטריך מעל מנחתך מכלל דהנך כולהו מייתו בחד צד
 ואימא מעל מנחתך ולא מעל אבריך
@@ -233,7 +233,7 @@
 מלמד שמתנדבים עצים כו'
 לדברי רבי עצים טעונין קמיצה
 עצים טעונין קמיצה
-<h2>דף כא</h2>
+<h2>דף כא.</h2>
 אפיק עצים ועייל נסכים
 יצאו עצים שאין מקבלין טומאה
 דם שבישלו אינו עובר עליו
@@ -247,7 +247,7 @@
 ת"ל ברית מלח עולם הוא
 כל כהן ששוקל אינו חוטא
 שהכהנים דורשין מקרא זה לעצמן
-<h2>דף כב</h2>
+<h2>דף כב.</h2>
 ועצים דפשיטא ליה לתנא משל צבור מנלן
 שזו בלילתה עבה
 שזו בלילתה עבה וזו בלילתה רכה והן בולעות זו מזו
@@ -258,7 +258,7 @@
 <h2>דף כב:</h2>
 מכאן לעולין שאין מבטלין זה את זה
 ורבי יהודה סבר מכאן למין במינו שאינו בטל
-<h2>דף כג</h2>
+<h2>דף כג.</h2>
 אמר רבא קסבר רבי יהודה כו'
 הוא עצמו משכשכו בשירי הלוג
 הרב שנתערב בבלול כו'
@@ -273,7 +273,7 @@
 קסלקא דעתך דאפיש לה תבלין טפי ממצה
 אלא למ"ד בתר מבטל אזלינן תבלין מי קא הוו מצה
 כי סליק רב כהנא אשכחינהו לבני רבי חייא
-<h2>דף כד</h2>
+<h2>דף כד.</h2>
 שאין צריך לכלי אין כלי מצרפו
 צירוף דאורייתא או דרבנן
 צירוף כלי וחיבור מים מהו
@@ -281,7 +281,7 @@
 ועשאו וילון טהור מן המדרס
 כי נגע בו הזב מיהא טמא ואפילו לבסוף כו'
 בשני סדינים המקופלים כו'
-<h2>דף כה</h2>
+<h2>דף כה.</h2>
 ונשא אהרן את עון הקדשים כו'
 אם עון נותר כו'
 הא אינו נושא אלא עון טומאה שהותרה מכללה בציבור
@@ -297,7 +297,7 @@
 ת"ל אשר ליי'
 ורב שילא אמר כו'
 זריקתו בין בשוגג בין במזיד הורצה
-<h2>דף כו</h2>
+<h2>דף כו.</h2>
 אשכחן חלב כו'
 ורבי ינאי אמר כיון שקמצו מכלי שרת כו'
 הקטר חלבים ואברים בין בימין בין בשמאל כשירה
@@ -309,7 +309,7 @@
 אלא עם בא השמש כו'
 תורת העולה ריבה
 ואי אתה מחזיר עיכולי קטורת
-<h2>דף כז</h2>
+<h2>דף כז.</h2>
 מסלתה ומשמנה מגרשה ומשמנה
 ארבעה שבמצורע
 ולקחתם לקיחה תמה
@@ -319,7 +319,7 @@
 <h2>דף כז:</h2>
 להיכל כולו בארבעים
 למעוטי דרך משופש
-<h2>דף כח</h2>
+<h2>דף כח.</h2>
 שבעה קני מנורה
 דתניא ככר זהב טהור
 מקשה דסיפא למאי אתא כו'
@@ -329,7 +329,7 @@
 שפודים של ברזל
 גובהה של מנורה י"ח טפחים
 וטפח שבו היה גביע כפתור ופרח
-<h2>דף כט</h2>
+<h2>דף כט.</h2>
 אבן היתה לפני המנורה
 סילוקו כסידורו
 הכא כתיב כמשפטו והתם כתיב כתבניתם
@@ -343,7 +343,7 @@
 ומאי טעמא אית ליה תגא<img src="data:image/png;base64,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"> ורבינו תם מפרש בתחילה כזה <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAA8CAIAAAB98qTzAAAACXBIWXMAAA50AAAOdAFrJLPWAAAACXZwQWcAAAAtAAAAPADdE9IeAAAE8klEQVRYw8VZe2gURxif3YhUodFCVapYWu3DFKWh6R+1NU2sHgbqxSZ6EkEtgSAogjal9GgVrJVejIpUFK7a+k9bbKtoFAqNJKFqIMY02rR5CJp49VWsYDzvJOflZra7O3u7c7uzs3O39xiS7GZ2ZvY3v+/75nsskHLeIFKbfKf9pQ0CUn4bsunPPQ6U4BkFCsABKpxcEMEK1pIC8/HriSNSYfUUo3m79KWC4YAQ4ptT3x/6IdgsdxTUbpFU/vorY/eHbfnQ8dopUbYoAQDYmQywOQETWYcyeKnNwOEol1wgwC1yq//Hw01cOAwQKH+WbMZBMAGzfYgh01sYOCCpsCgHW1cQIFunA5L6PI4VFP/77pvzckAGZPkXlByoMYYSCMYYik2O5Ld2pIxhDQMmA5EH7vJvMuEwzU/iQOTBwzg7rEKyAgIWYULfskUAiK/NmfFGyQsnj33X3nry+LFvQ9f7Lne1B78OXDh7Wh409uDOSH+PFB/7LzS0fqX3p6MHL7S2tLb8PNDTPdB76dqff9wdHgzfDd2/ee3q5c4M4w9ANEEQgKlZOtQmqj+27a+ec4gZFoGk8LTHibEwcGi278OgKdDVztrllQxNMvMx0NVm94LUnlRiBMDTaqoqnOWCla7psy1OOEQgpuz7nbLSjzZuAM40ClMnCcy4EBnPrpw/w7U1TTpi8aSJ8sVX67WTVCpTIosP0vxG+s45ABDk1Yvk65zZMy3iULR11ftLGbMd5IKo9iKwyNi6eSMfc4YE5cv4eES2CevBA3QUuiZ7K0tpLPDYr5h8IDL4oIYWwOqQblz5HaTZSDUQ6MJUfuvrVmh7puJIoHHFrRCWPfeZopQ1BNo7hHTRAkZEYas46EnkyP4vFy+cX+1ZVFO1cEKR8lpPRdk6X9XzM4ubA/7gga8CO7Ye2LvD817Zgldn7d+9fV2dZ9unDb7aiqPBpsAXH/sbN3ywvBIjKJk7Y3iohxHvUTBahxpUIa6MzdA5SVrprZCZc/Yv7IA0+RSSnhM7cQ4/i7D1Pfe0YJfRpMQf1AfsafzNemzw57eQuIEu40SszhapQkcc0K4nM1YwHzcHL2IRy4uw6kFk3UgLAKL35PmPH4y4DOLxmfZ5Yz17EcDeRywSchQtDx+kilADVYDZRmp8rJO/85MGYzJypSE0HMxzXU8aYOyRfloSFgMzk46Np6XpqckBbv5whTEZuU19VfenbApFwpx5pSYAMnRxn0fpS90Z6mdsCVgTHn3mlKeA+4qIvto3e5pZeZS5I/ZQjx4mitnko3rJYsItUPkgjpZbf3cmYxpVqNnDkZ7f/+XwPjK8cF+DIHEwJGzGsbqqnIx03JdDyJgNxZ/w4nhr3ixGeJ3JeSoYu4KK6UK6vZiWXlu9hIx75XzapVymTzHkfLW3G2/GKd+XpJefnZzCRzzKdMXp6IcARm+H+OoOqWqly0XzQenUwagL9p7voJKh4kC8ODIrSpGRfXDfbjtSzXwkMxHlKOvu+M0SIDoXjU06SOZUj+7d1mpgUpzu5wwcZqPNsD6phxM8yS1ZL1SDj1hUTwyj//5DTQXSLVrqIBLhUYn5fc7gGkZH8ZzG+jUZV/RNGoClXOddxt6OEXFJamq54MVpu/ybnNMkntotTKhe0xSM8dWlsv/F46FxZhieFuUdh8T8fJxXHBnWT/PGENn+B1S9ssCbKXzRAAAAGnpUWHRqcGVnOmNvbG9yc3BhY2UAAHjaMwIAADMAM4k4IzUAAAAkelRYdGpwZWc6c2FtcGxpbmctZmFjdG9yAAB42jOsMNQxhGAAEW8C553+HpkAAAAASUVORK5CYII="> כמו תגא דד' בעירובין דף יג
 ותניא תיובתא
 תנא אם יש בו דף אחד כו'
-<h2>דף ל</h2>
+<h2>דף ל.</h2>
 אבל יתירות לית לן בה
 שמנה פסוקים שבתורה יחיד קורא אותן
 מכאן ואילך כתב יהושע
@@ -357,7 +357,7 @@
 ולימא מר הלכה כמר
 תרומת מעשר של דמאי שחזרה למקומה כו'
 הא איתמר עלה א"ר יוחנן הלכה כר"ש שזורי במסוכן ובתרומת מעשר של דמאי
-<h2>דף לא</h2>
+<h2>דף לא.</h2>
 שידה דתנן בית שמאי אומרים נמדדת בפנים כו'
 אימא ר"ש שזורי אומר יין
 קסבר אין קנין מחייב)
@@ -368,7 +368,7 @@
 שלא יעשנה כזנב
 ועושה פרשיותיה סתומות
 רבי שמעון בן אלעזר אומר ר"מ היה כותבה על הדוכסוסטוס
-<h2>דף לב</h2>
+<h2>דף לב.</h2>
 ועושה ריוח מלמעלה וריוח מלמטה
 והאידנא נהוג עלמא בסתומות
 מנעל לכתחילה איכא בינייהו
@@ -382,7 +382,7 @@
 דאמר רבה בר בר חנה א"ר יוחנן מותר לישב על גבי מטה שס"ת מונח עליה
 כתבה אגרת פסולה מ"ט אתיא כתיבה כתיבה מספר
 סכנה ואין בה מצוה
-<h2>דף לג</h2>
+<h2>דף לג.</h2>
 כתבה על שני דפין פסולה
 תלי דשא ברישא
 הא דעבידא כסיכתא הא דעבידא כאיסתוירא
@@ -392,7 +392,7 @@
 דלית להו תקרה
 איספלידי דבי מר
 אכסדרה ומרפסת חייבין במזוזה
-<h2>דף לד</h2>
+<h2>דף לד.</h2>
 מ"ר כשהוא אומר מזוזות בפרשה שניה שאין ת"ל
 נאמר כאן כתיבה ונאמר להלן כתיבה
 כמה שנאמר להלן כו' פירש בקונטרס כלומר וצריכה ליכתב בדיו בין מזוזה בין גט כמה שנאמר להלן ותימה גדולה פירושו דהא מכשירין גט בסיקרא ובסם גיטין דף יט
@@ -403,7 +403,7 @@
 טט בכתפי שתים
 ושוין שנותן חוט או משיחה בין כל אחת
 והקורא קורא כסדרן
-<h2>דף לה</h2>
+<h2>דף לה.</h2>
 תיתורא דתפילין הלכה למשה מסיני
 מעברתא דתפילין
 דשי"ן של תפילין הלכה למשה מסיני
@@ -418,7 +418,7 @@
 ונוייהן לבר
 אלו תפילין שבראש
 משעת הנחה ועד שעת קשירה
-<h2>דף לו</h2>
+<h2>דף לו.</h2>
 סח בין תפילה לתפילה חוזר ומברך
 לא סח מברך אחת סח מברך שתים
 עבירה היא בידו וחוזר עליה מערכי המלחמה
@@ -432,7 +432,7 @@
 ושמרת את החוקה הזאת למועדה כו'
 יצאו שבתות וימים טובים שהן עצמן קרויין אות
 ידך זו שמאל
-<h2>דף לז</h2>
+<h2>דף לז.</h2>
 רבי יוסי החורם
 יד ימינו איקרי
 מה כתיבה בימין אף קשירה בימין
@@ -444,7 +444,7 @@
 <h2>דף לז:</h2>
 מה להלן במקום הראוי ליטמא בנגע אחד כו'
 האי מאן דחייטיה לגלימיה לא עבד כלום דכמאן דשריה דמי]
-<h2>דף לח</h2>
+<h2>דף לח.</h2>
 מתני' התכלת אינה מעכבת את הלבן
 כתיב הכנף מין הכנף
 ואם הקדים תכלת ללבן יצא
@@ -456,7 +456,7 @@
 אלא לגרדומין וכו'
 כדי לענבם
 כיון דאישתרי חד אישתרו כולהו
-<h2>דף לט</h2>
+<h2>דף לט.</h2>
 קשר העליון
 דאיגרדום איגרדומי
 שירי גרדומיו כל שהוא
@@ -471,7 +471,7 @@
 אף כל צמר ופשתים
 אמר אביי האי תנא דבי רבי ישמעאל
 בגד אין לי אלא בגד צמר
-<h2>דף מ</h2>
+<h2>דף מ.</h2>
 סדין בציצית בית שמאי פוטרין
 והלכה כדברי ב"ה
 אמר רבי אליעזר ברבי צדוק
@@ -486,7 +486,7 @@
 בבל תוסיף קאי מעשה לא הוי
 ממאי דגברא לאוסופי קמיכוין
 תכלת אין בה משום כלאים ואפילו בטלית פטורה
-<h2>דף מא</h2>
+<h2>דף מא.</h2>
 חדא מכלל דחבירתה איתמר
 ענשיתו אעשה
 הכי קאמר ליה טצדקי למפטר נפשך מציצית
@@ -501,7 +501,7 @@
 בית שמאי אומרים ארבע
 בית שמאי אומרים ארבע
 ארבעה בגודל
-<h2>דף מב</h2>
+<h2>דף מב.</h2>
 ואביק להו מיבק
 תמניא בגלימא
 מנין לציצית בעובד כוכבים שהיא פסולה
@@ -517,7 +517,7 @@
 משום שנאמר כליל תכלת
 ואין ניקחים אלא מן המומחה
 תפילין יש להן בדיקה
-<h2>דף מג</h2>
+<h2>דף מג.</h2>
 בן ארבעים
 מאי אין לה בדיקה נמי דקאמר אטעימה
 ור"ש פוטר בנשים
@@ -528,7 +528,7 @@
 ה"ג רקיע דומה לספיר
 חותם של טיט
 שואל מעמך
-<h2>דף מד</h2>
+<h2>דף מד.</h2>
 זיל טפי
 לבית מדרשו של רבי חייא
 טלית שאולה כל ל' יום
@@ -541,7 +541,7 @@
 ודם זבחיך ישפך
 כמשפט כמשפטם
 אלא דר"ח ועצרת דכתיב בחומש הפקודים
-<h2>דף מה</h2>
+<h2>דף מה.</h2>
 אלא פרים דאפי' אהדדי לא מעכבי
 ומנין שמעכבין זה את זה
 מילואים הקריבו בימי עזרא כדרך שהקריבו בימי משה
@@ -558,7 +558,7 @@
 זו היא שיבה זו היא ביאה
 דנין דבר שמתנה לכהן
 דאמר רב הונא קנאו השם ונתנו לכהן
-<h2>דף מו</h2>
+<h2>דף מו.</h2>
 ואיזו היא זיקה שלהן זו שחיטה
 נפרס לחמה
 מששחטה נטמא לחמה הדם יזרק והבשר יאכל וידי נדרו יצא והלחם פסול
@@ -572,7 +572,7 @@
 לפי שאין שורפין קדשים בי"ט
 צורת הקרבתן
 מה ביכורים בפני עצמן
-<h2>דף מז</h2>
+<h2>דף מז.</h2>
 עד שישחוט לשמן ויזרוק דמן לשמן
 ואת האיל יעשה זבח שלמים
 במה יעשה בזביחה
@@ -589,7 +589,7 @@
 והרי פסח אחר חצות
 והרי תודה
 מושך שתים מהן ומניפן
-<h2>דף מח</h2>
+<h2>דף מח.</h2>
 הא דלא כרבי
 כיון דכתיב לפני ה' אפסיל ליה ביוצא
 לעולם כרבי
@@ -603,7 +603,7 @@
 ותנא דבי לוי
 איתיביה אשם בן שנה
 אשם נזיר ואשם מצורע ששחטן שלא לשמן כשרין
-<h2>דף מט</h2>
+<h2>דף מט.</h2>
 עקירה בטעות הויא עקירה
 וקא מפרש בה לשלמים
 מתיב ר' זירא ר' שמעון אומר
@@ -611,7 +611,7 @@
 תלמוד לומר וערך עליה העולה
 <h2>דף מט:</h2>
 אית דגרסי הא איכא צפרא דתלתא בשבתא וחלו שני ימים טובים של ר"ה אחר השבת ופריך וליטעמיך תמניא הוו דהאיכא דפניא דמעלי שבתא וכסבור היה שבאמצע היום היה מדבר ואית דגרסי הא איכא צפרא דחד בשבתא ומונה הב' ימים טובים לפני השבת ובתר הכי נגרוס דפניא דמעלי יומא טבא:
-<h2>דף נ</h2>
+<h2>דף נ.</h2>
 מכל מקום ז' הוו
 דיקא נמי דקתני כדי לשבת
 שאין מחנכין
@@ -623,7 +623,7 @@
 ומחצה אבד
 אפי' פיגול טעון עיבור צורה
 תעשה אפילו בשבת תעשה אפילו בטומאה
-<h2>דף נא</h2>
+<h2>דף נא.</h2>
 הרי היא לך כמנחת תמידין
 אפי לה מאתמול איפסלה בלינה
 תניא כוותיה דרבא
@@ -637,7 +637,7 @@
 יש לו נסכים
 דקא מדחקא לישכה
 חטאת מלמד שמועלין בה
-<h2>דף נב</h2>
+<h2>דף נב.</h2>
 ואין מועלין באפרה
 דקא עבדי למכתן
 גזרו ביה מעילה
@@ -651,7 +651,7 @@
 בודה
 חסרה או יתרה
 מנין לכל המנחות שהן באות מצה כו'
-<h2>דף נג</h2>
+<h2>דף נג.</h2>
 כי קא מבעיא לי לעכב
 אי שיאור דרבי מאיר לר' יהודה מצה מעלייתא
 אלא דרבי מאיר לרבי מאיר מדלקי עליה חמץ הוא
@@ -660,7 +660,7 @@
 בן ידיד
 ולישקול פורתא מיניה
 אין מחמיצין לשתי הלחם וחלות תודה בתפוחים
-<h2>דף נד</h2>
+<h2>דף נד.</h2>
 תפוח שריסקו ונתנו לעיסה וחימצה הרי זו אסורה
 אין לך שקשה לקמיצה יותר ממנחת חוטא
 ומר סבר חריבה מכל דבר
@@ -671,7 +671,7 @@
 כשם שתרומה גדולה ניטלת באומד
 ניטלת באומד
 כך תרומת מעשר ניטלת באומד ובמחשבה
-<h2>דף נה</h2>
+<h2>דף נה.</h2>
 במחשבה
 ולא מוקמינן בתרי תנאי
 כל המנחות נילושות בפושרין
@@ -683,7 +683,7 @@
 או אינו אלא שזה טעון צפון ואין אחר טעון צפון
 תנא אותו קא קשיא ליה
 הואיל ואיתרבי בסמיכה
-<h2>דף נו</h2>
+<h2>דף נו.</h2>
 לרבות שעירי עבודת כוכבים לסמיכה
 לר' שמעון מאי איכא למימר
 אלא שעה מדורות לא ילפינן
@@ -700,7 +700,7 @@
 אמר מום ואמר כל מום
 הניח שאור על גבי עיסה והלך וישב לו ונתחמצה מאליה
 ומעשה שבת כי האי גוונא מי מיחייב כו'
-<h2>דף נז</h2>
+<h2>דף נז.</h2>
 ואם נצלה בו כגרוגרת במקום אחד
 בשנים ושלשה מקומות
 מנחה מנין
@@ -714,7 +714,7 @@
 רבי יאשי' סבר אותם למעוטי מדת יבש מבחוץ
 אין לי אלא מזבח כבש מנין
 כבש מנין
-<h2>דף נח</h2>
+<h2>דף נח.</h2>
 ורבי יוחנן אמר) האי אותם מאי עביד ליה
 מיבעי ליה לכדתניא
 אבל יהא ציבור מביא כו'
@@ -726,7 +726,7 @@
 אין לוקין על לאו שבכללות
 איכא דאמרי חדא מיהא לקי
 ואיכא דאמרי חדא נמי לא לקי
-<h2>דף נט</h2>
+<h2>דף נט.</h2>
 ונתת עליה שמן
 היא להוציא שתי הלחם
 ואימא עליה שמן ולא על מנחת כהנים שמן
@@ -737,7 +737,7 @@
 ותיהוי פך פירוש אמאי פסלה בה מחשבה
 כל שבידו לא הוי דחוי
 כוס היה ממלא מדם התערובות
-<h2>דף ס</h2>
+<h2>דף ס.</h2>
 מי בעינן שימה דומיא דנתינה או לא
 יכול בשני כהנים ת"ל עליה
 רבי שמעון אומר מנחת כהנים ומנחת כהן משיח אין בהן הגשה לפי שאין בהן קמיצה
@@ -747,7 +747,7 @@
 מנחת סוטה שטעונה תנופה אינו דין וכו'
 רבי שמעון אומר את המנחה כו'
 יכול שאני מרבה את שתי הלחם ולחם הפנים
-<h2>דף סא</h2>
+<h2>דף סא.</h2>
 ובאות בגלל עצמן
 ומנחת כהנים ומנחת כהן משיח
 ה"מ מנחה דאיקרי חטאת וחטאת טעונה יסוד כו'
@@ -757,7 +757,7 @@
 מצינו שחילק הכתוב בין קרבן ישראל לקרבן עובדי כוכבים לקרבן נשים בסמיכה
 יכול נחלוק בתנופה
 אין לי אלא בני ישראל גרים ועבדים משוחררים מנין תלמוד לומר המקריב
-<h2>דף סב</h2>
+<h2>דף סב.</h2>
 במילואים
 כדי לעצור רוחות רעות
 <h2>דף סב:</h2>
@@ -765,14 +765,14 @@
 ויהיו זבחי שלמי יחיד טעונין תנופה חיים כו'
 ויהא אשם מצורע טעון תנופה שחוט כו'
 וכן השולח קרבנותיו ממדינת הים כהן מניף על ידו
-<h2>דף סג</h2>
+<h2>דף סג.</h2>
 מספקא להו אי על שם כליין נקראו
 או על שם מעשיהן
 וכשרות אבית פאגי
 <h2>דף סג:</h2>
 מתני' רבי ישמעאל
 מפשיט את הפסח עד החזה
-<h2>דף סד</h2>
+<h2>דף סד.</h2>
 שחט שתי חטאות של ציבור
 ואפי' נתכפר בשניה
 להעלות דגים והעלה דגים ותינוק רבא אמר חייב
@@ -784,7 +784,7 @@
 ועל אותה שעה שנינו מעשה שבא עומר מגגות צריפין
 אמר להו מרדכי
 אסיכרא
-<h2>דף סה</h2>
+<h2>דף סה.</h2>
 בעלי כשפים
 ויודעים בשבעים לשון
 אלין יומיא דלא להתענאה ומקצתהון דלא למספד
@@ -798,7 +798,7 @@
 רגל ותחלת הרגל
 וספרתם לכם שתהא ספירה לכל אחד ואחד
 רבי יהודה בן בתירא אומר אינו צריך
-<h2>דף סו</h2>
+<h2>דף סו.</h2>
 כתוב אחד אומר ששת ימים תאכל מצות
 ואימתי שירצה יביא
 דלית להו פירכא
@@ -809,7 +809,7 @@
 שלא ניתנו מעות אלא לצורך להן
 מירוח העובד כוכבים תנאי היא דתניא תורמין כו'
 רבי יוסי ור"ש אומרים כו'
-<h2>דף סז</h2>
+<h2>דף סז.</h2>
 דכתיב דגנך דגנך יתירא
 חד עריסותיכם ולא עיסת עובד כוכבים וחד עריסותיכם ולא עיסת הקדש
 עובד כוכבים שהפריש פטר חמור
@@ -821,7 +821,7 @@
 יצק) נתן תחילה שמן ולבונתו קודם הסולת יצק לאחר נתינת סולת ובלל שכן דרך כל המנחות שנותן שמן תחילה בכלי ואח"כ נותן סולת וחוזר ויוצק עליה שמן ובולל ועוד יש נתינת שמן שלישית שלא הזכיר בקונטרס דתנן לקמן בפ' אלו מנחות מנחות דף עד:) כל המנחות הנעשות בכלי טעונות שלשה מתנות שמן יציקה ובלילה ומתן שמן בכלי קודם לעשייתן ונראה דכולהו תני להו הכא דנתן שמנו הוא נתינת שמן תחילה בכלי ויצק ובלל היא יציקה ובלילה דלקמן ובין הכא ובין התם הוה ליה למיתני בלילה ברישא דיצק היא יציקה אחרונה דמרבינן כל המנחות ליציקה בר ממנחת מאפה לקמן בפרק אלו מנחות מנחות דף עד:) שכך הוא הסדר תחילה נותן השמן בכלי ונותן הסולת ולש בפושרים ונותן שמן עליו בולל וחוזר ונותן שמן לקיים מצות יציקה וקומץ:
 יצק ובלל
 ובשעת הביעור
-<h2>דף סח</h2>
+<h2>דף סח.</h2>
 קוצרים בית השלחים ושל בית העמקים
 אבל לא גודשין
 והא כתיב עד הביאכם למצוה
@@ -829,7 +829,7 @@
 בשיטת רבי יהודה אמרה
 קסבר חדש בחוצה לארץ דרבנן
 לא אם אמרת קודם לעומר וכו'
-<h2>דף סט</h2>
+<h2>דף סט.</h2>
 והאמר רבא כל דבר שבמדה ושבמשקל ושבמנין אפי' פחות מכדי אונאה חוזר
 שדאי בה כדבעי ואתו סהדי כו'
 פיל שבלע כפיפה מצרית כו'
@@ -840,7 +840,7 @@
 חיטין שירדו בעבים
 דאמר ר' אבהו א"ר יוחנן ילדה שסיבכה בזקנה ובה פירות אפי' הוסיפו מאתים אסור
 בצל ששתלו בכרם כו'
-<h2>דף ע</h2>
+<h2>דף ע.</h2>
 ליטרא בצל שתיקנו וזרעו מתעשר לפי כולו
 חזר ונקבו קאמרת
 ביצי נבלת עוף טהור
@@ -849,7 +849,7 @@
 כדרך שבני אדם מוציאים לזריעה חיטה בקליפת'
 אתיא לחם לחם ממצה
 מאי קודם לעומר
-<h2>דף עא</h2>
+<h2>דף עא.</h2>
 קוצרין בית השלחין
 מרכיבין דקלים כל היום
 וכורכין את שמע
@@ -863,7 +863,7 @@
 אימור דשמעת ליה לרבי יהודה לבהמה לאדם מי שמעת ליה
 לאדם מי שמעת ליה
 במנמר לקליות
-<h2>דף עב</h2>
+<h2>דף עב.</h2>
 סבר לה כוותיה בחדא
 קצירכם ולא קציר מצוה
 כריכות
@@ -878,7 +878,7 @@
 הוקבעו ולא הוקבעו
 חיטין לא קמיבעיא לן
 אם אינו ענין לחרבה של חיטין
-<h2>דף עג</h2>
+<h2>דף עג.</h2>
 תלמוד לומר איש כאחיו
 איש חולק אפילו בעל מום
 והא אפיקתיה לכדר' יוסי ברבי יהודה
@@ -888,7 +888,7 @@
 <h2>דף עג:</h2>
 איש איש לרבות העובדי כוכבים שנודרים נדרים כו'
 אי לרבי יוסי הגלילי אפילו יין נמי
-<h2>דף עד</h2>
+<h2>דף עד.</h2>
 אי דלמטה
 ויש לך דבר שקרב למטה
 ויש לך דבר שקרב לאיבוד
@@ -904,7 +904,7 @@
 קומצו ושיריו נאכלין
 איכא מתנות
 למעוטי מנחת מאפה
-<h2>דף עה</h2>
+<h2>דף עה.</h2>
 מה להלן יציקה ובלילה אף כאן יציקה ובלילה
 שפיר קאמרי ליה רבנן ומאי היא
 ומה חלות שאין טעונות משיחה כו'
@@ -916,7 +916,7 @@
 היה עומד ומקריב מנחות בירושלים
 ליקט מכולן
 אפילו פירורין שאין בהן כזית
-<h2>דף עו</h2>
+<h2>דף עו.</h2>
 רבי יוסי אומר שיפה ובעיטה בבצק
 אתיא חוקה חוקה מלחם הפנים
 דאפרשינהו בלישייהו
@@ -925,13 +925,13 @@
 כל המנחות שריבה במדת עשרונן או שמיעט במדת עשרונן פסולות
 בדקה בגסה בדקה בגסה
 מתני' התודה היתה באה חמש סאין ירושלמיות שהן שש מדבריות
-<h2>דף עז</h2>
+<h2>דף עז.</h2>
 והשקל עשרים גרה
 <h2>דף עז:</h2>
 והקריב ממנו מן המחובר
 ואל יוכיחו בכורים שיש אחריהם תרומה
 מאי מחובר איכא
-<h2>דף עח</h2>
+<h2>דף עח.</h2>
 אמר רב יצחק בר אבדימי תהיינה כתיב
 הימנו ודבר אחר
 אחת להמשחו לחביתים ואחת לחנוכו לעבודת כהן גדול
@@ -941,7 +941,7 @@
 או לאחד מבני חבורה
 פורסה ואין חוטין נמשכין הימנה
 ליקדשו ארבעים מתוך שמוני'
-<h2>דף עט</h2>
+<h2>דף עט.</h2>
 והדר ביה רבה לגביה דרבא
 אין הנסכים מתקדשים אלא בשחיטת הזבח
 <h2>דף עט:</h2>
@@ -950,7 +950,7 @@
 ליפלוג וליתני בדידה
 ומי אית ליה לרבי שמעון לב ב"ד מתנה עליהן
 דאית ליה תקנה ברעייה
-<h2>דף פ</h2>
+<h2>דף פ.</h2>
 מאי קמשמע לן דקסבר רבי יוחנן מתכפר אדם בשבח הקדש
 רועה לרבי היכי משכחת לה
 הפריש שתי חטאות לאחריות מתכפר באחת מהן
@@ -958,7 +958,7 @@
 כולהו חליפין דהדדי נינהו
 וכי מכניסין חולין לעזרה
 אמר ליה לוי לרבי
-<h2>דף פא</h2>
+<h2>דף פא.</h2>
 אם איתא לדחזקיה כו'
 דלמא אם שיירו אינו משוייר
 התורה אמרה טוב אשר לא תדור
@@ -967,7 +967,7 @@
 אמאי כיון דאמר לחמה מן החולין יביא היא ולחמה מן החולין
 טעמא דאמר תודה הא לא אמר תודה לא
 תודה) היא ולחמה מן המעשר יביא יביא לא סגי דלא מייתי
-<h2>דף פב</h2>
+<h2>דף פב.</h2>
 אינו בתורת שלמים
 מוסיף שני חומשים
 הא מני ר' יהודה היא
@@ -979,7 +979,7 @@
 ויקח את המאכלת
 מה מנחה אינה נאכלת אלא לזכרי כהונה
 אף כל אינו נאכל אלא לזכרי כהונה
-<h2>דף פג</h2>
+<h2>דף פג.</h2>
 בקדש הקדשים תאכלנו כל זכר בכהנים יאכל אותו קודש יהיה לימד על זבחי שלמי צבור כו'
 איכא דנפקא ליה מהכא כו'
 מה חטאת מקדשה בבלוע
@@ -995,7 +995,7 @@
 עפריים
 מתני' דלא כי האי תנא
 והא כתיב חדשה
-<h2>דף פד</h2>
+<h2>דף פד.</h2>
 שומרי ספיחים בשביעית
 רחמנא אמר לדורותיכם ואת אמרת תיבטל
 בעינא כרמל וליכא
@@ -1004,7 +1004,7 @@
 שבח ארץ
 ארץ מארץ לא משמע ליה
 כאן בספינה של עץ כאן בספינה של חרס
-<h2>דף פה</h2>
+<h2>דף פה.</h2>
 תנאי היא
 אין מביאין כו'
 מודרמות
@@ -1013,7 +1013,7 @@
 בעי רבא הקדישו מהו שילקה
 הלך לצור
 עוזק
-<h2>דף פו</h2>
+<h2>דף פו.</h2>
 ואם הביא פסול מפני שהוא שרף
 זריק ליה
 שלשה זיתים
@@ -1024,7 +1024,7 @@
 ממנה היה מדליק
 הליסטיון
 מתוק
-<h2>דף פז</h2>
+<h2>דף פז.</h2>
 כרוך ותני
 כשם שהדיבור יפה לבשמים כו'
 שגובהן רחבים גרסינן ולא שגובהן כרחבן כדאשכחן רוחבו מייתי קרא דכתיב כר נרחב ובבראשית רבה אמר דכבשים של תמיד דהיו כל כך גבוהים שאוכלים על גבי ארזים וכשהיו מרכיבין אותן על הגמלים רגלי הכבשים נגררין לארץ:
@@ -1035,7 +1035,7 @@
 במה מחלקה לחלות
 מהו שיקדש קמצים בגודש שלו
 שנתות היו בהין
-<h2>דף פח</h2>
+<h2>דף פח.</h2>
 אף לדבריכם חצי לוג ולוג] לא יעשה שרביעית היתה שם
 בירוצי מדות נתקדשו
 ומאן דאמר מלמעלה למטה קסבר מלאים שלא יחסר ולא יותיר
@@ -1046,7 +1046,7 @@
 נר ישראל כך היה
 נר של מקדש של פרקים הוה
 מכלל דאי בעי לאוזוזי מצי מזיז לה
-<h2>דף פט</h2>
+<h2>דף פט.</h2>
 וליעבד זהב כל דהו
 חד ריבוי הוא
 חצי לוג לכל נר ונר
@@ -1059,7 +1059,7 @@
 והא מדקתני סיפא בללן אלו בפני עצמן כו'
 שאם אי אתה אומר כן פסלתו
 תמיד של שחר טעון שני גזירין
-<h2>דף צ</h2>
+<h2>דף צ.</h2>
 כיצד יעשה
 שאפילו הוא על השולחן ימים רבים] אין בכך כלום
 בירוצי מדות
@@ -1072,7 +1072,7 @@
 או במועדיכם
 בן בקר בכלל היה
 מה בן בקר מיוחד בא בנדר או בנדבה
-<h2>דף צא</h2>
+<h2>דף צא.</h2>
 הואיל וכתיב ומן הצאן כמאן דכתיב יחדו
 וכל הזבחים שנזבחו שלא לשמן
 <h2>דף צא:</h2>
@@ -1083,7 +1083,7 @@
 חמור מן העיקר
 דמייתי ומתני
 תלמוד לומר לשור האחד
-<h2>דף צב</h2>
+<h2>דף צב.</h2>
 וכפר את מקדש הקודש זה לפני ולפנים אהל מועד זה היכל מזבח כמשמעו
 הושוו כולן לכפרה אחת שמתכפרין בשעיר המשתלח
 ואין שעירי עבודת כוכבים טעונין סמיכה
@@ -1092,7 +1092,7 @@
 גירסא בעלמא
 איכא למיפרך
 שכן טעונין נסכים ותנופת חזה ושוק
-<h2>דף צג</h2>
+<h2>דף צג.</h2>
 קראי למה לי
 תחלת הקדש מסוף הקדש
 קרבנו ולא קרבן עובד כוכבים
@@ -1108,7 +1108,7 @@
 ידו ולא יד אשתו
 כאילו לא כיפר וכיפר
 ולא ידו על הצואר
-<h2>דף צד</h2>
+<h2>דף צד.</h2>
 סמיכה שלא נתרבתה בשחוטין
 קא הויא חציצה
 בזמן שכהן גדול רוצה להקטיר
@@ -1120,7 +1120,7 @@
 כמין תיבה פרוצה<img src="data:image/png;base64,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"> הם החידודין שבראשו ושבסופו של אורך השולחן ולצד רוחבן שהיו דופני הלחם מאריכין ומרחיבין בענין זה שכופפין לצד ראשו ולכך מפרש לקמן דסניפין עגיל להו מיעגל אבל גובה הלחם מאמצעית לא היה הולך ומגביה בשיפוע מכאן ומכאן עד שהיה הולך ומרחיב עד ה' טפחים והם השוליים הממלאים רחבו של שולחן ואחד כופל מכאן ומכאן כמו דופן זקוף לר' יהודה טפחיים ומחצה ולר' מאיר טפחיים כזה <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAABoCAIAAADUyIFcAAAACXBIWXMAAA50AAAOdAFrJLPWAAAACXZwQWcAAABMAAAAaADAbJaxAAAV40lEQVR42r1cCVxN2R+/70lNQwzKUlRIlkQpjaVkK2HsxJAhTFOGGdsQfzshYwuNKWMvazNCDKZkkrQRoRLtKWmlUunde//nvvPefXd/97XM+TTPffede875/c5v+f5+53cHwbgaztXgfXYf8j75FWM/iHL8yp4LE2zMWcibMlRxjeHUnmRnRGA41RdU+S+KMtanmlX5SV13TXEGVleJU0Ygu4Kh1Mwr8lfFeuAU1IWprhGBnRTDSM7dx6qK232BIIi0lQ5i07tLRX6KYh2qHZMxZEFtY3RjCJGKZUoeUkdGGA9wiiUnqVw3UfLXVtqIBJBJ/IdcPnlYNT6GCygFpmFjyBTgHSEiVXmeCyafOLYbq/8I7yPs/WFeCOohtSeKqzpY9zBq1YKgsIUU+etMAJuPbJERo5Psx+EeUsd3dbYD85oZtrsQcIimk2J4yScw5A1FH/n90TZWraUIoNPUoG1sxJ2GyaSwOWRoENk8vnWZPGrotLEj1i9bItrwUOgh2ca1qzh187vrt0KU7fxxf4Xl4Rd4kSzgXBicnVib/Pp6sP+Vk7/NHDdqhLUF/AkRFHFuE8/gIlurgVEnKQRquWapO7wt51FDdE/Af5BNPjjQSfz0kR1gJ23Ne05wGKzSSepjqLw1wIlR+6OyWiWJUvCf1wJXGo9QrMGNujYeS4EOtzQFk9oP7Bt07KBCXIUJEEMkadmgOyaarI7cyJ4d2wAi4W0Upylw4xvNRSvvWJvpA+YumjUp58UTaPARPjLYWs7pvlmyTQyK1n4E5OlpI1/pIFbm3aaNc+AzGOKtDqMD1TqQ2wvHtx9oAnRk/lSX+zcu03aS0zqLlFI2RqsvzQYOUlcL6WNs4DTcepyDLR8A5NRzDRWVZg7Kc58B/g6zNBvcx2TqWDvo/xA+08I5H42XOANYUbpVlUBZdRlhCz4NWkkqCtIFHLLIneS0z9TFb1g+H0znv3vD57Lcn91dc1PioUFCSDgqchv5JI3BoMibl7roSRBKu3/7SoOdh8ACyK++G5eBWSY4WIac9Au/fvFpTLgSS+McsE6ksWHsJBuRxtwJpdBImNnCrGQS5TeZ1ZFfRN+6ZNXDoHeX1uDTqC2SmxJL/RVRiyoYFpxjn5W2G8WZQ72IvwdALAR3Q216OTlYlRemN5hCNpCEtjX0rD9g4iTHQVfP+W9b7bFyyUycEhKpsCsfqmDYVQYLGLiRk1/Xgo9BSNDHtAP4d7BFj/jo20yeEh5FJueRjNc9ohT9p8jqcvdpUFTaaSM3ggPZiyF0klsU6d4C528qAEDRbcad3LREhN5ePLnPpyMKOlmiRKB/ZeQNIwG0rmzHBi8H6+7aUqT9F8gRH2/qINRnEU5bwgedhOnk+Zn4eBRxjUGnx5LZ9C4cA1JxP6SQXFJBZkILQs2Rq+eOJESEAonFWIuhBc2c0FRkNkRUk3fMfBlDtUP9zDr/+89VXFbK9QCnwVclF+ZNH0VgqU46hJcaZonVlPPEDJgKDPDpN8PM8DkA4cCH2j6VpUL2gzZ/lsvyxd9OdrGvKc/n2E2K3GL0DfdwmwpH0GmBGLXTyU6NpTKFkS7gRjy46CwTJ3Lg3m1Mlfv5XJHqOnEookwagLZpxQ915Xk4popRWEKg0MUPBdlf6SDUZ2vLs3nkC2UmssRIo1przofpubiG/rhoBrlUsCHjHW3KC1JJu0LpjJKkvoyNlFDAxZABZrmv4qlmRgCcIhoFHJyehoqVedSYw1bv2riCaod++G5KbGQoQ2wVqojjsyaOgt2A1zUzbGPUrmVR1ktVaobtt+nWC+GLLcSmWyheizoUQ+QwLh7npScY6CmI7Nezg7ND/2exd0gPQQrCvGlOVHY8iQoT2Am24qiC5kbiLDbW4ZR/hX+DWVLCKqDvM59+pUssvVs7hSxCOkl19P5pESHYSkk9cXQHw/aKSZ0iTRK8qt1MZraazu/rF/y7dSRyezMmDB8yoEfAwV01pTlv05IcbPqCm07DB4LPBa5OH4vSSMwsYCzY8BhpZDQgngV8VkG+seg4x/6G7RSmqKWWtHMbLXvbvtOdh5EuB+fCQCKzJM1CJDWZwPY0fC6nqjidqntzpzp7uc04tn8nMDZ8sa7IiJQ7M8A+89BIb4UhEbckyy8M2xEbt3frukF9jElqH0XcgBqqYJkqysM5c4UcRIo/1RKGr2qBAR/co7bXyQ/I4BM2rRYSuY7VQwDEjhx4EQilIY2lENOEKhHoF8A0QFvHNhLr3kYTRtrWluUKT8QX69OIZOtPQ7A4ygTHrx5HPHlwDf2QQ98wFK+vxWV1wsN+N8v53s2gm1dOXTx1AMdwttfVNEKg6rRYQMfpphgrGO9gSQK37ga6hnpafbvqd2mrDYXQzXWC++yJ013sbS26Ag+xZ+OK2HthYA8XznaxH9wDIATwN6R/1wG99EHnc4G+oRd+A3/ASf66Y0XYlT9Az9yU2MQHYaEXjx/a879JY4b2Mmrfz7ST/pcSM8N2APc/iw4LDtz5Nj0WLgkhoZPQNsoVAcU4cDBfztbfdz0jgLTqYWJpagiv+xgbrPL8znfL6rHDrAB27WPc3vWbkR7zv4FcAb7EoudX0eGX1v/kBm4MtyEy4qb6WoByyDUne8uflswBiNfZfpDTcOvpLo5rlrov+XYGVOaFrpMunThooi/9ZtRAoSgEY30lXTD1mJFjw5Ud8tPi5elzvSljvoaETR41ZO4kFUDz37OlID3xyhn/CSPtbPp2GzWkr50lYVFHDDYDn8YGWrdDjxNSYIi0lR8d7dz0Y8i5w1Zm+oDQfsbtAdb9dqrjnG9GAu5sWOHxV1Cg75ZfTAxaj3e0K8l9BRZwNejwKg9XuE5mFCL7WKAujECFIxV4nfPy0YAe+t7L3J5G3/pckhUc8KvX/Ckhpw9dC/Z/FH4Zr3lPCgKG1teX5xDaW1tR/T6tJCcJ/NWUpNV/zMNqShWxVvU7cpby/OTMZ/++e5NYX571uSwT3qx8l/L2VVxcxNXi/BfwTm3JG7SykBZqKReLFqY/Y+0mypBMnAW42Xx58zQKsN+mdxdZRS4mkAEEbBVM4ZJnRCS+IXNJKvlCma6ypjhjpsswwF/6qVZ1yakju0NOH53uZL/I1WX7+qVbVy/+/tvxLvb93Wc43//7PC6rhlynHrAIGDRSSrNfxKhMN9fBMPcZNitS4+KRjAGYSQyTEn8XTH3jQgA8glIQ+c1IKwnC3SSqQFyRQV3s6rxx2fypY20tTNoiEmbvpKjrzx/e7tqmBTCqg8wN13i6KcSSC3aCC/gnX7FMFamguEDoJJzpB1+LMhOBEdr9vx/hd4W42lubyCMaxNa8m3WvLuBavzVi1vkLRMMGYiJ9PWTGuK/BTr7PTK4sfO2/eyNeVyN8ZCY+TMcFJZ88EUx6cBMsZtxwS5w88AE/u9gPAOv7efFsRdmNssWGh4z9ujcgXu8LKdi3uPCQO3+eOOCzxn3mmIUzx25atXCVxxwg0tQ0XM9Our94zbv4xyEg25/Lcv12eGN8eLVBwJgvoKVWERWkE7Y9YN9Gmk7CTQNEqvX+9MyCjFsjK/MObF/r4mg1xKoXjCH4AiKNozZ18bpiOFnN7/s2A4uNUYl0sO5u3F7brHPrspw0MopXVsbw5mm4wxw5S2//FUSqNNeZJN74Ogm+p4hpPlc9f3QHhWaSJPKE346hliYAfNCcBKrGH5K8YJcg+e/f3lILMenU2tSwNacnUGs/+Lad+SxKrY2TQQNbXfQa7KQ86YyqiCT1CpfVMx0gS+fZSWe20f8zOHDkEEuAQoL+8BMo9xJJiVqLRAodVM4XCeELpztVF2XQdtK2T2d4yi8yPlIiXpSv28yJo4ElW7/SI8BvFx/i5zsa1LzJKP6JmCI4wBeQczvkNE0ntVooFOjANu+omyHLv5+z0stty7plJ/z33Lt16eXj+3mvnxRkJanoxJgYiO67ZRY9uui3ko4ZZt1VX1f28Z2AUW1AaC5wZArb6aO7ADXOw/pRzkLQOrq3k6pwAOsm2J/OBtpjR1jNm+Xk4T55/erv9+3yXv7D7FMBvm9SYj4BEAecECZzmzUx6k7ouFGDwSDht0MaE0arjf7YT8Xc/Yua/oJE1vc1bi3C1UuFYADleoyD9Zc6SOilU+YmBgS8+vMMDQZjuPgDGLW1xZyPpMbdg+l2GkAvzkqaPdEReBE2JRKJRCzNEu4+n6vecYZjnOdQGiEEtqmHT928EAgWM2WUrXInaTXFMqy6DKsqLi9Mz0iJeRR5PTr8anryw4Lsp8V5Ke/znhPrA9IoB+tgWyqLMzNexibHR3yuzDt2aPPzxHDwiJODVcj5QJIFK5e7s4umOMWPk0JS5dgnLgyDT1VOgMPA1FvXeCiIhFCYjFzEiBNlAl7rOn+a08K5k8FMaU8fUGsoKXYL5/O9GqU8OXG8z3ovkw4t60ozIEUI40yPES6w3S6zRolbl9DVXvO3ey8D+5kSf49xREuJDFHO8gvxha98v2Y8+9eso25CRCgt/cFdu8Iq3OELdhgbAwJloMnQLb1JjqGAXiUwEcx8N6Tcnv5r0ZtEYEkA6KEVEFLjaypQVfIYZ9UlMQ/wqNsIgizS8jxPuEeTc5S7YlbTKnu+o1F4fe7YbsBlP591HKWgmlZo039CKZFOImlugeniLQyiSzvvuDhvPIDznKaBeJDIfXkv5SiMaHxcBwcBEQC5k8/iwjW1K3wqKBLryu1+IWHYFyuzdWpPdTTFWVTAAbYyNSmKD7WqLcRkha887oddcFtZpNNCumfjMuZJc0MKdHgqL37xmgchhFSiEFdN8Q0zQBW1NpXtjP7nMpg94upZXiLV5mPUtv1bVpHgx3fbGqETuwYVQwmcDsIBxwwxB1Pnp8VjDMPTeCLJzsEBvyoxnfTw3k1qcbZGUzCBEcaBXgL2bwKactJ/F+yAiD8PE98ibwRDHNtGB3mo9MjCJ8RN1eBo14L9wezb13oyrav4M1YBRAbvXD13DMoqiEXeZT+n1iswIBQNOfO8bqKuobQyNflTPhs8wexh5wMUBYTCyiDyXSJGu3TiIOlC8tOfMBLewpZZoJ5YmL9UD7JpxQIgSUCghN4mEK4S5KRTploGWpz1jCTy7vVgTd+dUeuimKvFmMK/ysMVELntlx/UEylGZlidFYR26wBL/ZDAo7vEZ8pFlr/zvGihkhQH6+5g6j8ObWUSqZEmqFsjatdPUb5x/qRfk7xyJxArk6EceYgKzV51yWvId4TvHTO+knR+KVKVHCRE3oAUGuppxUVcE/+GQiNfnyBXuGH1YjD7yaN7oEHifRNWbWZJQJdWLiYC8466SO8uX2U+fSQ+MdWgN3ww6pk//HrhhB/YzJ885wohHo1cCFvaPedOgefnNubdaovzBN6XEaN+AkcSfCM/igyTSJHvF81gVmSJKbQWZRUxfMvKJQTckSCWpp1kH4twde9Jc1bMilFIxrEKGRFfPutvbqp/6Zw/Tn1JlDNnQx0Z430BFmPX1oQG/U7m7j7kvxa5D5zBodqQiJ2MQWsKbfubdNCTJMVF4LQX0uo/pjwOP/vHPt8dq4/7+1QUptRXZMoq8ynHlahgiov2W2jQb9rKfOXzuEgx9kYj96imyarh1DevnoHBiRzW1ZR20BNKG08eZX35zKG0xPCU+Lsn/LZt++X7s7/tevD3haDje48f3ALuBPhu2Lx28fHD2wAy/nHBjDWeblOchsOtjL1/UzjN0USAGaWyGiZEVyx1UxGZlxajNmsO40PFkYmabLo09Fxg5rO47p30Wmkjr5/HijRjwscbGp0sGHf+kqg9sequOvDJTI6irrGlFjJzoj01cU69NmpL/CES3poBnRbIo4hraU+iAejpY2qQ8+pJIwsLG7DDwwb1khe3OSuPCZTVU4q3qB4/oAh3DXP6mlKFSNTX4rVl2KfiT+/TgSAAXQ8N9ju0c82jf67cv3X5pyVzSC7E3LvRJNWTGrEATr15rZcqaE6Lj4B37azMGlAHytYNeVpZ0Yh3lZqOSDHCDH61texmYWZYlPdchV0P7fSGFv/A7i3CZGD8FpZ6LL3cfQZJZMLDO5howoTJE2lp0bqKaePtl/8wD1cWPBBELnKdAKUrLiqcs8iMd9s4ox4ct+jZkfSTkf+ENpWgihSrYvm72131dUsK0lREbl27FHL9yIE9Amc4jJyKQJCprKwm7FCgHCU3U+PUz+xUhbN4mfxAReT+LWtI6Tq8d3dKUhxWXaKeWp7JwsMuUH3M74d34uIqxRt2uk67IyPWXJCRKJEQvg7upMKFjBtuyfZ+Bq0kJh1amhu2njBiwLKF06eMsTFqKxltZw46e7pN/n3fZvC3YsnMmS7Dpo6181wwebqz3dzpjr2M28BBlF5HGnr5pEixbKpCdlllLiShvPCNisjIsNP0k2KpRgfp8EmJvMFvJvpt9m/fDJ9KfxbfTIk5vlZbnj1xjJ1B2xbwfzqkzAzUlU4YTWymrjbNx+tqEe/9gZWDz/a6YG+R+2HnJzkOgszwmjfZz2fd1xbdGPR2+lJKhQqJD+5RuC4T8+JIQ3dS4VreZT1ZNHeKRa9OKhuB8byYKTQuWk+32TKAB4gCzIyk9MfRn4pyqDTf/vMSlUhc3MuWDSMVft67GTR0YM8uHXQwFL62gCINLjJhcESRq5N/tTTtTBIZFHCEK0eKNQl8Y4wMnz/y61o4dWVFDne2rknaMEszksjdm9fh/23b7L0ITv2h6E0zErlj7XKSyJ895v83tJFisMx9Epwa+1TUXEQCqbt6zp8MSvZuX9eEI/NLuArQWvRsw3gbEWnCFZDXwH+SREb+HdK0HFQbKSicnqQZiKS2WeOHkuL68nHUfySuyn3uZ6I70LwTiNfRD2+5rWuTNJ/1XiSRaU8f/mfYFZK07uc5d0PO+G5ZTXZoFiJP+G0jiTzgs7GZt5CJsW9dCVj/48I5E0c3r7iGXQwkiTz6685mVUh2wVRmclRvo7ZmndrgaG2zEKkoo7lyksS0M8ePexwdWVaY9eF99ofiDBAZZL+Ke5FwNzUhIjM5ujTj6efSfGDr0apSaPE1QGAAJNYRpYxo1duK/BeVbxXRY3FWkoN1r3lTxjSXuML1LHefJQrWc6H/AT06Dh/YHd4HxkNxOkbPm/UwaG2kp8UewagtsnHFov7G7cC1thQh19QMfhLHx9vbcJa/8pfOCgU3/PziKc1VTgIxNtrURCpswM61hHX934qlajdQikjU0qkRU0bb9ZnoaH3qyO67f53GlaVMSNMKKrtVl2YDJcxOj895nRD7IPTC2YOnfveJuBWU+PDGq6eRMZF/Xjx1YJ/PavAJbsb/G/r6RRSIld5lPwa/3ggJ3L9t5SqvOTu9Pc8H7k1NiKwqSsVry/DaCll5VlVhaklWEl77Qd2SmtBPYuqziY2IM1CBnJ3aYZtYXKlVySJIQptBgtDmJlJUslSg4py+SrSBOoIy+/wfODLHI5y6B5sAAAAaelRYdGpwZWc6Y29sb3JzcGFjZQAAeNozAgAAMwAziTgjNQAAACR6VFh0anBlZzpzYW1wbGluZy1mYWN0b3IAAHjaM6ww1DGEYAARbwLnnf4emQAAAABJRU5ErkJggg=="> אבל מה שפי' בקונטרס ושני ראשיה חדין והולכין וגבוהין למעלה ואין נוגעין במים אם רוצה לומר כעין ספינות שלנו שראשו וסופו משופע והולך ואינו נוגע במים נמצא דכי מסדר ליה ללחם על השולחן לא יתיב לחם אקנים המונחים בראש הלחם שתחתיו ובסופו דלא יתיב אלא אקנה אמצעי בלחודיה ויש מפרשים דהיינו הא דפריך אלא למאן דאמר כמין ספינה רוקדת קנים היכי הוו יתבי כלומר היאך היה יושב הלחם על הקנים פירוש היכי הוו יתבי קנים כמשפטו שישב הלחם עליהם ומשני מורשא עביד להו שהיה מדביק בצק בשולי הלחם מתחתיו בחודו שלמטה כדי שישען על הקנים ואין הלשון משמע כן כלל לפיכך נראה שהלחם בראשו ובסופו שכלפי אורך השולחן אין הולך ומשפע כלל אלא זקוף וא"ת למאן דאמר כמין ספינה רוקדת היכי מיפרשא מתני' דלחם הפנים ארכו עשרה ורוחבו חמשה וקופל לר' יהודה טפחיים ומחצה מכאן וטפחיים ומחצה מכאן ולרבי מאיר טפחיים דכיון דלמטה כלה והולך עד כאצבע היכי תנן נמצא ארכו ממלא רחבו של שולחן הא חסר ליה מה ששוליו הולכין וגבוהין מאמצעיתו מכאן ומכאן דכי פשטת ליה קממלא ליה ותו לא וכי משפעת ליה חסר ליה פורתא ושמא ההוא פורתא לא חשיב ועוד קשה הא דאמר רבי יוחנן לקמן מנחות ד' צו
 דסמכי
 תלח
-<h2>דף צה</h2>
+<h2>דף צה.</h2>
 כמין כוורת היה לה בתנור
 מר אמר במסודר ומר אמר במסולק ולא פליגי מסקנא דשמעתא דלא אמרינן אע"פ שנסע אהל מועד הוא והא דמסיק ליה בפ' בתרא דזבחים דף קטז:) היינו לענין קדשים קלים דנאכלין בכל מחנה ישראל ולא בעו אהל מועד ומיהו ק' דבפרק קדשי קדשים זבחים דף סא:) מסיק ליה גבי קדשי קדשים דמפרש בשני מקומות קדשים נאכלים קודם שיעמידו הלוים את המשכן ולאחר שיפרקו הלוים המשכן ולא מיפסלי ביוצא משום דאע"פ שנסע אהל מועד הוא ויש לומר דהתם מיירי קודם) שנפרס אהל מועד והמזבח וקלעי החצר עומדים במקומן וא"ת וכיון שנסתלק המזבח היכי מתאכלן הא"ר אלעזר התם מזבח שנפגם אין אוכלין בגינו שירי מנחה ור' ישמעאל ברבי יוסי נמי קאמר כל הקדשים שנשחטו שם פסולין ואפילו קדשים קלים והתם מדמי סילוק מסעות לנפגם מזבח וי"ל דאתיא כתנא דפליג אר' ישמעאל בר' יוסי ובקונטרס פי' התם דשני מקומות לאו לאחר שנסעו ונסתלק המזבח קאמר אלא חד מינייהו כדאיתא בעוד שהמשכן נטוי כמשפטו וחד לאחר שפרקוהו קרשיו ויריעותיו ועדיין המזבח במקומו וקודם שיעמידו לוים המשכן דנקט לאו דווקא נקט חדא דלא משכחת לה שיהא המזבח מונח קודם העמדת המשכן שהרי קודם שיחנו בני קהת נושאי המזבחות היו חונין בני גרשון ובני מררי נושאי המשכן ומקימין אותו אבל בנסיעתן שהיו מורידין המשכן תחלה ונושאין בני גרשון ובני מררי אחר דגל ראשון ובני קהת אחר דגל שני כדי שיהו קודמין בני גרשון בחנייתן ומעמידין את המשכן לפני בא בני קהת כדכתיב אחר מסע בני יהודה במדבר י) והורד המשכן ואחר שני דגלים כתיב שם) ונסעו הקהתים נושאי המקדש דהיינו ארון ומזבחות וכלי שרת והקימו בני גרשון המשכן עד בואם של בני קהת ועוד אי בששינו את הסדר מוקמת לה היכי שחטו קרבנם קודם שיעמידו המשכן הא אמרן באיזהו מקומן זבחים דף נה:) שלמים ששחטן קודם שיעמידו הלוים את המשכן פסולין ואי גרסינן לה מיתוקמא בששינו את הסדר וההיא דאיזהו מקומן שלמים דווקא קאמר ומשום דכתיב בהו ושחטו פתח אהל מועד ולא יליף שאר קדשים מינייהו עכ"ל והא דתנן גבי תמיד דף ל:) לא היה השוחט שוחט עד שישמע קול שער גדול שנפתח למצוה בעלמא וא"ת ולעיל אמאי איצטריך לשנויי ההוא לדגלים הוא דאתא לימא לקדשים קלים הוא דאתא כדמוכח בפרק בתרא דזבחים דף קטז:) וי"ל דא"כ לא הוה ליה למתלייה באהל מועד ואם תאמר ולוקמה בקדשי קדשים וכגון שהמזבח והקלעים במקומן וי"ל דמשמע ליה ונסע אהל מועד שנסתלק הכל אפילו המזבח:
 שמע מינה יש סילוק מסעות בלילה 
@@ -1131,7 +1131,7 @@
 ומאי קושיא דילמא עשרון לא מקדש תנור מקדש
 אלא דרב אשי ברותא היא
 דרך חולין אפיתו להו אף כי היום יקדש בכלי איפסיל ליה בלינה
-<h2>דף צו</h2>
+<h2>דף צו.</h2>
 כלל א"ר עקיבא כו'
 כל הכלים שהיו במקדש אורכן לאורכו של בית
 שאלו את רבי זו מנין
@@ -1143,7 +1143,7 @@
 כלי עץ העשוי לנחת הוא
 סילוקו כסידורו
 כאן בציפוי שאינו עומד
-<h2>דף צז</h2>
+<h2>דף צז.</h2>
 כלי אכסלגוס
 שאני שולחן דרחמנא קרייה עץ
 המזבח עץ שלש אמות
@@ -1157,7 +1157,7 @@
 וגבולה אל שפתה סביב זרת האחד זרת חצי האמה וכשתמדוד מאמצע הקרן זרת סביב עד השפה אישתכח דהוי אמה:
 ותנן חוט של סיקרא כו'
 אל חיק האמה בגובהה
-<h2>דף צח</h2>
+<h2>דף צח.</h2>
 שלא יבואו לידי מעילה
 חדא לכספא ודהבא
 אחת של ארבע ואחת של שמונה
@@ -1168,7 +1168,7 @@
 מדכתיב בנר מערבי לפני ה'
 שאמצעי משובח
 תרי דרי הוו
-<h2>דף צט</h2>
+<h2>דף צט.</h2>
 כמה משוך מן הכותל שתי אמות ומחצה
 מלמד שהלוחות ושברי לוחות מונחין בארון
 <h2>דף צט:</h2>
@@ -1176,7 +1176,7 @@
 אחד של כסף
 מהו ללמוד חכמת יונית
 לא יהו עליך חובה
-<h2>דף ק</h2>
+<h2>דף ק.</h2>
 ששונאין את הבבליים
 אמר להם הממונה
 מתתיא בן שמואל אומר אם) האיר פני המזרח
@@ -1189,7 +1189,7 @@
 מתני' המנחות והנסכים שנטמאו
 העופות
 וכלי שרת
-<h2>דף קא</h2>
+<h2>דף קא.</h2>
 אע"ג דנטמאו כטהורים דמו
 פיגל במנחה לרבי שמעון אינו מטמא טומאת אוכלין
 <h2>דף קא:</h2>
@@ -1200,7 +1200,7 @@
 פיגל במנחה מטמא טומאת אוכלין
 ההיא דפרה מטמאה טומאת אוכלין
 והא לן לפני זריקה דמצוה למיזרקיה
-<h2>דף קב</h2>
+<h2>דף קב.</h2>
 דקומץ מנחה כשחיטה דמי
 אמר רב אשי אמריתה לשמעתא קמיה דרב כהנא גרסינן
 דאי בעי זריק לא אמר
@@ -1208,7 +1208,7 @@
 <h2>דף קב:</h2>
 כי קאמרינן דרבנן
 כשתי מנחות שנתערבו
-<h2>דף קג</h2>
+<h2>דף קג.</h2>
 הא מני בית שמאי היא דאמרי תפוס לשון ראשון דתנן כו'
 הריני נזיר מן הגרוגרות
 <h2>דף קג:</h2>
@@ -1218,7 +1218,7 @@
 אי הכי רבי שמעון פוטר כו'
 והא תנן לא בלל כשר
 מעשה בפרדה אחת של בית רבי
-<h2>דף קד</h2>
+<h2>דף קד.</h2>
 מוריינא דבי נשיאה
 הואיל ויכול לקרוש ולעמוד על כזית
 אין מתנדבין לוג שנים וחמשה
@@ -1230,7 +1230,7 @@
 חמשה מיני טיגון
 מתני' הרי עלי מנחה יביא איזו שירצה
 מנחה מין המנחה
-<h2>דף קה</h2>
+<h2>דף קה.</h2>
 סימנא בעלמא
 למחרת מביא אשמו ולוגו
 <h2>דף קה:</h2>
@@ -1239,7 +1239,7 @@
 ותנופת חזה ושוק
 ונאכל ליום ולילה
 שמעינן ליה לרבי שמעון דאמר אם הביא עשרון אחד משני עשרונות ולוג אחד משני לוגין יצא
-<h2>דף קו</h2>
+<h2>דף קו.</h2>
 כרבי שמעון בן יהודה
 שהן אלף ושמונה מאות ושלשים
 במותר להכניס חולין לעזרה קמיפלגי
@@ -1251,7 +1251,7 @@
 לא יפחות מן הקומץ
 המעלה את הקומץ בחוץ חייב
 והא איכא עולה וא"ת והא איכא שמן למ"ד בפרק כל התדיר זבחים צא:) דכליל וי"ל כיון דאיכא שמן דאכלי כהנים לא פסיקא ליה ועוד קשיא והא איכא עצים דאפי' לרבי דאמר טעון קמיצה הכל קרב כמפורש בהקומץ רבה לעיל מנחות כ:):
-<h2>דף קז</h2>
+<h2>דף קז.</h2>
 ודילמא נסכא
 שמוחטין בה את הפתילות לאו של מנורה דמלקחיים אית להן אלא של] שאר נרות שהיו במקדש כדתנן בתמיד דף ל) ובפ"ק דסנהדרין דף יד:) דאמרי' אפי' צינורא קטנה של הקדש צריכה עשרה בני אדם לפדותה לא כמו שפי' שם בקונטרס שטווין בה זהב אלא כי הכא שמוחטין בה את הפתילות אשכחן צינורא כדתנן כלים פ"ט מ"ו) כוש שבלע את הצינורא:
 כליה עורב
@@ -1265,14 +1265,14 @@
 שחור והביא לבן
 שיהא שלום זה עם זה
 ורבי היא דאמר קטן והביא גדול לא יצא
-<h2>דף קח</h2>
+<h2>דף קח.</h2>
 והמעה
 ושמואל מאי טעמא לא אמר כרבי אושעיא
 היא קרויה חטאת
 ומדאינה קרויה חטאת ירקבו
 <h2>דף קח:</h2>
 לפי שאין בילה
-<h2>דף קט</h2>
+<h2>דף קט.</h2>
 אפילו תימא עלייה דגריעה יד בעל השטר על התחתונה
 שאקריבנה בבית חוניו
 לא ישמשו במקדש בירושלים
@@ -1282,6 +1282,6 @@
 חוניו בני ישמש תחתי
 והעלה עליו עולה לשם שמים
 בתחילה כל האומר עולה או] מנחה
-<h2>דף קי</h2>
+<h2>דף קי.</h2>
 הלומד תורה בטהרה נושא אשה ואחר כך לומד תורה
 ומיכאל שר הגדול עומד ומקריב עליו קרבן

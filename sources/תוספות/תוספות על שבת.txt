@@ -1,6 +1,6 @@
 <h1>תוספות על שבת</h1>
 תוספות
-<h2>דף ב</h2>
+<h2>דף ב.</h2>
 מתני' יציאות השבת שתים שהן ארבע 
 יציאות 
 שתים שהן ארבע בפנים 
@@ -17,7 +17,7 @@
 מי לא עסקינן דקא מעייל מרה"ר לרה"י 
 וקמפרש הכנסה לאלתר 
 רשויות קתני 
-<h2>דף ג</h2>
+<h2>דף ג.</h2>
 בבא דרישא פטור ומותר 
 בר מהני תלת 
 הצד נחש 
@@ -36,7 +36,7 @@
 התירו לו לרדותה 
 ואיבעית אימא לעולם לא תפשוט 
 בשוגג לא קנסוה 
-<h2>דף ד</h2>
+<h2>דף ד.</h2>
 כאן לחצר אחרת 
 ומאי שנא 
 ואלא דאהדר ואידכר מי מחייב 
@@ -52,7 +52,7 @@
 אלא א"ר יוסף כו' 
 זרק ונח ע"ג זיז כל שהוא ר' מחייב 
 באילן העומד ברה"י ונופו נוטה לרשות הרבים 
-<h2>דף ה</h2>
+<h2>דף ה.</h2>
 לא מחייב ר' אלא ברשות היחיד מקורה 
 אמאי חייב מרה"י לרה"י קא מפיק 
 כאן למטה מי' 
@@ -66,7 +66,7 @@
 אגוז ע"ג מים לאו היינו הנחתו 
 רבי יוחנן בן נורי אמר שניהם כו' 
 בשלמא לבן עזאי מהלך כעומד דמי 
-<h2>דף ו</h2>
+<h2>דף ו.</h2>
 מידי דהוה אמעביר חפץ בר"ה 
 התם כל היכא דמנח ליה מקום חיוב הוא 
 מידי דהוה אצדי ר"ה 
@@ -81,7 +81,7 @@
 בשוגג חייב חטאת פשיטא 
 הא קמ"ל כרב כו' 
 ואמר רבי יוחנן שאם עשאן כולם בהעלם אחת כו' 
-<h2>דף ז</h2>
+<h2>דף ז.</h2>
 לא נצרכה אלא לקרן זוית 
 אבל בין העמודים 
 וטח בפניה חייב 
@@ -90,7 +90,7 @@
 ואם חקק בו ד' על ד' 
 התם לא ניחא תשמישתיה 
 והלכה ונחה בחור כל שהוא באנו למחלוקת רבי מאיר ורבנן 
-<h2>דף ח</h2>
+<h2>דף ח.</h2>
 אמר אביי הכא באילן העומד כו' 
 רחבה ששה פטור 
 רחבה ששה פטור 
@@ -102,7 +102,7 @@
 ואי אשמועינן בימות הגשמים כו' 
 לא מיחייב עד דעקר לי' ממקומו 
 לימא תהוי תיובתא דרבא כו' 
-<h2>דף ט</h2>
+<h2>דף ט.</h2>
 אע"ג דלית ליה לחי כו' 
 תוך הפתח אע"פ שאין בו ד' צריך לחי אחר להתירו 
 אמר רב יהודה אמר רב הכא באסקופת מבוי עסקינן 
@@ -115,7 +115,7 @@
 בתספורת של בן אלעשה כו' 
 הא לן והא לאו 
 למ"ד תפלת ערבית רשות לא מטרחינן ליה 
-<h2>דף י</h2>
+<h2>דף י.</h2>
 התם לא שכיחא שכרות 
 טריחותא למיסר המייניה ועוד ליקו הכי וליצלי ומשני משום שנאמר הכון לקראת אלהיך ישראל 
 רמי פוזמקי 
@@ -128,7 +128,7 @@
 יהבה ניהליה 
 ה"ג נתגלגל הדבר וירדו אבותינו למצרים 
 ושל סדום נ"ב שנה 
-<h2>דף יא</h2>
+<h2>דף יא.</h2>
 ולא תחת חבר 
 כגון רבי שמעון בן יוחי וחבריו 
 כגון אנו מפסיקין בין לקריאת שמע בין לתפלה 
@@ -140,7 +140,7 @@
 אלא לאו כרמלית 
 ואם יצא פטור אבל אסור דברי ר"מ 
 כל אצולי טינוף לא קא חשיב 
-<h2>דף יב</h2>
+<h2>דף יב.</h2>
 ושבתוכה הרי זה בכי יותן 
 שמא יהרוג 
 מי אלימא ממתניתין 
@@ -154,7 +154,7 @@
 לא ישב על גבי מטה ולא על ספסל 
 רבי נתן אומר קרא והטה 
 שמש שאינו קבוע בדמשחא מאי 
-<h2>דף יג</h2>
+<h2>דף יג.</h2>
 מיתיבי התינוקות של בית רבן מסדרין פרשיותיהן כו' 
 רבא אמר רוב עם הארץ מעשרין הן 
 מה אשת רעהו הוא בבגדו והיא בבגדה אסור 
@@ -169,7 +169,7 @@
 והשותה משקין טמאים 
 והבא ראשו ורובו במים שאובין 
 וטהור שנפלו על ראשו כו' 
-<h2>דף יד</h2>
+<h2>דף יד.</h2>
 רבי יהושע אומר האוכל אוכל ראשון ושני שני 
 זמנין דאכיל אוכלין טמאין כו' 
 ושקיל משקין דתרומה ושדי לפומיה ופסיל להו 
@@ -187,7 +187,7 @@
 אלא במשקין הבאים מחמת שרץ 
 שמאי והלל גזור 
 ואילו שמאי והלל לא נחלקו אלא בג' דברים בלבד 
-<h2>דף טו</h2>
+<h2>דף טו.</h2>
 אלא שלמה גזר לקדשים 
 שלמה גזר כו' 
 שמאי אומר מקב לחלה הלל אומר מקביים 
@@ -204,7 +204,7 @@
 ורבי מאיר היא דאמר הכל הולך אחר המעמיד 
 וחכמים מטהרין 
 אלא מעתה לא ליטמאו מגבן 
-<h2>דף טז</h2>
+<h2>דף טז.</h2>
 לא ליטמאו מגבן אלמה תנן כלי נתר וכלי חרס כו' 
 ה"ג רש"י מיטמאין ומטמאין מאויריהן ומיטמאין מאחוריהן ואין מיטמאין מגביהן ופירש דמיטמאין מאחוריהן במקום חקק בית מושבן כל שכן דמטמאין אחרים כדמוכח בפ' העור והרוטב חולין דף קיח
 אלא כיון דכי נשברו יש להם תקנה 
@@ -217,7 +217,7 @@
 אחד כלים גדולים 
 אף בנות כותים 
 כל המטלטלין 
-<h2>דף יז</h2>
+<h2>דף יז.</h2>
 אקפח את כו' 
 ששמע השומע וטעה כו' טמאוהו משום כלים המאהילים על המת 
 אמר רבי עקיבא אני אתקן שיהו דברי חכמים קיימין שיהו כל המטלטלין מביאין טומאה על האדם הנושאן בעובי המרדע 
@@ -235,7 +235,7 @@
 אלא בכדי שיצודו 
 אין מוכרים לנכרי 
 אין נותנין עורות לעבדן וב"ה מתירין 
-<h2>דף יח</h2>
+<h2>דף יח.</h2>
 אבל דיו דלאו בר גיבול הוא 
 ומתרפאת והולכת כל השבת כולה 
 ולימא מר משום שביתת כלים 
@@ -252,7 +252,7 @@
 האי בישרא דגדיא ושריק 
 התם בבשרא אגומרי 
 ולא ישאילנו כו' אלא כדי שיגיע לביתו 
-<h2>דף יט</h2>
+<h2>דף יט.</h2>
 נותנין מזונות לנכרי בחצר 
 לא ישכיר 
 אלא אם כן קוצץ לו דמים 
@@ -264,7 +264,7 @@
 ושמואל שרי 
 הני כרכי דזוזי רב אסר 
 וחד מציל בארבע וחמש מאני 
-<h2>דף כ</h2>
+<h2>דף כ.</h2>
 איבעיא להו תחתון האיך דגבי תנור 
 למשרי אברים ופדרים 
 כדי שתהא שלהבת עולה מאיליה 
@@ -276,7 +276,7 @@
 אנן שירא פרנדא קרינן ליה 
 ותנא דידן צמר מכווץ כווץ ושער איחרוכי מחרך 
 עד כאן פסול פתילות מכאן ואילך פסול שמנים 
-<h2>דף כא</h2>
+<h2>דף כא.</h2>
 למאי נ"מ למקח וממכר 
 מפני שאין נמשכין כו' 
 חלב מהותך וקרבי דגים שנימוחו נותן לתוכן שמן כו' 
@@ -288,7 +288,7 @@
 מצוה להניחה על פתח ביתו מבחוץ 
 ובשעת הסכנה 
 שהיה מונח בחותמו של כ"ג 
-<h2>דף כב</h2>
+<h2>דף כב.</h2>
 נר חנוכה שהניחה למעלה מכ' אמה פסולה כסוכה וכמבוי 
 סוכה תניא 
 אסור להסתפק מהן עד מוצאי יו"ט האחרון 
@@ -301,7 +301,7 @@
 והא הכא כיון דקביעי נרות כו' 
 מאי הוי עלה 
 דאיבעיא להו הדלקה עושה מצוה כו' 
-<h2>דף כג</h2>
+<h2>דף כג.</h2>
 מכבה ומגביהה ומניחה וחוזר ומדליק מיבעי ליה 
 שמע מינה הדלקה עושה מצוה 
 מריש הוה מהדר מר אמשחא דשומשמי 
@@ -312,7 +312,7 @@
 דבי נשא דרב שיזבי 
 גזרה יו"ט אטו שבת 
 גזירה יו"ט אטו שבת 
-<h2>דף כד</h2>
+<h2>דף כד.</h2>
 תניא כוותיה דרב חסדא 
 איבעיא להו מהו להזכיר של חנוכה בברכת המזון 
 מהו להזכיר של חנוכה בבהמ"ז 
@@ -330,7 +330,7 @@
 בקר שני לשריפתו 
 ולא עולת חול בשבת ולא עולת חול ביום טוב 
 ולא מילה שלא בזמנה דאתיא בק"ו 
-<h2>דף כה</h2>
+<h2>דף כה.</h2>
 ה"ל יו"ט עשה כו' 
 הא בחול שפיר דמי מ"ט כו' 
 כך אתה מצווה לשרוף את התרומה 
@@ -345,7 +345,7 @@
 חובה 
 סדין בציצית ב"ש פוטרין 
 גזירה משום כסות לילה 
-<h2>דף כו</h2>
+<h2>דף כו.</h2>
 ולימא מר מפני שהוא עף 
 חדא ועוד קאמר 
 אין מדליקין בטבל טמא 
@@ -361,7 +361,7 @@
 אתי בק"ו 
 ואימא כי אימעוט משלש על שלש 
 תרי מיעוטי כתיבי 
-<h2>דף כז</h2>
+<h2>דף כז.</h2>
 נפקא ליה מאו בגד דתניא בגד כו' 
 תלמוד לומר או בגד 
 מה לנגעים שכן שתי וערב טמא בהן 
@@ -379,7 +379,7 @@
 אונין של פשתן 
 כל היוצא מן העץ אין מדליקין 
 ואין מטמא טומאת אהלים אלא פשתן 
-<h2>דף כח</h2>
+<h2>דף כח.</h2>
 ויפרוש את האהל וגו' 
 אם כן ג"ש מאי אהני ליה 
 אי מה להלן קרשים כו' 
@@ -396,7 +396,7 @@
 למאי הלכתא 
 תפילין בהדיא כתיב בהו למען תהיה וגו' 
 לא צריכא אלא לכורכן בשערן 
-<h2>דף כט</h2>
+<h2>דף כט.</h2>
 רבא אמר היינו טעמא דר' אליעזר 
 ולא בסמרטוטין שאינן מחורכין 
 אכלן אין מסיקין בגרעיניהן 
@@ -406,12 +406,12 @@
 גזירה עיליתא דשישא אטו עיליתא דעלמא 
 ה"ג מחלוקת בקטנים אבל בגדולים ד"ה מותר 
 ובלבד שלא יתכוין בחמה מפני החמה וכו' 
-<h2>דף לא</h2>
+<h2>דף לא.</h2>
 שהמרו זה את זה 
 אמונת זה סדר זרעים 
 <h2>דף לא:</h2>
 וסותר על מנת לבנות במקומו 
-<h2>דף לב</h2>
+<h2>דף לב.</h2>
 על שקורין לארון הקדש ארנא 
 <h2>דף לב:</h2>
 רבי יהודה הנשיא היינו רבי ורבי בעון נדרים קאמר 
@@ -419,7 +419,7 @@
 בעון ציצית כו' 
 <h2>דף לג:</h2>
 ה"ג ר"ת הלך רבי יהודה בן גרים וסיפר דברים ונשמעו למלכות ויש ספרים שכתב בהן יהודה ואין נראה לרבינו תם דאמרינן בפרק קמא דמועד קטן דף ט
-<h2>דף לד</h2>
+<h2>דף לד.</h2>
 עבד איהו נמי הכי 
 כל היכא דהוה קשי טהריה 
 לא קשיא כאן בעירובי תחומין כו' 
@@ -428,7 +428,7 @@
 <h2>דף לד:</h2>
 רבי יוסי אומר בין השמשות כהרף עין 
 ספק לטומאה ולקרבן 
-<h2>דף לה</h2>
+<h2>דף לה.</h2>
 תרי תילתי מיל 
 ואפילו בת תרי כורי לא שרא לי 
 וירד ויטבול ויעלה 
@@ -438,7 +438,7 @@
 רבי יהודה הנשיא אומר שלישית לחלוץ כו' 
 שש תקיעות 
 והתניא שופר מטלטלין כו' 
-<h2>דף לו</h2>
+<h2>דף לו.</h2>
 הא ר' יהודה 
 הא ר' שמעון 
 הא ר' נחמיה 
@@ -449,7 +449,7 @@
 לא יתן עד שיגרוף 
 חמין ותבשיל 
 וב"ה אומרים אף מחזירין 
-<h2>דף לז</h2>
+<h2>דף לז.</h2>
 לעולם אימא לך להחזיר תנן וחסורי מיחסרא כו' 
 אא"ב להחזיר תנן היינו דשני בין תוכה לעל גבה 
 מהו לסמוך 
@@ -459,7 +459,7 @@
 אמר רב ששת אמר ר' יוחנן כירה שהסיקוה בגפת ובעצים משהין עליה תבשיל שלא בישל כל צרכו כו' 
 דיוקא דמתני' קמ"ל 
 מהו להשהות 
-<h2>דף לח</h2>
+<h2>דף לח.</h2>
 שכח קדרה על גבי כירה ובישלה בשבת מהו 
 אבל האי דלא קעביד מעשה במזיד נמי יאכל 
 בשלמא לרב נחמן בר יצחק כאן קודם גזירה כו' 
@@ -476,7 +476,7 @@
 תניא כוותיה דאביי כו' 
 לא יטמיננה בחול 
 מעשה והביאו סילון של צונן לתוך אמה של חמין כו' 
-<h2>דף לט</h2>
+<h2>דף לט.</h2>
 כל שבא בחמין מלפני השבת 
 שמא יטמין ברמץ 
 מפני שמזיז עפר ממקומו 
@@ -492,7 +492,7 @@
 בין בחמין בין בצונן 
 והא מעשה דאנשי טבריא בקרקע הוה ואסרי להו 
 אמר רבה בר בר חנה הלכה כר' יהודה 
-<h2>דף מ</h2>
+<h2>דף מ.</h2>
 דילמא ה"מ במתני' אבל בברייתא לא אע"ג דלא קאמר במשנתינו הכא משמע דאין הלכה כמותו משום דסתם מתני' דלא כוותיה:
 הלכה כדברי המכריע 
 למוצאי שבת רוחץ מיד 
@@ -502,7 +502,7 @@
 ובלבד שלא יביא קומקומוס כו' 
 ושמע מינה כלי שני אינו מבשל 
 וכי תימא בלשון חול קאמר ליה 
-<h2>דף מא</h2>
+<h2>דף מא.</h2>
 פשיטא דלא נגע דתניא ר' אליעזר אומר כו' 
 רחץ ולא סך 
 מוליאר הגרוף שותין ממנו בשבת 
@@ -512,7 +512,7 @@
 מיחם שפינה ממנו מים לא יתן לתוכו מים כל עיקר מפני שמצרף ורבי יהודה היא 
 לא שנו אלא להפשיר 
 לא שנו אלא להפשיר 
-<h2>דף מב</h2>
+<h2>דף מב.</h2>
 אפילו של עץ נמי 
 נותן אדם חמין לתוך צונן 
 אבל באמבטי כו' 
@@ -528,7 +528,7 @@
 אע"פ שאמרו חכמים אין נותנין כו' 
 הצלה שאינה מצויה לא התירו 
 שאינה מצויה לא התירו 
-<h2>דף מג</h2>
+<h2>דף מג.</h2>
 דמבטל כלי מהיכנו 
 טבל מוכן הוא אצל שבת 
 כופין את הסל 
@@ -548,7 +548,7 @@
 ונשמט והולך לו 
 דכ"ע טלטול מן הצד שמיה טלטול 
 מתוך שאדם בהול על מתו אי לא שרית לי' אתי לכבויי 
-<h2>דף מד</h2>
+<h2>דף מד.</h2>
 שבנר ושבקערה אסור ור' שמעון מתיר 
 לדברי המתיר אסור 
 מטה שיחדה למעות אסור לטלטלה 
@@ -560,7 +560,7 @@
 ואין מצלת עמה באהל המת 
 אין גוררין אותה בשבת בזמן שיש עליה מעות 
 הא אין עליה מעות שריא אע"ג דהוו עליה כל בין השמשות 
-<h2>דף מה</h2>
+<h2>דף מה.</h2>
 הכי נמי מסתברא דרב כר' יהודה ס"ל 
 מקמי חברי בשבתא 
 היכא דדחייה בידים אית ליה 
@@ -581,7 +581,7 @@
 אמר ליה מנרתא שאני 
 אין לנו אלא בנר כר' שמעון 
 והא כילת חתנים דאדם קובע לה מקום 
-<h2>דף מו</h2>
+<h2>דף מו.</h2>
 דחוליות בין גדולה בין קטנה אסורה 
 הורה במנורה להיתרא וכר"ש בנר נמי להיתרא או דילמא במנורה הורה לאיסורא וכר"ש בנר להיתרא 
 דנפטא אסור לטלטלה 
@@ -595,7 +595,7 @@
 ולפ"ז א"ש גבי טבל דאמר אם עבר ותיקנו מתוקן דדוקא חכם אמר הכא לא מיזדקיק אבל בג' הדיוטות לא אמר מי יימר ומיהו לפי מ"ש בפנים ה"נ המ"ל כו' לא א"ש טבל כדפי' לעיל ולהכי נקט חכם משום דמתיר בכל מומין ועיקר טעמא משום דהכא איכא איסורא והתם ליכא והא דנקט התם אם לא מיזדקיק ליה חכם סגיא בג' הדיוטות אע"ג דשרי חשיב מוקצה אי לא סגיא ליה בג' הדיוטות ת"י]:
 כבתה אין לא כבתה לא 
 דכל היכא דקמכוין איכא איסורא דאורייתא 
-<h2>דף מז</h2>
+<h2>דף מז.</h2>
 הנח לנר שמן ופתילה הואיל ונעשה בסיס לדבר האסור 
 לי התיר רבי לטלטל מחתה באפרה 
 ואמר רבה ב"ב חנה א"ר יוחנן כו' 
@@ -608,7 +608,7 @@
 לימא תנן סתמא כרבי יוסי דאמר גורם לכיבוי אסור 
 מפני שמקרב את כבויו 
 מתני' במה טומנין וכו' אין טומנין לא בגפת 
-<h2>דף מח</h2>
+<h2>דף מח.</h2>
 דזיתים מסקי הבלא 
 מאי שנא ממיחם ע"ג מיחם 
 מאי שנא מפרונקא 
@@ -623,7 +623,7 @@
 עבדו רבנן היכרא כו' 
 אי חיבור הוא אפי' להזאה נמי כו' 
 דבר תורה בשעת מלאכה חיבור 
-<h2>דף מט</h2>
+<h2>דף מט.</h2>
 ועל הזאה שבשעת מלאכה משום הזאה שלא בשעת מלאכה 
 אבל לא בכסות לחה כו' 
 כאלישע בעל כנפים 
@@ -639,7 +639,7 @@
 כנגד כל מלאכה שבתורה 
 הם העלו קרשים כו' 
 ואתם אל תכניסו 
-<h2>דף נ</h2>
+<h2>דף נ.</h2>
 אלא אי איתמר כו' 
 רבינא אומר בשל הפתק שנו 
 ורב אסי אמר ישב אע"פ שלא קשר ושלא חישב 
@@ -659,7 +659,7 @@
 גורדיתא דקני 
 הטומן לפת וצנונות כו' 
 מקצת עליו מגולים 
-<h2>דף נא</h2>
+<h2>דף נא.</h2>
 כסהו ונתגלה מותר לכסותו 
 אילו היה ר' יוסי קיים היה כפוף כו' 
 כיצד הוא עושה רשב"ג אומר נוטל את הסדינין כו' 
@@ -672,7 +672,7 @@
 חמרא לובא 
 או דילמא כל נטירותא יתירתא לאו משוי היא 
 קדמיה חמרא דלוי 
-<h2>דף נב</h2>
+<h2>דף נב.</h2>
 אמר שמואל הלכה כחנניא 
 אדרבה תסתיים דשמואל הוא דאמר כו' 
 קשרה בעליה במוסרה 
@@ -687,7 +687,7 @@
 טבעת שהתקינה לחגור בה מתניו 
 היא של אלמוג וחותמה של מתכת 
 והתניא מחט בין נקובה בין אינה נקוב' 
-<h2>דף נג</h2>
+<h2>דף נג.</h2>
 והוא שקשורה לו מע"ש 
 אילימא שאינה קשורה לו כלל פשיטא 
 מהו ליתן המרדעת ע"ג חמור בשבת 
@@ -702,7 +702,7 @@
 כאן ליבש כאן ליחלב 
 שקושרין להן כנגד זכרותן כו' 
 ממאי מדקתני סיפא 
-<h2>דף נד</h2>
+<h2>דף נד.</h2>
 עד כבלא 
 רב אמר ליבש מותר כו' 
 הלכה כר' יהודה בן בתירא 
@@ -714,7 +714,7 @@
 דלא למציוה יאלי 
 הוה מעשר ר' אלעזר בן עזריה כל שתא ושתא 
 רב ור' חנינא ור' יוחנן ורב חביבא מתני 
-<h2>דף נה</h2>
+<h2>דף נה.</h2>
 ואע"ג דלא מקבלי לוכחינהו מר 
 ועל הרשעים תי"ו של דם 
 ושמואל אמר תמה זכות אבות ורבי יוחנן אמר תחון זכות אבות 
@@ -727,7 +727,7 @@
 כל האומר בני עלי חטאו אינו אלא טועה 
 מעבירם כתיב 
 מתוך שהיה לו לפנחס למחות 
-<h2>דף נו</h2>
+<h2>דף נו.</h2>
 שהיה לך לדונו בסנהדרין 
 ליקוחין יש לך בה 
 גט כריתות כותב לאשתו 
@@ -737,7 +737,7 @@
 אלא מעתה אז יבנה יהושע כו' 
 מה אחרונים לא עשו ותלה בהן כו' 
 דצוציתא 
-<h2>דף נז</h2>
+<h2>דף נז.</h2>
 מתני' במה אשה כו' לא בחוטי צמר 
 השתא רך על גבי קשה חוצץ כו' 
 השתא קשה ע"ג קשה חוצץ 
@@ -748,7 +748,7 @@
 אי כבלא דעבדא תנן 
 אין בה משום כלאים 
 ואינה מטמאה בנגעים 
-<h2>דף נח</h2>
+<h2>דף נח.</h2>
 והאמר שמואל יוצא העבד בחותם כו' 
 הא דעבד איהו לנפשיה 
 במאי אוקימתא להא דשמואל בדעבד ליה רביה כו' 
@@ -765,7 +765,7 @@
 מתיב רבא הזוג והעינבל חיבור 
 וכי תימא כו') והתניא מספורת של פרקים ואיזמל של רהיטני 
 אלא אמר רבא כו' 
-<h2>דף נט</h2>
+<h2>דף נט.</h2>
 ורבי יוחנן אמר הואיל וראוי לגמע בו מים לתינוק 
 ואין אומרים בטמא מת עמוד ונעשה מלאכתנו 
 סנדל של בהמה של מתכת 
@@ -780,7 +780,7 @@
 נזמי האף 
 הא יש עליה חותם חייבת חטאת 
 רבי נחמיה מטמא 
-<h2>דף ס</h2>
+<h2>דף ס.</h2>
 רב נחמן בר יצחק אמר טומאה אשבת קא רמית 
 למאי חזיא 
 הואיל ואשה אוגרת בה שערה 
@@ -791,7 +791,7 @@
 לא בסנדל המסומר ולא במנעל שאינו תפור 
 אין בין יו"ט לשבת כו 
 השתא חמש שרינן כו' 
-<h2>דף סא</h2>
+<h2>דף סא.</h2>
 דעבד הכי עבד 
 וסיים דשמאליה וקטר 
 דילמא מיפסקי ואתי לאתויינהו ד' אמות ברה"ר 
@@ -807,12 +807,12 @@
 איתמחי קמיע 
 חד קמיע לתלת גברי 
 תלת קמיע לחד גברא מאי 
-<h2>דף סב</h2>
+<h2>דף סב.</h2>
 והתניא ר' אושעיא אומר ובלבד כו' 
 שי"ן של תפילין 
 וחילופיהן באיש 
 וכל מצות עשה שהזמן גרמא נשים פטורות 
-<h2>דף סג</h2>
+<h2>דף סג.</h2>
 אין בין העוה"ז לימות המשיח 
 <h2>דף סג:</h2>
 ואילו אצעדה טמאה היא 
@@ -822,7 +822,7 @@
 מניין לתכשיט כל שהוא טמא 
 אריג ותכשיט 
 ההוא במדין כתיב 
-<h2>דף סד</h2>
+<h2>דף סד.</h2>
 מניין לרבות את הקילקלי והחבק 
 שמע מינה לאפנויי 
 מידי הרהור מי יצאנו 
@@ -832,7 +832,7 @@
 ובלבד שלא תצא זקנה בשל ילדה וילדה בשל זקנה 
 רבי ענני ברבי ששון אמר הכל ככבול 
 אמר רב כל מקום שאסרו חכמים כו'
-<h2>דף סה</h2>
+<h2>דף סה.</h2>
 ליעבד לה פולסא 
 ומפצי ביומי תשרי 
 <h2>דף סה:</h2>
@@ -841,7 +841,7 @@
 שמא ירבו הנוטפים 
 דאמר שמואל נהרא מכיפיה מיתבריך 
 הקיטע יוצא בקב שלו 
-<h2>דף סו</h2>
+<h2>דף סו.</h2>
 סנדל של סיידין 
 טמא מדרס ולא הודו לו 
 כוורת הקש ושפופרת של קנים ר"ע מטמא 
@@ -851,11 +851,11 @@
 עגלה של קטן 
 <h2>דף סו:</h2>
 קישורי 
-<h2>דף סז</h2>
+<h2>דף סז.</h2>
 בני מלכים יוצאין בזגין מאן תנא ר"ש היא כו' 
 <h2>דף סז:</h2>
 מתני' כלל גדול
-<h2>דף סח</h2>
+<h2>דף סח.</h2>
 וגבי שביעית נמי כו' 
 והא גבי מעשר דקתני עוד כלל אחר אמרו כו' 
 דאית ביה אבות ותולדות 
@@ -872,7 +872,7 @@
 אבל תינוק שנשבה פטור 
 וחייב על הדם אחת 
 כל שכן שהוספת 
-<h2>דף סט</h2>
+<h2>דף סט.</h2>
 מה ע"ז שחייבים על זדונו כרת 
 אלא למונבז שגגה במאי 
 כגון ששגג בכרת אע"פ שהזיד בלאו 
@@ -882,7 +882,7 @@
 <h2>דף סט:</h2>
 הא מני מונבז היא 
 עושה כדי פרנסתו 
-<h2>דף ע</h2>
+<h2>דף ע.</h2>
 אם אינו ענין למזיד דהא כתיב כו' 
 יכול שאם עשאן כולם בהעלם אחד כו' 
 על חרישה וקצירה חייב שתים 
@@ -896,7 +896,7 @@
 אמר ליה הרי העלם שבת בידו כו' 
 חזינן אי משום שבת קא פריש כו' 
 נודע לו על הקצירה ועל הטחינה של שגגת שבת וזדון מלאכות 
-<h2>דף עא</h2>
+<h2>דף עא.</h2>
 גרירה דגרירה לית ליה 
 ממין אחד חייב פשיטא 
 אנן אסיפא מתנינן לה 
@@ -904,7 +904,7 @@
 <h2>דף עא:</h2>
 מכלל דרישא מין אחד ותמחוי אחד כו' 
 מאן דאמר אשם ודאי לא בעי ידיעה בתחלה 
-<h2>דף עב</h2>
+<h2>דף עב.</h2>
 בעל חמש בעילות בשפחה חרופה אינו חייב אלא אחת 
 מתקיף לה רב המנונא אלא מעתה בעל והפריש קרבן כו' 
 כי אתא רב דימי אמר למ"ד בעי ידיעה כו' 
@@ -914,7 +914,7 @@
 הניחא לאביי דאמר חייב 
 באומר מותר 
 עד כאן לא בעא מיניה רבא מרב נחמן כו' 
-<h2>דף עג</h2>
+<h2>דף עג.</h2>
 אלא לאו רישא בע"ז וסיפא בשאר מצות 
 העושה שני בתי נירין 
 הקושר והמתיר 
@@ -925,7 +925,7 @@
 וצריך לעצים 
 ואחת משום מפרק 
 מפרק 
-<h2>דף עד</h2>
+<h2>דף עד.</h2>
 אע"ג דאיכא דדמיא לה חשיב 
 שכן עני אוכל פתו בלא כתישה 
 היו לפניו שני מיני אוכלין גרסי' 
@@ -941,7 +941,7 @@
 חביתא ותנורא וחלתא 
 חכמה יתירה שאני 
 שכן צדי חלזון כו' 
-<h2>דף עה</h2>
+<h2>דף עה.</h2>
 שכן יריעה שנפל בה דרנא כו' 
 אמגושא 
 הצד חלזון 
@@ -958,7 +958,7 @@
 חסר אחת לאפוקי מדר' יהודה 
 לאפוקי עצי אשרה 
 הא דלא כר' שמעון 
-<h2>דף עו</h2>
+<h2>דף עו.</h2>
 מפני שלא שוו בשיעוריהם 
 אכילה ע"י הדחק לא שמה אכילה 
 אידי ואידי חד שיעורא הוא 
@@ -974,14 +974,14 @@
 כדי שימזגנו ויעמוד על רביעית 
 ויעמוד על רביעית 
 אף אנן נמי תנינא 
-<h2>דף עז</h2>
+<h2>דף עז.</h2>
 דאמר רבא כל חמרא דלא דרי על חד תלת מיא כו' 
 חדא דתנן והמזוג שני חלקי מים 
 ועוד מים בכד ומצטרפין 
 הואיל ויכול לקרוש ולעמוד על כזית 
 <h2>דף עז:</h2>
 דרבי שמעון בן אלעזר סבר אבר קטן של קטן בן יומו כו' 
-<h2>דף עח</h2>
+<h2>דף עח.</h2>
 דם וכל מיני משקין ברביעית 
 שכן כוחלין ליארוד 
 אטו מצניע לאו מוציא הוא 
@@ -993,7 +993,7 @@
 והמוציא קשר מוכסין חייב 
 ת"ק סבר מודה בשטר שכתבו צריך לקיימו 
 רש"י גריס דכולי עלמא מודה בשטר שכתבו צריך לקיימו 
-<h2>דף עט</h2>
+<h2>דף עט.</h2>
 ת"ק סבר כותבין שובר 
 חזי דגברא דפרע אנא 
 אלמא כיון דלטוויה קאי 
@@ -1009,7 +1009,7 @@
 תפילין אגויל מי כתבינן 
 הא מורידין עושין 
 השתא דאתית להכי כו' 
-<h2>דף פ</h2>
+<h2>דף פ.</h2>
 אות אחת בקולמוס ואות אחת בקלמרין 
 והעבירה דרך עליה 
 והא אמר רבא תוך שלשה לרבנן צריך הנחה ע"ג משהו 
@@ -1021,7 +1021,7 @@
 <h2>דף פ:</h2>
 המוציא שיער כדי לגבל בו את הטיט טיט כדי לעשות פי כור כן גרס בתוספתא וכן גרס רש"י ולהך גירסא שיער כדי לגבל בו את הטיט כשיעור טיט הנעשה מרביעית שופכין אבל לספרים דגרסי שיער כדי לגבל בו טיט לעשות פי כור של צורפי זהב קשה דאמר לעיל אין אדם טורח לגבל טיט כדי לעשות פי כור ויש לפרש דמיירי בטיט שהוא מגובל כבר ואחר הגיבול נותנין בו שיער כדי לתקנו:
 שהגיעו לפירקן ולא הגיעו 
-<h2>דף פא</h2>
+<h2>דף פא.</h2>
 למימרא דשיעורא דר' יהודה נפיש 
 חפי פותחת טהורין 
 אסור למשמש בצרור 
@@ -1032,7 +1032,7 @@
 וחכמים אומרים לא יטול אלא מן האבוס כו' 
 והניחו ע"ג יתדות מיחייב משום תולש 
 והאמר ר' יוחנן הלכה כסתם משנה כו' 
-<h2>דף פב</h2>
+<h2>דף פב.</h2>
 מתני' אמר רבי עקיבא מניין לע"ז כו' 
 אסור לבנותו 
 כונס לתוך שלו ד"א 
@@ -1045,7 +1045,7 @@
 למשמשיה 
 ולוקשה רחמנא לנבלה 
 ורבי אלעזר אמר כו' 
-<h2>דף פג</h2>
+<h2>דף פג.</h2>
 מיתיבי ע"ז כשרץ ומשמשיה כשרץ 
 ורבי עקיבא 
 ומשמשיה בין הן שהסיטו כו' 
@@ -1057,7 +1057,7 @@
 מה מת בכזית אף ע"ז בכזית 
 נלמדנה משק 
 לאפוקי ספינה שאינה מיטלטלת מליאה 
-<h2>דף פד</h2>
+<h2>דף פד.</h2>
 ולחנניא טילטול על ידי שוורים שמיה טילטול 
 ואמר רבי יוחנן אם יש בה בית קיבול רימונים כו' 
 שלש תיבות הן 
@@ -1074,7 +1074,7 @@
 מי לא עסקינן דייחדינהו לאשתו נדה 
 מניין לערוגה שהיא ו' כו' 
 ארבע על ארבע רוחות הערוגה 
-<h2>דף פה</h2>
+<h2>דף פה.</h2>
 וקים להו לרבנן דחמשא בשיתא לא ינקי 
 לא תסיג גבול רעך 
 חוי 
@@ -1090,7 +1090,7 @@
 איתיביה הנוטע שתי שורות כו' מותר 
 אמר ר' יוחנן הרוצה למלאות כל גינתו ירק עושה בה ערוגה ו' על ו' ועוגל כו' <img src="data:image/png;base64,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"> והשתא הוי בריבוע הפנימי ה' מינין ואע"פ שבין זרע שבתוך העגול לזרע שבקרנות אין הפסק רק משהו אין לחוש דעוגל הוי היכירא בלבד שיהא ג' טפחים בין זרע קרן זה לקרן זה וכן יכול לעשות ערוגות בכל סביבותיה בענין זה דהשתא יש ג"ט בין ערוגה לערוגה דריבוע החיצון חצי טפח חרב וכן לאחרת הרי טפח וב' גבולין שהיו ב' טפחים הרי ג"ט וא"ת מאי איריא ששה אפי' ה' על ה' נמי ועוגל בה ארבע כיון דעוגל חשיב היכירא ויש לומר דעוגל ה' חשיב היכירא אבל ד' לא:
 והא איכא ביני וביני <img src="data:image/png;base64,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">
-<h2>דף פו</h2>
+<h2>דף פו.</h2>
 מנין לפולטת כו' שנא' היו נכונים לשלשת ימים 
 אע"פ שאין ראייה לדבר זכר לדבר שנאמר ותבא כמים וגו' 
 תני רישא טהורה ומוקי לה כו' 
@@ -1103,7 +1103,7 @@
 אמר ר' יצחק שלא יהא הללו הולכים לקבל תורה 
 אבל פירשה מן האיש טמאה כל זמן שהיא לחה 
 וכתיב התם החדש הזה לכם 
-<h2>דף פז</h2>
+<h2>דף פז.</h2>
 בתלתא אמר להו מצות הגבלה 
 היום כמחר 
 ומה ישראל כו' 
@@ -1119,7 +1119,7 @@
 וכתיב ששת ימים תלקטוהו 
 עשר עטרות נטל אותו היום 
 ראשון לאכילת קדשים 
-<h2>דף פח</h2>
+<h2>דף פח.</h2>
 לרבנן ח' חסירין עבוד 
 כפה עליהן הר כגיגית 
 מודעא רבה לאורייתא 
@@ -1130,14 +1130,14 @@
 <h2>דף פח:</h2>
 ולא כתיב הסריח 
 מה פטיש זה מתחלק לכמה ניצוצות 
-<h2>דף פט</h2>
+<h2>דף פט.</h2>
 תורה היכן היא 
 לסוף מ' יום אני בא 
 מדבר צין 
 <h2>דף פט:</h2>
 תבלין שנים ושלשה שמות והן מין אחד 
 אסורין ומצטרפין 
-<h2>דף צ</h2>
+<h2>דף צ.</h2>
 הואיל וראויין למתק הקדירה 
 מי רגלים בן מ' יום 
 בורית זה החול 
@@ -1151,7 +1151,7 @@
 דלא לימרו מיכל קא אכיל ליה ועבר משום בל תשקצו 
 ועובר משום בל תשקצו 
 מתני' המצניע וכל אדם אין חייבין עליו אלא כשיעורו 
-<h2>דף צא</h2>
+<h2>דף צא.</h2>
 מתקיף לה רב יצחק 
 או דילמא בתר השתא אזלינן 
 אי לענין טומאה כביצה אוכלין בעינן 
@@ -1160,7 +1160,7 @@
 פחות מכביצה אוכלין 
 <h2>דף צא:</h2>
 קס"ד בצררי קשיא לחזקיה 
-<h2>דף צב</h2>
+<h2>דף צב.</h2>
 דאי בעי מפקע ליה 
 ורמי דאביי אדאביי 
 המוציא בפיו כו' 
@@ -1174,7 +1174,7 @@
 תברא מי ששנה זו כו' 
 הא לאחריו ובא לאחריו פטור 
 זה אינו יכול וזה אינו יכול ר"מ ורבי יהודה מחייבין 
-<h2>דף צג</h2>
+<h2>דף צג.</h2>
 תלתא מיעוטי כתיבי 
 חד למעוטי זה עוקר וזה מניח 
 אמר מר זה יכול וזה אינו יכול 
@@ -1194,7 +1194,7 @@
 אלא אימא חייבין ור' שמעון פוטר 
 את המת במטה חייב 
 רבי שמעון פוטר 
-<h2>דף צד</h2>
+<h2>דף צד.</h2>
 ששגג על האוכלין והזיד על הכלי 
 ובפלוגתא דר' יוחנן ור"ל 
 שהחי נושא את עצמו 
@@ -1211,7 +1211,7 @@
 והוא שפירשו כלפי מעלה 
 פוקסת 
 וכי דרך אריגה בכך 
-<h2>דף צה</h2>
+<h2>דף צה.</h2>
 המכבד והמרבץ 
 והרודה חלות דבש 
 החולב משום דש הוא 
@@ -1224,7 +1224,7 @@
 טהור מלהכשיר בו זרעים 
 ניקב כמוציא רימון טהור מכלום 
 שמא לא שמעת אלא במוקף צמיד פתיל 
-<h2>דף צו</h2>
+<h2>דף צו.</h2>
 הא ברברבי והא בזוטרי 
 פליגי בה תרי אמוראי 
 שיעורו כמוציא זיתים 
@@ -1237,7 +1237,7 @@
 ולרבי אליעזר דמחייב אתולדה במקום אב אמאי קרי לה אב כו' 
 אי נמי הך דכתיבא קרי לה אב 
 ודילמא שלחופי הוו משלחפי 
-<h2>דף צז</h2>
+<h2>דף צז.</h2>
 גזירה שוה לא גמיר 
 <h2>דף צז:</h2>
 למימרא דמחייב רבי אתולדה במקום אב והתניא כו' 
@@ -1245,13 +1245,13 @@
 מאי לאו דעבדינהו לתרוייהו בהדי הדדי 
 הרי כתב שם משמעון 
 הכי גרסינן ודקאמרת הרי כתב שם משמעון מי דמי התם כו' 
-<h2>דף צח</h2>
+<h2>דף צח.</h2>
 הניחא למ"ד קרשים מלמטה עוביין אמה וכלין והולכין עד כאצבע 
 אטבעי היכא מנח להו אגבא דעגלה עגלה מקורה היא 
 <h2>דף צח:</h2>
 תנא בנס היה עומד 
 דל עשר לאיגרא 
-<h2>דף צט</h2>
+<h2>דף צט.</h2>
 שתי גזוזטראות כו' 
 בין עגלה לעגלה כמלא אורך עגלה 
 כי היכי דלא לידחקו קרשים 
@@ -1265,7 +1265,7 @@
 לאחרים עושה מחיצה כו' 
 ואמאי והא קא ממעט מארבע אמות 
 זרק דף כו' הנחת חפץ ועשיית מחיצה כו' 
-<h2>דף ק</h2>
+<h2>דף ק.</h2>
 פירות מבטלי מחיצתא 
 והא לא נח 
 והלכה ונחה בחור כל שהוא כו' 
@@ -1275,7 +1275,7 @@
 גמירי דאין ספינה מהלכת למטה מי' 
 ודילמא מורשא אית לה 
 כחו בכרמלית לא גזרו רבנן 
-<h2>דף קא</h2>
+<h2>דף קא.</h2>
 רבי יהודה אומר עמוקה י' ואין גבוהה י' מטלטלין מתוכה לים 
 עמוקה י' ואין גבוהה ' י' 
 הני ביציתא דמישן 
@@ -1288,7 +1288,7 @@
 נפסקו נאסרו 
 כי איתמר דרב נחמן אמזיד איתמר 
 קשרה בדבר המעמידה מביא לה טומאה 
-<h2>דף קב</h2>
+<h2>דף קב.</h2>
 סיפא אתאן ללכתא ומיתנא 
 אלא אמר רבא במעביר 
 רב אשי אמר חסורי מחסרא כו' 
@@ -1306,7 +1306,7 @@
 האי מאן דעייל שופתא בקופינא רב אמר חייב משום בונה 
 לול של תרנגולין 
 אבל בהנך תרתי אימא מודה כו' 
-<h2>דף קג</h2>
+<h2>דף קג.</h2>
 בשלמא לרב מיחזי כמאן דחר חורתא לבניינא 
 אם לבהמה כמלא פי הגדי ואם להיסק 
 באגם שנו 
@@ -1319,7 +1319,7 @@
 תריץ הכי יכול עד שיכתוב כל הפסוק כו' 
 טיתין פיפין 
 בשביעי כמשפטם גרסינן 
-<h2>דף קד</h2>
+<h2>דף קד.</h2>
 גרועי קא מגרע ליה דאמר רבי חייא בר אבא מנצפך צופים אמרום 
 נבוב בובן בהר רהב 
 א"ל לר' יהושע בן לוי אתו דרדקי כו' 
@@ -1330,7 +1330,7 @@
 בן סטדא 
 אמר רב חסדא דלא כר' יהודה 
 התם מחוסר מעשה 
-<h2>דף קה</h2>
+<h2>דף קה.</h2>
 והתניא פטור 
 רבן גמליאל סבר אין ידיעה לחצי שיעור 
 ורבנן סברי יש ידיעה לחצי כו' 
@@ -1341,7 +1341,7 @@
 הא ר' יהודה והא ר"ש 
 לא צריכא דקעבד למירמא אימתא כו' 
 שרגש עליהן ההר כו' 
-<h2>דף קו</h2>
+<h2>דף קו.</h2>
 חוץ מחובל ומבעיר א"ל פוק תני לברא כו' 
 בחובל וצריך לכלבו כו' 
 מדאצטריך קרא למישרי מילה כו' 
@@ -1352,7 +1352,7 @@
 היכא דנפלי טולא דכתלים 
 הלכה מכלל דפליגי 
 למה זה דומה לנועל ביתו לשומרו ונמצא צבי שמור בתוכו 
-<h2>דף קז</h2>
+<h2>דף קז.</h2>
 וממאי דפטור ומותר דתנן מחט של יד ליטול בה את הקוץ 
 מתני' שמנה שרצים החובל בהן חייב 
 הצדן לצורך חייב 
@@ -1364,20 +1364,20 @@
 הצד את הפרעוש כו' ר"י פוטר 
 יש ספרים דגרסי מ"ט מחייב רבי אליעזר לאו משום דפרה ורבה ושיבוש הוא דהא אפילו בכינה מחייב רבי אליעזר ופרעוש נקט לרבותא דרבי יהושע דאפילו פרעוש פוטר ושינויא נמי דמשני לא משמע דגריס ליה ור"ת נמי מחקו מספרו:
 כיון שיבש בו כסלע 
-<h2>דף קח</h2>
+<h2>דף קח.</h2>
 ואי ס"ד עור הוא היכי מרבי ליה קרא 
 ר"ח ל"ג וקדלו מיא לאקבולי אפיה אלא הכי גרס חזנהו שמואל למיא דקדלו ועכירי אמר שמואל גברא רבה קאתי וחש במיעיה פי' שמע שמואל שמועה שאדם גדול היה בא בספינה וידע שמואל שישתה מן הנהר אותו אדם גדול ומתוך כך יחוש במעיו לפי שהמים היו עכורים מחמת הרוח שהיה מבלבלם ולפי ששמואל היה רופא מומחה א"ל לקרנא זיל תהי ליה בקנקניה פי' תראה אם הוא חכם וראוי לכבדו אביאנו לביתי ואעשה לו רפואה ואכבדנו לפי מה שראוי לו:
 מניין לדם שהוא אדום 
 איזה מהן חשוב אותו שהרגו מלך 
 אין עושין הילמי בשבת 
-<h2>דף קט</h2>
+<h2>דף קט.</h2>
 עלין אין בהם משום רפואה 
 לדידי אפילו כוסברתא קשי לי 
 שריקא טויא 
 רוחצין במי גרר במי חמתן במי טבריא 
 הא ר"מ והא רבי יהודה 
 רבי יוסי אומר כל הימים מטהרין בזוחלין 
-<h2>דף קי</h2>
+<h2>דף קי.</h2>
 חיויא דרבנן טרקיה דלית ליה אסותא 
 וליתי אגנא דתחלי 
 רב יוסף אמר זיתום המצרי 
@@ -1385,7 +1385,7 @@
 <h2>דף קי:</h2>
 והתניא מניין לסירוס שהוא אסור 
 תלמוד לומר ובארצכם לא תעשו 
-<h2>דף קיא</h2>
+<h2>דף קיא.</h2>
 להביא נותק אחר כורת כו' 
 אלא בזקן 
 בזקנה ובעקרה 
@@ -1398,7 +1398,7 @@
 מודה ר"ש בפסיק רישיה 
 ושלש מחלוקות בדבר 
 מתני' ואלו קשרים
-<h2>דף קיב</h2>
+<h2>דף קיב.</h2>
 אימור דאמרי' חליצתה כשרה היכא דלמילתיה מנא הוא 
 <h2>דף קיב:</h2>
 סנדל שנפסקה אחת מאזניו ותיקנה כו' 
@@ -1407,14 +1407,14 @@
 עד שהשלימו למוציא רמון מהו 
 רבי שנית לנו סנדל 
 לא צריכא דאית לה שלאכא 
-<h2>דף קיג</h2>
+<h2>דף קיג.</h2>
 כלל אמר ר"י 
 התם חבל דעלמא הכא חבל דגרדי 
 אבל יש לו להחליף לא 
 מקפלים כלים כו' 
 <h2>דף קיג:</h2>
 שלא יהא דבורך של שבת כדבורך של חול 
-<h2>דף קיד</h2>
+<h2>דף קיד.</h2>
 הא בלבושא הא בגלימא 
 ואפילו במסכת כלה 
 חלבי שבת קריבין ביוה"כ 
@@ -1425,7 +1425,7 @@
 אמר רב יוסף לפי שאין דוחין שבות להתיר 
 ואמאי ליתקע כי היכי דלידעו דשרי בשחיטה 
 לעולם למלאכה 
-<h2>דף קטו</h2>
+<h2>דף קטו.</h2>
 מתני' כל כתבי הקדש מצילין אותן מפני הדליקה כו' 
 אליבא דמ"ד ניתנו לקרות בהן כ"ע לא פליגי דמצילין 
 לא ניתנו לקרות בהן 
@@ -1436,7 +1436,7 @@
 אבל הכא כיון דלא מקיים לא 
 מגילה עד שתהא כתובה אשורית על הספר ובדיו 
 מיתיבי ס"ת שבלה אם יש בה כדי ללקט כו' 
-<h2>דף קטז</h2>
+<h2>דף קטז.</h2>
 פורענות ראשונה ויסעו וא"ר חנינא שסרו מאחרי השם 
 ספרי מינין כו' א"ר טרפון כו' 
 כך אין מצילין אותן לא מן המים כו' 
@@ -1445,7 +1445,7 @@
 ושמואל דאמר כר' נחמיה 
 וכ"ש בשטרי הדיוטות 
 פליגי בטלטול כו' 
-<h2>דף קיז</h2>
+<h2>דף קיז.</h2>
 הכא נעשה בסיס לדבר האסור 
 מי דמי התם אדהכי והכי נפלה דליקה 
 אדהכי והכי לשדינהו 
@@ -1461,7 +1461,7 @@
 אבל לא משבת ליום הכפורים 
 והתנא דבי רבי ישמעאל כל מלאכת עבודה לא תעשו 
 שהיא חכמה ואינה מלאכה 
-<h2>דף קיח</h2>
+<h2>דף קיח.</h2>
 במנחה מצילין מזון סעודה אחת 
 והא דתנן אין פוחתין כו' נימא רבנן היא ולא רבי חידקא 
 מככר בפונדיון כו' 
@@ -1472,7 +1472,7 @@
 אימא ה' בעילות בעלתי ושניתי 
 אילו היו אומרים לי חברי עלה לדוכן 
 עיון תפלה 
-<h2>דף קיט</h2>
+<h2>דף קיט.</h2>
 בתליסר עיליתא דדינרי 
 רב אמר להקדים ושמואל אמר לאחר 
 <h2>דף קיט:</h2>
@@ -1480,7 +1480,7 @@
 ומצא נר דלוק ושולחן ערוך 
 כל העונה אמן יהא שמיה רבא בכל כחו 
 א"ר חנינא אל מלך נאמן 
-<h2>דף קכ</h2>
+<h2>דף קכ.</h2>
 אידי ואידי בבא לקפל 
 נותן מים מצד זה 
 <h2>דף קכ:</h2>
@@ -1492,7 +1492,7 @@
 וכי תימא איפוך מתני' כו' 
 והאמר רבה כו' 
 אי הכי קשה דרבנן אדרבנן 
-<h2>דף קכא</h2>
+<h2>דף קכא.</h2>
 הכי גרסי' ר' יוסי אומר מן המנחה ולמעלה אינו צריך לטבול 
 רבי יוסי בר' יהודה היא 
 אין אומרים לו כבה 
@@ -1501,7 +1501,7 @@
 <h2>דף קכא:</h2>
 כל המזיקין נהרגין בשבת 
 ברצין אחריו וד"ה 
-<h2>דף קכב</h2>
+<h2>דף קכב.</h2>
 אמר ליה כאותן של בית אביך 
 משתמש ישראל לאורה 
 ואם בשביל ישראל אסור 
@@ -1515,7 +1515,7 @@
 כל הכלים הניטלין בשבת דלתותיהן עמהם גרסינן ול"ג כל הכלים ניטלין דטובא איכא דאין ניטלין כגון מסר הגדול ויתד של מחרישה דאפילו ר"ש מודה כדאיתא בשילהי מכילתין דף קנז
 לעולם קסבר יש בנין בכלים כו' 
 רחת ומלגז מי מייחדי ליה לקטן 
-<h2>דף קכג</h2>
+<h2>דף קכג.</h2>
 בסיכי זיירי ומזורי 
 הא נמי מייחד לה מקום 
 פגה שהטמינה כו' 
@@ -1529,13 +1529,13 @@
 איתיביה אביי מדוכה 
 הכא נמי מחמה לצל 
 לא סידור קנים 
-<h2>דף קכד</h2>
+<h2>דף קכד.</h2>
 הרי היא ככל הכלים 
 הא ר"א 
 <h2>דף קכד:</h2>
 הא רבי נחמיה 
 ורבא אמר אפילו ברה"ר 
-<h2>דף קכה</h2>
+<h2>דף קכה.</h2>
 אם זרקה מבעוד יום 
 מחצלת גופה למאי חזיא 
 הרי הן ככל הכלים הניטלין בחצר 
@@ -1545,7 +1545,7 @@
 <h2>דף קכה:</h2>
 ואזדו לטעמייהו 
 הכל מודים שאין עושין אהל עראי בתחלה 
-<h2>דף קכו</h2>
+<h2>דף קכו.</h2>
 בין קשור בין שאינו קשור והוא שמתוקן 
 והמונח כאן וכאן אסור 
 שקשור ותלוי וראשו מגיע לארץ 
@@ -1554,7 +1554,7 @@
 וכי תימא הכא נמי דאיכא תורת כלי עליו 
 ומדבריהן למדנו שפוקקין ומודדין 
 מתני' מפנין ארבע וחמש קופות 
-<h2>דף קכז</h2>
+<h2>דף קכז.</h2>
 דכולי עלמא למעוטי בהלוכא עדיף 
 של כדי שמן ושל כדי יין 
 אע"ג דאית ליה אורחין טובא או דילמא הכל לפי האורחין 
@@ -1566,7 +1566,7 @@
 דאי בעי מפקר לנכסיה 
 האי אידגן 
 הא קמ"ל דאין חומש מעכב 
-<h2>דף קכח</h2>
+<h2>דף קכח.</h2>
 אבל לא את הטבל 
 שפדאו אגב אסימון 
 ונתן הכסף וקם לו 
@@ -1579,7 +1579,7 @@
 בשר תפוח מפני שהוא מאכל לחיה 
 אין עוקרין בהמה חיה ועוף 
 קמ"ל איתובי מיתבא דעתה 
-<h2>דף קכט</h2>
+<h2>דף קכט.</h2>
 רבא משמיה דרב יהודה אמר שבעה 
 <h2>דף קכט:</h2>
 מי שיש לו זכות אבות 
@@ -1588,7 +1588,7 @@
 מאה רישי בזוזא מאה קרי בזוזא 
 מפגרי רבנן 
 כל האמור בפרשת תוכחה 
-<h2>דף קל</h2>
+<h2>דף קל.</h2>
 רבי אליעזר אומר אם לא הביא כלי כו' מביאו בשבת מגולה 
 שש אנכי 
 אמר ליה כנפי יונה 
@@ -1599,7 +1599,7 @@
 לכלים ששבתו לתוכו 
 דרבי אליעזר שמותי הוא 
 ניתקו חצרות ונעשו בתים 
-<h2>דף קלא</h2>
+<h2>דף קלא.</h2>
 אפשר דמבטלי רשות כו' 
 מפלגא דיומא לפניא 
 מי גרם לחצרות 
@@ -1614,7 +1614,7 @@
 שבעת ימים מלולב 
 ואי מסוכה שכן נוהגת בלילות כבימים 
 נפקא ליה מביום הכפורים 
-<h2>דף קלב</h2>
+<h2>דף קלב.</h2>
 והתניא אמר ליה רבי אלעזר כו' 
 אלא מעתה יהא זר ואונן כשר בהן 
 ההיא מבן שמונת ימים נפקא 
@@ -1625,7 +1625,7 @@
 הדר אמר ממאי דשבת חמירא דילמא צרעת חמירא 
 האי עשה ולא תעשה הוא 
 רבא אמר מילה בזמנה לא צריכא קרא 
-<h2>דף קלג</h2>
+<h2>דף קלג.</h2>
 ואביי אליבא דר' שמעון 
 באומר לקוץ בהרתו הוא מתכוין 
 ותנן נמי גבי פסח כה"ג אמר רב יהודה אמר רב הלכה כר"ע 
@@ -1634,12 +1634,12 @@
 לועס בשיניו 
 <h2>דף קלג:</h2>
 גדול בהדיא כתיב ביה 
-<h2>דף קלד</h2>
+<h2>דף קלד.</h2>
 הכא מיחזי כבורר 
 <h2>דף קלד:</h2>
 מי גרע מחמין על גבי מכה 
 ואין מונעין חמין ושמן 
-<h2>דף קלה</h2>
+<h2>דף קלה.</h2>
 ולא ספק דוחה את השבת 
 לא נחלקו על נולד כשהוא מהול שצריך להטיף ממנו דם ברית כו' על מה נחלקו על גר שנתגייר 
 בן שמנה הרי הוא כאבן ואסור לטלטלו 
@@ -1650,7 +1650,7 @@
 כגון שלקח זה שפחה וזה עוברה 
 כגון שלקחה ע"מ שלא להטבילה 
 כל ששהה שלשים יום באדם וח' ימים בבהמה 
-<h2>דף קלו</h2>
+<h2>דף קלו.</h2>
 מימהל היכי מהלינן ליה 
 צודניתא 
 <h2>דף קלו:</h2>
@@ -1658,7 +1658,7 @@
 ואם אשת כהן היא אינה חולצת
 דתניא הזכר ולא טומטום ואנדרוגינוס 
 הזכר ולא טומטום ואנדרוגינוס 
-<h2>דף קלז</h2>
+<h2>דף קלז.</h2>
 הזכר ולא טומטום ואנדרוגינוס 
 <h2>דף קלז:</h2>
 מל ולא פרע את המילה כאילו לא מל 
@@ -1667,7 +1667,7 @@
 במצותיו וצונו למול את העבדים 
 מתני' תולין
 דרבי אליעזר עדיפא מדר"י 
-<h2>דף קלח</h2>
+<h2>דף קלח.</h2>
 אלא אמר אביי מדרבנן 
 כסא גלין 
 כסא טרסקל 
@@ -1680,7 +1680,7 @@
 שאין בשיפועה טפח 
 הא דמהדק 
 דבר ה' זה הקץ 
-<h2>דף קלט</h2>
+<h2>דף קלט.</h2>
 ולישלח להו כר"ט 
 רב עמרם חסידא מנגיד עלה רב משרשיא יהיב ליה פרוטה לנכרי כו' 
 וליתן ליה לתינוק ישראל 
@@ -1691,7 +1691,7 @@
 <h2>דף קמ:</h2>
 תלא דבישרא כו' 
 אבל באיבוס של קרקע דברי הכל אסור 
-<h2>דף קמא</h2>
+<h2>דף קמא.</h2>
 הקש שע"ג המטה 
 הני פלפלי מידק חדא כו' 
 דילמא אתי לאשוויי גומות 
@@ -1702,7 +1702,7 @@
 מתני' נוטל
 תינוק מת וכיס תלוי בצוארו פטור 
 אי הכי מאי איריא אבן אפי' דינר נמי 
-<h2>דף קמב</h2>
+<h2>דף קמב.</h2>
 ונשדיינהו לפירי ונשדייה לאבן 
 ונשדינהו לפירי ונשדייה לאבן כו' 
 הכא נמי בפירות המיטנפין 
@@ -1710,7 +1710,7 @@
 <h2>דף קמב:</h2>
 שאוכל מרובה על הפסולת 
 לא שנו אלא בשכח 
-<h2>דף קמג</h2>
+<h2>דף קמג.</h2>
 התם כיון דמסרח 
 ליטול מהן אוד 
 עצמות וקליפין 
@@ -1727,7 +1727,7 @@
 שמשך מהן שמן כו' 
 חלב האשה מטמא לרצון ושלא לרצון 
 לרצון ושלא לרצון 
-<h2>דף קמד</h2>
+<h2>דף קמד.</h2>
 מחמיר אני בחלב מבדם שהחולב לרפואה טמא והמקיז לרפואה טהור 
 סלי זיתים וענבים יוכיחו שמשקה היוצא מהן לרצון טמא שלא לרצון טהור 
 מאי לאו לרצון דניחא ליה ושלא לרצון בסתמא 
@@ -1738,7 +1738,7 @@
 ה"נ כיון דאחשביה הווה להו משקה 
 אמר אביי ר' יעקב היא 
 חולב אדם עז כו' 
-<h2>דף קמה</h2>
+<h2>דף קמה.</h2>
 כביצה מכוונת טהור 
 דכ"ע משקה הבא לאוכל לאו אוכל הוא 
 אם הגיעו זיתיו למסוק כו' 
@@ -1746,7 +1746,7 @@
 ורבי יוחנן אמר אחד כבשין ואחד שלקות לגופן מותר למימיהן חייב חטאת 
 <h2>דף קמה:</h2>
 בהמה בגימטריא 
-<h2>דף קמו</h2>
+<h2>דף קמו.</h2>
 שובר אדם את החבית לאכול הימנה גרוגרות 
 מתיר ומפקיע וחותך 
 הא רבנן והא ר' נחמיה 
@@ -1757,7 +1757,7 @@
 משום מרזב 
 אייתי ליה בי סדיא 
 מי שנשרו כליו במים 
-<h2>דף קמז</h2>
+<h2>דף קמז.</h2>
 המנער טליתו 
 היוצא בטלית מקופלת 
 הרטנין 
@@ -1768,7 +1768,7 @@
 דתניא א"ר כשהיינו למדין תורה כו' 
 צריך לקשר שני ראשיה למטה 
 אין מעצבין את הקטן 
-<h2>דף קמח</h2>
+<h2>דף קמח.</h2>
 מתני' שואל אדם מחבירו כדי יין וכדי שמן ובלבד שלא יאמר לו הלויני 
 אתקין רבא במחוזא דדרו בדוחקא כו' 
 <h2>דף קמח:</h2>
@@ -1779,7 +1779,7 @@
 דאיגלאי מילתא דבחול הויא 
 והא אנן תנן אין נימנין כו' 
 מטילין חלשים על הקדשים ביו"ט 
-<h2>דף קמט</h2>
+<h2>דף קמט.</h2>
 בשטרי הדיוטות 
 ולמ"ד שמא ימחוק ליחוש שמא יקרא 
 אלא איכא בינייהו דכתיב אכותל ומתתאי 
@@ -1789,7 +1789,7 @@
 בני חבורה המקפידין זה על זה עוברין משום משקל ומשום מדה ומשום מנין 
 <h2>דף קמט:</h2>
 מאי טעמא משום קוביא 
-<h2>דף קנ</h2>
+<h2>דף קנ.</h2>
 ואין מחשיכין על התחום לשכור פועלים ולהביא פירות 
 מה לי הוא ומה לי חבירו 
 ורבי יהושע בן קרחה היא 
@@ -1803,7 +1803,7 @@
 בתיבנא סריא 
 אלא מת מאי ניהו להביא לו ארון ותכריכין 
 אבל מחשיך הוא לשמור ומביא פירות בידו 
-<h2>דף קנא</h2>
+<h2>דף קנא.</h2>
 האי כל שאני רשאי בחשיכתו רשאי אני באמירתו מיבעי ליה 
 לעולם אסיפא קאי דאמר רב יהודה אמר שמואל מותר אדם לומר לחבירו שמור לי פירות שבתחומך 
 אין מחשיכין על התחום להביא בהמה 
@@ -1812,7 +1812,7 @@
 דיקא מתניתין כוותיה דשמואל כו' יקבר בו ישראל אלמא מספיקא שרי 
 <h2>דף קנב:</h2>
 עד שיסתם הגולל 
-<h2>דף קנג</h2>
+<h2>דף קנג.</h2>
 ונשמתו עולה ושוב אינה יורדת 
 מתני' מי שהחשיך כו' חרש שוטה וקטן 
 <h2>דף קנג:</h2>
@@ -1821,14 +1821,14 @@
 בו ביום גדשו סאה כו' נותן לתוכה חרדל והיא מחזקת 
 ואדרבה נ"ל שהירו' קשה לו דלא שייך למימר גבי מים כמו שמפר"י גבי נותן לתוכה אגוזים ורמונים:
 סוף סוף כי מטי לביתיה א"א דלא קאי וקא מעייל מרשות הרבים לרשות היחיד 
-<h2>דף קנד</h2>
+<h2>דף קנד.</h2>
 ואמרי לה רבא אבוה דרב מרי בר רחל 
 בלאו נמי לא מיחייב דה"ל לאו שניתן לאזהרת מיתת ב"ד 
 <h2>דף קנד:</h2>
 והא מבטל כלי מהיכנו 
 בחיבור גוולקי 
 שתים בידי אדם ואחת באילן 
-<h2>דף קנה</h2>
+<h2>דף קנה.</h2>
 למטה מי' טפחים עירובו עירוב 
 אמר רב פפא הכא בכלכלה דחוקה עסקינן 
 והלכתא צדדין אסורין צדי צדדין מותרין 
@@ -1836,7 +1836,7 @@
 <h2>דף קנה:</h2>
 אין אובסין את הגמל וכו' 
 אלא קמח דבר גיבול הוא 
-<h2>דף קנו</h2>
+<h2>דף קנו.</h2>
 מהו לפרק 
 אין מזל לישראל 
 <h2>דף קנו:</h2>
@@ -1846,7 +1846,7 @@
 תרגמא זעירי בבהמת קדשים 
 והא א"ר יוחנן הלכה כסתם משנה ותנן אין מבקעין כו' 
 והא אמר רבי יוחנן הלכה כסתם משנה 
-<h2>דף קנז</h2>
+<h2>דף קנז.</h2>
 אין משקין ושוחטין את המדבריות 
 לבר ממוקצה מחמת איסור 
 והלכתא מעת לעת 
