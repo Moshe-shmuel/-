@@ -12,7 +12,7 @@ import {
   Wrench, Search, Globe, Scissors, Scale, Eye, 
   Upload, Folder, Trash2, Download, FileText, 
   CheckCircle, AlertCircle, ChevronRight, Menu,
-  Settings, ListCheck, ArrowLeft, Play, Undo2, Filter, Type, X,
+  Settings, ListCheck, ArrowLeft, Play, Undo2, Filter, Type, X, BookOpen,
   Bold, Italic, Underline, RefreshCw, AArrowUp, AArrowDown,
   Highlighter, ArrowLeftRight, Plus, Minus
 } from 'lucide-react';
@@ -69,6 +69,11 @@ const App: React.FC = () => {
   const [terminatorChar, setTerminatorChar] = useState('.:-');
   const [generateLinks, setGenerateLinks] = useState(false);
   
+  // Tractate Loading States
+  const [availableTractates, setAvailableTractates] = useState<string[]>([]);
+  const [selectedTractate, setSelectedTractate] = useState<string>('');
+  const [isLoadingTractate, setIsLoadingTractate] = useState(false);
+
   // Review States
   const [reviewQueue, setReviewQueue] = useState<ReviewItem[]>([]);
   const [currentReviewBatch, setCurrentReviewBatch] = useState<ReviewItem[]>([]);
@@ -79,18 +84,36 @@ const App: React.FC = () => {
 
   // Highlighting States
   const [sources, setSources] = useState<string[]>(Object.keys(EMBEDDED_SOURCES));
-  const [selectedSource, setSelectedSource] = useState<string>(Object.keys(EMBEDDED_SOURCES)[0] || '');
-  const [sourceCache, setSourceCache] = useState<Record<string, string>>(EMBEDDED_SOURCES);
-  const [sourceContent, setSourceContent] = useState<string>(EMBEDDED_SOURCES[Object.keys(EMBEDDED_SOURCES)[0]] || '');
+  const [selectedSource, setSelectedSource] = useState<string>('');
+  const [sourceCache, setSourceCache] = useState<Record<string, string>>({});
+  const [sourceContent, setSourceContent] = useState<string>('');
   const [localSource, setLocalSource] = useState<string>('');
 
   const activeSourceContent = localSource || sourceContent;
 
   const fileInputRef = useRef<HTMLInputElement>(null);
   const folderInputRef = useRef<HTMLInputElement>(null);
+  const dataFileInputRef = useRef<HTMLInputElement>(null);
+  const folderDataInputRef = useRef<HTMLInputElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
+    // 1. Check for offline index (script tag)
+    if ((window as any).AVAILABLE_TRACTATES) {
+      setAvailableTractates((window as any).AVAILABLE_TRACTATES);
+      addLog("נמצא אינדקס מסכתות מקומי", 'success');
+    } else {
+      // 2. Try to load from server
+      fetch('/data/index.json')
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) {
+            setAvailableTractates(data);
+          }
+        })
+        .catch(() => addLog("לא נמצא אינדקס מסכתות בשרת", 'info'));
+    }
+
     fetch('/api/sources')
       .then(res => res.json())
       .then(data => {
@@ -270,6 +293,66 @@ const App: React.FC = () => {
     }
     return { sections: null, prefix, matchingSection: null, type: currentType, targetName: shortTargetName };
   }, [sourceCache, parseSections]);
+
+  const loadTractate = async (name: string) => {
+    setIsLoadingTractate(true);
+    try {
+      const res = await fetch(`/data/${name}.json`);
+      const data = await res.json();
+      setSourceCache(data);
+      const keys = Object.keys(data);
+      setSources(keys);
+      if (keys.length > 0) {
+        setSelectedSource(keys[0]);
+        setSourceContent(data[keys[0]]);
+      }
+      setSelectedTractate(name);
+      addLog(`מסכת ${name} נטענה בהצלחה`, 'success');
+    } catch (err) {
+      addLog(`שגיאה בטעינת מסכת ${name}`, 'error');
+    } finally {
+      setIsLoadingTractate(false);
+    }
+  };
+
+  const handleDataFileLoad = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+
+    if (files.length === 1) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const data = JSON.parse(event.target?.result as string);
+          setSourceCache(data);
+          const keys = Object.keys(data);
+          setSources(keys);
+          if (keys.length > 0) {
+            setSelectedSource(keys[0]);
+            setSourceContent(data[keys[0]]);
+          }
+          setSelectedTractate(file.name.replace('.json', ''));
+          addLog(`קובץ נתונים ${file.name} נטען בהצלחה`, 'success');
+        } catch (err) {
+          addLog("שגיאה בפענוח קובץ הנתונים", 'error');
+        }
+      };
+      reader.readAsText(file);
+    } else {
+      // Multiple files (folder scan)
+      const newTractates: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        if (files[i].name.endsWith('.json') && files[i].name !== 'index.json') {
+          newTractates.push(files[i].name.replace('.json', ''));
+        }
+      }
+      if (newTractates.length > 0) {
+        setAvailableTractates(prev => Array.from(new Set([...prev, ...newTractates])));
+        addLog(`זוהו ${newTractates.length} מסכתות חדשות בתיקייה`, 'success');
+      }
+    }
+  };
 
   const undo = () => {
     if (history.length === 0) return;
@@ -1157,7 +1240,7 @@ const App: React.FC = () => {
                 בטל
               </button>
              <button 
-                onClick={() => (fileInputRef.current as unknown as HTMLInputElement)?.click()}
+                onClick={() => fileInputRef.current?.click()}
                 className="flex items-center gap-2 px-3 py-2 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded-lg transition-colors text-sm font-bold"
               >
                 <FileText size={16} />
@@ -1418,6 +1501,71 @@ const App: React.FC = () => {
               <p className="text-slate-600">פעולה זו תסרוק את כל הקבצים הטעונים ותדגיש את תחילת הפסקה על ידי השוואה למקור נבחר.</p>
               
               <div className="space-y-4">
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                  <h3 className="text-sm font-bold text-slate-700 mb-3 flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    בחירת מסכת לטעינה
+                  </h3>
+                  <div className="flex flex-col gap-3">
+                    <select 
+                      className="w-full p-2 bg-white border border-slate-300 rounded-lg text-sm"
+                      value={selectedTractate}
+                      onChange={(e) => loadTractate(e.target.value)}
+                      disabled={isLoadingTractate}
+                    >
+                      <option value="">בחר מסכת...</option>
+                      {availableTractates.map(t => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                    
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <input
+                          type="file"
+                          accept=".json"
+                          onChange={handleDataFileLoad}
+                          className="hidden"
+                          ref={dataFileInputRef}
+                        />
+                        <button
+                          onClick={() => dataFileInputRef.current?.click()}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium"
+                          title="טעינת קובץ JSON בודד"
+                        >
+                          <Upload className="w-4 h-4" />
+                          קובץ JSON
+                        </button>
+                      </div>
+                      
+                      <div className="relative flex-1">
+                        <input
+                          type="file"
+                          {...({ webkitdirectory: "", directory: "" } as any)}
+                          multiple
+                          onChange={handleDataFileLoad}
+                          className="hidden"
+                          ref={folderDataInputRef}
+                        />
+                        <button
+                          onClick={() => folderDataInputRef.current?.click()}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors text-sm font-medium"
+                          title="סריקת תיקייה המכילה קבצי JSON"
+                        >
+                          <Folder className="w-4 h-4" />
+                          סריקת תיקייה
+                        </button>
+                      </div>
+                    </div>
+                    
+                    {isLoadingTractate && (
+                      <div className="text-xs text-blue-600 animate-pulse text-center">
+                        טוען נתונים...
+                      </div>
+                    )}
+                  </div>
+                </div>
+
                 <div className="flex items-center justify-between">
                   <label className="text-sm font-bold text-slate-700">בחר מקור להשוואה:</label>
                   <label className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded cursor-pointer hover:bg-blue-100 transition-colors">
