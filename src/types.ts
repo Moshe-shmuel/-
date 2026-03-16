@@ -9,7 +9,10 @@ export interface ReviewItem {
   wordMap: number[];
   originalWords: string[];
   headerText?: string;
+  fullHeader?: string;
   sourceLineIndex?: number;
+  mainSourceLineIndex?: number;
+  mainSourceHeader?: string;
 }
 
 export type TabId = 'process' | 'replace' | 'global' | 'split' | 'sync_h1' | 'fix' | 'preview' | 'highlight_regex' | 'highlight_fuzzy' | 'review';
